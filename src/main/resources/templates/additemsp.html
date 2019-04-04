@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <title>add Item</title>
+    <link rel="stylesheet" type="text/css"
+          href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+
+</head>
+<body class="pa">
+
+
+<div class="container">
+    <div class="row flex-items-xs-center">
+        <form action="#" th:action="@{/additemsp}" th:object="${item}" method="post">
+
+            <p>SP's address :<input type="text" th:field="*{address}"/></p>
+            <p>Code: <input type="text" th:field="*{code}"/></p>
+
+
+            <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

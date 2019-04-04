@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+    <head>
+    <meta charset="UTF-8">
+    <title>All ItemSP</title>
+    <link rel="stylesheet" type="text/css"
+          href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<table class="table .table-striped .table-bordered .table-responsive">
+    <thead class="thead-dark">
+    <tr>
+        <th>code</th>
+        <th>name</th>
+        <th>price</th>
+        <th> price with discount</th>
+        <th>address</th>
+    </tr>
+
+    </thead>
+<tr th:each="itemsSP : ${itemsSP}">
+    <td th:text="${itemsSP.code}"></td>
+    <td th:text="${itemsSP.nameSP}"></td>
+    <td th:text="${itemsSP.priceSP}"></td>
+    <td th:text="${itemsSP.priceDiscountSP}"></td>
+    <td th:text="${itemsSP.addressSP}"></td>
+
+</tr>
+
+
+
+</table>
+
+</body>
+</html>
