@@ -30,4 +30,7 @@ public class ItemSP {
     @Column(name = "code")
     private Long code;
 
+    @Column(name = "sale")
+    private Boolean sale;
+
 }

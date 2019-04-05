@@ -1,8 +1,9 @@
 package ru.bjcreslin.service;
 
+import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.DAO.ItemSP;
 import ru.bjcreslin.model.Item;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 @Service
+@Log
 public class SPParsingSP {
 
     public ItemSP parsingItempSP(Item item) throws IOException {
@@ -19,18 +21,33 @@ public class SPParsingSP {
         document = Jsoup.connect(item.getAddress()).
                 userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36").
                 get();
-        Elements elements;
+        Element elementItem = document.getElementsByClass("c-content").first();
 
-        item.setName(document.getElementsByClass("c-product-title").first().html());
-//        System.out.println(document.getElementsByClass("c-product__price-value c-product__price-value--not-prior").first().html().
-//                replace("&nbsp;₽", "").replace(" ", "").replace(".", "."));
-        item.setPrice(new BigDecimal(document.getElementsByClass("c-product__price-value c-product__price-value--not-prior").first().html().
-                replace("&nbsp;₽", "").replace(" ", "").replace(".", ".")));
+        item.setName(elementItem.getElementsByClass("c-product-title").html());
 
-        item.setPriceDiscount(new BigDecimal(document.getElementsByClass("c-product__price-value o-color--orange").first().html().
-                replace("&nbsp;₽", "").replace(" ", "").replace(".", ".")));
-        System.out.println(item);
+        Element elementItemWithoutName = elementItem.getElementsByClass("c-product-meta-item").first();
 
+
+        if (elementItemWithoutName.html().contains("Цена без карты")) {
+
+            item.setPrice(new BigDecimal(elementItemWithoutName.getElementsByClass("c-product__price-value c-product__price-value--not-prior").
+                    first().html().replace("&nbsp;₽", "").
+                    replace(" ", "")));
+
+            item.setPriceDiscount(new BigDecimal(elementItemWithoutName.getElementsByClass("c-product__price-value o-color--orange").
+                    first().html().replace("&nbsp;₽", "").
+                    replace(" ", "")));
+
+        } else {
+            item.setPriceDiscount(new BigDecimal(elementItemWithoutName.getElementsByClass("c-product__price-value").
+                    first().html().replace("&nbsp;₽", "").
+                    replace(" ", "")));
+
+            item.setPrice(item.getPriceDiscount());
+
+        }
+
+        log.info(item.toString());
         return itemToSP(item);
     }
 
@@ -41,6 +58,14 @@ public class SPParsingSP {
         itemSP.setNameSP(item.getName());
         itemSP.setPriceSP(item.getPrice());
         itemSP.setPriceDiscountSP(item.getPriceDiscount());
+        if (item.getPriceDiscount().equals(item.getPrice())) {
+            itemSP.setSale(true);
+        } else {
+            itemSP.setSale(false);
+        }
         return itemSP;
     }
+
+
+
 }
