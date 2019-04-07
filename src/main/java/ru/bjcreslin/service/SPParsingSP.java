@@ -5,8 +5,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.DAO.ItemSP;
-import ru.bjcreslin.model.Item;
+import ru.bjcreslin.DAO.ItemSPDAO;
+import ru.bjcreslin.model.ItemSP;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Log
 public class SPParsingSP {
 
-    public ItemSP parsingItempSP(Item item) throws IOException {
+    public ItemSPDAO parsingItempSP(ItemSP item) throws IOException {
         Document document;
 
         document = Jsoup.connect(item.getAddress()).
@@ -51,19 +51,19 @@ public class SPParsingSP {
         return itemToSP(item);
     }
 
-    private ItemSP itemToSP(Item item) {
-        ItemSP itemSP = new ItemSP();
-        itemSP.setAddressSP(item.getAddress());
-        itemSP.setCode(item.getCode());
-        itemSP.setNameSP(item.getName());
-        itemSP.setPriceSP(item.getPrice());
-        itemSP.setPriceDiscountSP(item.getPriceDiscount());
+    private ItemSPDAO itemToSP(ItemSP item) {
+        ItemSPDAO itemSPDAO = new ItemSPDAO();
+        itemSPDAO.setAddressSP(item.getAddress());
+        itemSPDAO.setCode(item.getCode());
+        itemSPDAO.setNameSP(item.getName());
+        itemSPDAO.setPriceSP(item.getPrice());
+        itemSPDAO.setPriceDiscountSP(item.getPriceDiscount());
         if (item.getPriceDiscount().equals(item.getPrice())) {
-            itemSP.setSale(true);
+            itemSPDAO.setSale(true);
         } else {
-            itemSP.setSale(false);
+            itemSPDAO.setSale(false);
         }
-        return itemSP;
+        return itemSPDAO;
     }
 
 
