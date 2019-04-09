@@ -27,6 +27,6 @@ public class ItemWatermanDAO {
     @Column(name="address")
     private String address;
 
-    @Column(name="group")
+    @Column(name="groupw")
     private String group;
 }

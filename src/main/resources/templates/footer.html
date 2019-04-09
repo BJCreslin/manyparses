@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <title>footer</title>
+</head>
+<body>
+<div th:fragment="main">
+    <p>
+        Select section
+    </p>
+    <ol class="border">
+        <li><a href="index.html" th:href="@{index}">Index page</a></li>
+        <li><a href="/showallsp" th:href="@{showallsp}">Show AlL</a></li>
+        <li><a href="additemsp.html" th:href="@{/additemsp}">Add item</a></li>
+        <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
+    </ol>
+</div>
+
+</body>
+</html>
