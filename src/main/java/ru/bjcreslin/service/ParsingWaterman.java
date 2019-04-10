@@ -20,7 +20,7 @@ public class ParsingWaterman {
                 userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36").
                 get();
 
-        System.out.println(document.html());
+
         String name = document.getElementsByClass("hl--light").text();
         BigDecimal price = new BigDecimal(document.getElementsByClass("product-wrap").
                 first().text().replace(" ", "").

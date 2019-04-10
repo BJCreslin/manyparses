@@ -14,6 +14,12 @@ import ru.bjcreslin.service.SPParsingSP;
 
 import java.io.IOException;
 
+/**
+ * Добавляем элемент СП.
+ * так же код элемента Водяного
+ * если код есть, то ничего не делаем
+ * если кода нет, то добавяляем в таблицу
+ */
 @Controller
 public class AddItemSP {
     @Autowired

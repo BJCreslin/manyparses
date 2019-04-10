@@ -5,16 +5,18 @@
     <title>footer</title>
 </head>
 <body>
-<div th:fragment="main">
+<div th:fragment="main" style="padding: 30px">
+    <container style="width: 150px">
     <p>
         Select section
     </p>
-    <ol class="border">
-        <li><a href="index.html" th:href="@{index}">Index page</a></li>
+    <ol class="border container-fluid" >
+        <li><a href="/index" th:href="@{index}">Index page</a></li>
         <li><a href="/showallsp" th:href="@{showallsp}">Show AlL</a></li>
         <li><a href="additemsp.html" th:href="@{/additemsp}">Add item</a></li>
         <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
     </ol>
+    </container>
 </div>
 
 </body>
