@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.com">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
     <title>Main page</title>
@@ -7,7 +7,21 @@
           href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
-<div th:insert="~{footer :: main}"> </div>
+<div th:insert="~{footer :: main}"></div>
+<div th:object="${edit_sp}">
+    <form action="#" th:action="@{edit_sp}" method="post">
+        <div class="form-control">
+            <label class="card-header"> id <span>:</span>
+                <span th:text="${edit_sp.id}"></span> </label>
+            <hr>
+            <div class="align-self-stretch">
+                adress<br>
+            <input type="text" id="adress" class="input-group" th:field="${edit_sp.addressSP}">
+            </div>
+
+        </div>
+    </form>
+</div>
 
 
 </body>

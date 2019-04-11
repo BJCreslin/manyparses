@@ -14,11 +14,14 @@ public class ItemSPService {
 
     public void save(ItemSPDAO itemSPDAO) {
         this.itemSPDAO.save(itemSPDAO);
-
     }
 
     public List<ItemSPDAO> findAll() {
         return (List<ItemSPDAO>) itemSPDAO.findAll();
+    }
+
+    public ItemSPDAO findById(Long id) {
+        return itemSPDAO.findById(id).get();
     }
 
 
