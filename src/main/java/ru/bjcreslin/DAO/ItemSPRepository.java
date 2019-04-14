@@ -6,5 +6,7 @@ import java.util.Optional;
 
 public interface ItemSPRepository extends CrudRepository<ItemSPDAO,Long> {
     Optional<ItemSPDAO> findById(Long id);
+    ItemSPDAO findByAddressSP(String address);
+
 
 }

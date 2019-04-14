@@ -10,18 +10,23 @@ import java.util.List;
 @Service
 public class ItemSPService {
     @Autowired
-    ItemSPRepository itemSPDAO;
+    ItemSPRepository itemSPRepository;
 
     public void save(ItemSPDAO itemSPDAO) {
-        this.itemSPDAO.save(itemSPDAO);
+        this.itemSPRepository.save(itemSPDAO);
     }
 
     public List<ItemSPDAO> findAll() {
-        return (List<ItemSPDAO>) itemSPDAO.findAll();
+        return (List<ItemSPDAO>) itemSPRepository.findAll();
     }
 
     public ItemSPDAO findById(Long id) {
-        return itemSPDAO.findById(id).get();
+      //  itemSPRepository.findById(id).
+        return itemSPRepository.findById(id).get();
+    }
+
+    public ItemSPDAO findByAddressSP(String address){
+        return itemSPRepository.findByAddressSP(address);
     }
 
 

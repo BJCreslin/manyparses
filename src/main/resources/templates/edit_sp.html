@@ -9,16 +9,17 @@
 <body>
 <div th:insert="~{footer :: main}"></div>
 <div th:object="${edit_sp}">
-    <form action="#" th:action="@{edit_sp}" method="post">
+    <div class="card-header" align="center">Edit ItemSP</div>
+    <form action="#" th:action="@{edit}" method="post">
         <div class="form-control">
-            <label class="card-header"> id <span>:</span>
-                <span th:text="${edit_sp.id}"></span> </label>
-            <hr>
-            <div class="align-self-stretch">
-                adress<br>
-            <input type="text" id="adress" class="input-group" th:field="${edit_sp.addressSP}">
-            </div>
 
+            <div style="margin-left: 30px" class="align-self-stretch">
+                adress :
+                <input type="text" id="adress" class="input-group" th:field="${edit_sp.addressSP}">
+                waterman code :
+                <input type="number" class="input-group" th:field="${edit_sp.code}">
+            </div>
+            <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
         </div>
     </form>
 </div>
