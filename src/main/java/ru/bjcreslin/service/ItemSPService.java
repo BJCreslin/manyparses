@@ -21,12 +21,16 @@ public class ItemSPService {
     }
 
     public ItemSPDAO findById(Long id) {
-      //  itemSPRepository.findById(id).
+        //  itemSPRepository.findById(id).
         return itemSPRepository.findById(id).get();
     }
 
-    public ItemSPDAO findByAddressSP(String address){
+    public ItemSPDAO findByAddressSP(String address) {
         return itemSPRepository.findByAddressSP(address);
+    }
+
+    public void delete(ItemSPDAO itemSPDAO) {
+        itemSPRepository.delete(itemSPDAO);
     }
 
 

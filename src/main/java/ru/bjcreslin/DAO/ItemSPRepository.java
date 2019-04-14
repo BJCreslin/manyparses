@@ -8,5 +8,6 @@ public interface ItemSPRepository extends CrudRepository<ItemSPDAO,Long> {
     Optional<ItemSPDAO> findById(Long id);
     ItemSPDAO findByAddressSP(String address);
 
-
+    @Override
+    void delete(ItemSPDAO itemSPDAO);
 }

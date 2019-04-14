@@ -47,6 +47,14 @@ public class EditSp {
 //        {
 //            itemSPService.save(editItemSPDAO);
 //        }
+        itemSPService.save(editItemSPDAO);
         return "redirect:/index";
     }
+
+    @DeleteMapping("{item}")
+    public String delete(@PathVariable ItemSPDAO deleteItem) {
+        itemSPService.delete(deleteItem);
+        return "redirect:/index";
+    }
+
 }
