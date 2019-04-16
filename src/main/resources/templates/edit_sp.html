@@ -10,7 +10,7 @@
 <div th:insert="~{footer :: main}"></div>
 <div th:object="${edit_sp}">
     <span class="card-header" align="center" th:text="'Edit ItemSP with ID: '+${edit_sp.id}"></span>
-    <form action="#" th:action="@{edit}" method="post">
+    <form action="" th:action="@{edit}" method="post">
         <div class="form-control">
             <input type="hidden" id="id" class="input-group" th:field="${edit_sp.id}">
             <div style="margin-left: 30px" class="align-self-stretch">
@@ -20,20 +20,21 @@
                 <input type="text" id="name" class="input-group" th:field="${edit_sp.nameSP}">
                 waterman code :
                 <input type="number" class="input-group" th:field="${edit_sp.code}">
-                <p><input type="submit" value="Submit" class="btn-dark"/> <input type="reset" value="Reset"/>
+                <input type="submit" value="Submit" class="btn-dark"/> <input type="reset" value="Reset"/>
 
-                </p>
             </div>
         </div>
     </form>
     <br>
-    <form action="/itemsp/" th:action="@{delete}" method="delete">
-        <p style="vert-align: top; margin-left: 80px; margin-top: 150px" >
-            <input type="hidden" id1="id" class="input-group" th:field="${edit_sp.id}">
-            <input type="submit" value="Delete" class="btn-danger">
+    <form action="" th:action="@{edit}" method="delete">
+        <div class="form-control">
+            <p style="vert-align: top; margin-left: 80px; margin-top: 150px">
+                <input type="hidden"  class="input-group-text" th:field="${edit_sp.id}">
+                <input type="submit" value="Delete" class="btn-danger">
 
 
-        </p>
+            </p>
+        </div>
     </form>
 </div>
 

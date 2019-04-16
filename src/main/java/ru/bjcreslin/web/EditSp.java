@@ -16,12 +16,6 @@ public class EditSp {
     @Autowired
     ItemSPService itemSPService;
 
-//    @GetMapping
-//    public String ed() {
-//
-//        System.out.println("iam here");
-//        return "index";
-//    }
 
 
     @GetMapping("{item}")
@@ -35,24 +29,12 @@ public class EditSp {
         if (result.hasErrors()) {
             return "edit_sp";
         }
-//        ItemSPDAO itemSPDAO = itemSPService.findByAddressSP(editItemSPDAO.getAddressSP());
-//        if (itemSPDAO != null) {
-//            itemSPDAO.setSale(editItemSPDAO.getSale());
-//            itemSPDAO.setCode(editItemSPDAO.getCode());
-//            itemSPDAO.setNameSP(editItemSPDAO.getNameSP());
-//            itemSPDAO.setPriceDiscountSP(editItemSPDAO.getPriceDiscountSP());
-//            itemSPDAO.setPriceSP(editItemSPDAO.getPriceSP());
-//            itemSPDAO.setSale(editItemSPDAO.getSale());
-//        }
-//        {
-//            itemSPService.save(editItemSPDAO);
-//        }
         itemSPService.save(editItemSPDAO);
         return "redirect:/index";
     }
 
-    @DeleteMapping("{item}")
-    public String delete(@PathVariable ItemSPDAO deleteItem) {
+    @DeleteMapping("edit?id={item}")
+    public String delete(@PathVariable ("item")ItemSPDAO deleteItem) {
         itemSPService.delete(deleteItem);
         return "redirect:/index";
     }
