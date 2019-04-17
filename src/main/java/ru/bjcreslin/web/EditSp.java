@@ -33,10 +33,11 @@ public class EditSp {
         return "redirect:/index";
     }
 
-    @DeleteMapping("edit?id={item}")
-    public String delete(@PathVariable ("item")ItemSPDAO deleteItem) {
-        itemSPService.delete(deleteItem);
-        return "redirect:/index";
+    @GetMapping("/delete/{item}")
+    public String delete(@PathVariable ("item")ItemSPDAO itemSPDAO) {
+        itemSPService.delete(itemSPDAO);
+//        System.out.println(str);
+        return "redirect:/showallsp";
     }
 
 }
