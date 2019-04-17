@@ -22,6 +22,10 @@ public class ItemWatermanService {
 
     public ItemWatermanDAO findByCode(Long code) {
         return itemWatermanRepository.findByCode(code);
+
+    }
+    public void delete(ItemWatermanDAO item){
+        itemWatermanRepository.delete(item);
     }
 
 }

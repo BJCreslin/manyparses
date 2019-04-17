@@ -6,7 +6,8 @@
 </head>
 <body>
 <div th:fragment="main" style="padding-left: 20px">
-    <container class="leftContainer">
+    <div class="row" style="margin-left: 30px" >
+    <div class="col-xs-4">
     <p>
         Select section
     </p>
@@ -16,8 +17,8 @@
         <li><a href="additemsp.html" th:href="@{~/additemsp}">Add item</a></li>
         <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
     </ol>
-    </container>
-    <container class="right-container">
+    </div>
+    <div class="col-xs-4" style="margin-left: 10px">
         <p>Waterman Item </p>
         <ol class="border container-fluid" >
             <li><a href="/index" th:href="@{~/index}">Index page</a></li>
@@ -27,7 +28,8 @@
         </ol>
 
 
-    </container>
+    </div>
+</div>
 </div>
 
 </body>

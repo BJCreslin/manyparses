@@ -36,7 +36,6 @@ public class EditSp {
     @GetMapping("/delete/{item}")
     public String delete(@PathVariable ("item")ItemSPDAO itemSPDAO) {
         itemSPService.delete(itemSPDAO);
-//        System.out.println(str);
         return "redirect:/showallsp";
     }
 
