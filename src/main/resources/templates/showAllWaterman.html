@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <title>All ItemSP</title>
+    <link rel="stylesheet" type="text/css"
+          href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:insert="~{footer :: main}"></div>
+<table class="table .table-striped .table-bordered .table-responsive">
+    <thead class="thead-dark">
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Address</th>
+        <th>Groupe</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>id</th>
+    </tr>
+
+    </thead>
+    <tr th:each="item : ${item_waterman}">
+        <td th:text="${item.code}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price}"></td>
+        <td th:text="${items.address}"></td>
+        <td th:text="${itemsSP.groupw}"></td>
+        <td>><a th:href="@{'/itemwaterman/'+${item.id}}">edit</a></td>
+        <td><a th:href="@{'/itemwaterman/delete/'+${item.id}}">Delete</a></td>
+        <td th:text="${item.id}"></td>
+    </tr>
+</table>
+</body>
+</html>
