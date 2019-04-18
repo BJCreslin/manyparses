@@ -35,7 +35,6 @@ public class AddItemSP {
 
     @GetMapping("/additemsp")
     public String action(Model model) {
-        //model.addAttribute("myid","12");
         model.addAttribute("item", new ItemSP());
         return "additemsp";
     }
@@ -49,9 +48,14 @@ public class AddItemSP {
             ItemSPDAO itemSPDAO = spParsingSP.parsingItempSP(item);
             itemSPService.save(itemSPDAO);
 
+            ItemWatermanDAO itemWatermanDAOtemp = parsingWaterman.action(item.getCode());
             ItemWatermanDAO itemWatermanDAO = itemWatermanService.findByCode(item.getCode());
-            if(itemWatermanDAO==null){
-            itemWatermanDAO = parsingWaterman.action(item.getCode());}
+            if (itemWatermanDAO == null) {
+                itemWatermanDAO = itemWatermanDAOtemp;
+            } else {
+                itemWatermanDAO.setPrice(itemWatermanDAOtemp.getPrice());
+
+            }
 
             itemWatermanService.save(itemWatermanDAO);
 
