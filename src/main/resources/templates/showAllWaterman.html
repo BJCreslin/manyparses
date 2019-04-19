@@ -18,6 +18,7 @@
         <th>Groupe</th>
         <th>Edit</th>
         <th>Delete</th>
+        <th>Reread</th>
         <th>id</th>
     </tr>
 
@@ -30,6 +31,7 @@
         <td th:text="${item.group}"></td>
         <td>><a th:href="@{'/itemwaterman/'+${item.id}}">edit</a></td>
         <td><a th:href="@{'/itemwaterman/delete/'+${item.id}}">Delete</a></td>
+        <td><a th:href="@{'/itemwaterman/reread/'+${item.id}}">Reread</a></td>
         <td th:text="${item.id}"></td>
     </tr>
 </table>

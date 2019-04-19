@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.ItemWatermanService;
+import ru.bjcreslin.service.ParsingWaterman;
 
 /**
  * показывает таблицу с данными СП
@@ -17,6 +18,8 @@ import ru.bjcreslin.service.ItemWatermanService;
 public class ShowItemWaterman {
     @Autowired
     private ItemWatermanService itemWatermanService;
+
+
 
     @GetMapping("/showall")
     public String action(Model model) {

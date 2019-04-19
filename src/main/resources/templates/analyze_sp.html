@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+    <head>
+    <meta charset="UTF-8">
+    <title>All ItemSP</title>
+    <link rel="stylesheet" type="text/css"
+          href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:insert="~{footer :: main}"> </div>
+<table class="table .table-striped .table-bordered .table-responsive">
+    <thead class="thead-dark">
+    <tr>
+        <th>code</th>
+        <th>SP name</th>
+        <th>Waterman name</th>
+        <th> price with discount</th>
+        <th>Waterman price</th>
+        <th>SP Address</th>
+        <!--<th>delete</th>
+        <th>id</th> -->
+    </tr>
+
+    </thead>
+<tr th:each="cheaplist : ${cheaplist}">
+    <td th:text="${cheaplist.code}"></td>
+    <td th:text="${cheaplist.nameSP}"></td>
+    <td th:text="${cheaplist.nameWaterman}"></td>
+    <td th:text="${cheaplist.priceSp}"></td>
+    <td th:text="${cheaplist.priceWaterman}"></td>
+    <td th:text="${cheaplist.addressSP}"></td>
+
+    <!--<td>><a href="edit_sp.html" th:href="@{'/itemsp/'+${itemsSP.id}}">edit</a> </td>
+    <td><a th:href="@{'/itemsp/delete/'+${itemsSP.id}}">Delete</a></td>
+    <td th:text="${itemsSP.id}"></td> -->
+
+</tr>
+
+
+
+</table>
+
+</body>
+</html>

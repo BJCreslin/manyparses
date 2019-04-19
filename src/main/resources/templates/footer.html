@@ -6,31 +6,38 @@
 </head>
 <body>
 <div th:fragment="main" style="padding-left: 20px">
-    <div class="row" style="margin-left: 30px" >
-    <div class="col-xs-4">
-    <p>
-        Select section
-    </p>
-    <ol class="border container-fluid" >
-        <li><a href="/index" th:href="@{~/index}">Index page</a></li>
-        <li><a href="/showallsp" th:href="@{~/showallsp}">Show AlL</a></li>
-        <li><a href="additemsp.html" th:href="@{~/additemsp}">Add item</a></li>
-        <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
-    </ol>
-    </div>
-    <div class="col-xs-4" style="margin-left: 10px">
-        <p>Waterman Item </p>
-        <ol class="border container-fluid" >
-            <li><a href="/index" th:href="@{~/index}">Index page</a></li>
-            <li><a href="/showallsp" th:href="@{~/watermanitem/showall}">Show AlL</a></li>
-            <li><a href="additemsp.html" th:href="@{~/watermanitem/add_item}">Add item</a></li>
-            <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
-        </ol>
+    <div class="row" style="margin-left: 30px">
+        <div class="col-xs-4">
+            <p>
+                Select section
+            </p>
+            <ol class="border container-fluid">
+                <li><a href="/index" th:href="@{~/index}">Index page</a></li>
+                <li><a href="/showallsp" th:href="@{~/showallsp}">Show AlL</a></li>
+                <li><a href="additemsp.html" th:href="@{~/additemsp}">Add item</a></li>
+                <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
+            </ol>
+        </div>
+        <div class="col-xs-4" style="margin-left: 10px">
+            <p>Waterman Item </p>
+            <ol class="border container-fluid">
+                <li><a href="/index" th:href="@{~/index}">Index page</a></li>
+                <li><a href="/showallsp" th:href="@{~/watermanitem/showall}">Show AlL</a></li>
+                <li><a href="additemsp.html" th:href="@{~/watermanitem/add_item}">Add item</a></li>
+                <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
+            </ol>
+        </div>
 
-
+        <div class="col-xs-4" style="margin-left: 10px">
+            <p>Analize </p>
+            <ol class="border container-fluid">
+                <li><a href="/analize/cheap_sp" th:href="@{~/analize/cheap_sp}">SP cheap</a></li>
+                <li><a href="/showallsp" th:href="@{~/watermanitem/showall}">Show AlL</a></li>
+                <li><a href="additemsp.html" th:href="@{~/watermanitem/add_item}">Add item</a></li>
+                <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
+            </ol>
+        </div>
     </div>
 </div>
-</div>
-
 </body>
 </html>

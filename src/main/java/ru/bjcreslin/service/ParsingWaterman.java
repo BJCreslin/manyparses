@@ -32,6 +32,14 @@ public class ParsingWaterman {
         return itemWaterman;
     }
 
+    public BigDecimal getPrice(Long code) {
+        try {
+            return pageParser(code).getPrice();
+        } catch (IOException e) {
+            return BigDecimal.ZERO;
+        }
+    }
+
     public ItemWatermanDAO action(Long code) throws IOException {
         ItemWaterman itemWaterman = pageParser(code);
         ItemWatermanDAO itemWatermanDAO = new ItemWatermanDAO();

@@ -6,10 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.bjcreslin.DAO.ItemSPDAO;
 import ru.bjcreslin.DAO.ItemWatermanDAO;
-import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.ItemWatermanService;
+import ru.bjcreslin.service.ParsingWaterman;
+
+import java.io.IOException;
 
 @Log
 @Controller
@@ -17,8 +18,8 @@ import ru.bjcreslin.service.ItemWatermanService;
 public class EditItemWaterman {
     @Autowired
     ItemWatermanService watermanService;
-
-
+    @Autowired
+    private ParsingWaterman parsingWaterman;
 
     @GetMapping("/{item}")
     public String editItemSP(@PathVariable ItemWatermanDAO item, Model model) {
@@ -32,13 +33,19 @@ public class EditItemWaterman {
             return "edit_waterman";
         }
         watermanService.save(item);
-        return "redirect:/index";
+        return "redirect:/showall";
     }
 
     @GetMapping("/delete/{item}")
-    public String delete(@PathVariable ("item")ItemWatermanDAO item) {
+    public String delete(@PathVariable("item") ItemWatermanDAO item) {
         watermanService.delete(item);
         return "redirect:/showall";
+    }
+
+    @GetMapping("/reread/{item}")
+    public String reread(@PathVariable("item") ItemWatermanDAO item) {
+        item.setPrice(parsingWaterman.getPrice(item.getId()));
+        return "redirect:/watermanitem/showall";
     }
 
 }
