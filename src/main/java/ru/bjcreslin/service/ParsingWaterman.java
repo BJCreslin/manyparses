@@ -22,6 +22,9 @@ public class ParsingWaterman {
 
 
         String name = document.getElementsByClass("hl--light").text();
+        /**
+         * todo переделать парсер с учетом нескольких диаметров
+         */
         BigDecimal price = new BigDecimal(document.getElementsByClass("product-wrap").
                 first().text().replace(" ", "").
                 replace("\u20BDДобавитьвкорзину", ""));
