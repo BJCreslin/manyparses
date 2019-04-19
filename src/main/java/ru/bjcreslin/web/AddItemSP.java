@@ -39,6 +39,12 @@ public class AddItemSP {
         return "additemsp";
     }
 
+    /**
+     *
+     * @param item
+     * @param model
+     * @return
+     */
     @PostMapping("/additemsp")
     public String pidUserSubmit(@ModelAttribute ItemSP item, Model model) {
         model.addAttribute("item", item);
