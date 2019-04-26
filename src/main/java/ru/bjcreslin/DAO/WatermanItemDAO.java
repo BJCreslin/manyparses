@@ -22,7 +22,7 @@ public class WatermanItemDAO {
     private Long code; //код товара
     @Column(name = "price")
     private BigDecimal price; //прайсовая цена
-    @Column(name = "group")
+    @Column(name = "groupitem")
     private String group;  // группа товаров
     @Column(name = "currency")
     private String currency; // валюта цены -rub или other
