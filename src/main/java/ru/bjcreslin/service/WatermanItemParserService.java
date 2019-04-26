@@ -5,11 +5,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 import ru.bjcreslin.model.WatermanItem;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
+@Service
 @Log
 public class WatermanItemParserService {
     //private final static String WATERMAN_ADDRESS = "http://www.waterman-t.ru/";

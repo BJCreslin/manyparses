@@ -1,9 +1,7 @@
-package ru.bjcreslin.service;
+package ru.bjcreslin.delete;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.DAO.ItemWatermanDAO;
-import ru.bjcreslin.DAO.ItemWatermanRepository;
 
 import java.util.List;
 

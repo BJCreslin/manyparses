@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bjcreslin.DAO.ItemSPDAO;
-import ru.bjcreslin.DAO.ItemWatermanDAO;
+import ru.bjcreslin.delete.ItemWatermanDAO;
 import ru.bjcreslin.service.ItemSPService;
-import ru.bjcreslin.service.ItemWatermanService;
+import ru.bjcreslin.delete.ItemWatermanService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

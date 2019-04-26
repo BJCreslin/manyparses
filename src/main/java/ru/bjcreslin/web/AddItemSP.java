@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.bjcreslin.DAO.ItemSPDAO;
-import ru.bjcreslin.DAO.ItemWatermanDAO;
 import ru.bjcreslin.model.ItemSP;
+import ru.bjcreslin.model.WatermanItem;
 import ru.bjcreslin.service.ItemSPService;
-import ru.bjcreslin.service.ItemWatermanService;
-import ru.bjcreslin.service.ParsingWaterman;
 import ru.bjcreslin.service.SPParsingSP;
+import ru.bjcreslin.service.WatermanItemParserService;
+import ru.bjcreslin.service.WatermanItemService;
 
 import java.io.IOException;
 
@@ -29,9 +29,9 @@ public class AddItemSP {
     @Autowired
     SPParsingSP spParsingSP;
     @Autowired
-    ItemWatermanService itemWatermanService;
+    WatermanItemService watermanItemService;
     @Autowired
-    ParsingWaterman parsingWaterman;
+    WatermanItemParserService watermanItemParserService;
 
     @GetMapping("/additemsp")
     public String action(Model model) {
@@ -40,7 +40,6 @@ public class AddItemSP {
     }
 
     /**
-     *
      * @param item
      * @param model
      * @return
@@ -49,22 +48,12 @@ public class AddItemSP {
     public String pidUserSubmit(@ModelAttribute ItemSP item, Model model) {
         model.addAttribute("item", item);
 
-
         try {
             ItemSPDAO itemSPDAO = spParsingSP.parsingItempSP(item);
             itemSPService.save(itemSPDAO);
 
-            ItemWatermanDAO itemWatermanDAOtemp = parsingWaterman.action(item.getCode());
-            ItemWatermanDAO itemWatermanDAO = itemWatermanService.findByCode(item.getCode());
-            if (itemWatermanDAO == null) {
-                itemWatermanDAO = itemWatermanDAOtemp;
-            } else {
-                itemWatermanDAO.setPrice(itemWatermanDAOtemp.getPrice());
-
-            }
-
-            itemWatermanService.save(itemWatermanDAO);
-
+            WatermanItem watermanItem = watermanItemParserService.getWatermanItemByCode(itemSPDAO.getCode());
+            watermanItemService.save(watermanItem);
         } catch (IOException e) {
             // e.printStackTrace();
         }

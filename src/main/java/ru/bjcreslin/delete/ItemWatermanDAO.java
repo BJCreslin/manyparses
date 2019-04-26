@@ -1,4 +1,4 @@
-package ru.bjcreslin.DAO;
+package ru.bjcreslin.delete;
 
 
 import lombok.Data;

@@ -6,11 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.bjcreslin.DAO.ItemWatermanDAO;
-import ru.bjcreslin.service.ItemWatermanService;
-import ru.bjcreslin.service.ParsingWaterman;
-
-import java.io.IOException;
+import ru.bjcreslin.delete.ItemWatermanDAO;
+import ru.bjcreslin.delete.ItemWatermanService;
+import ru.bjcreslin.delete.ParsingWaterman;
 
 @Log
 @Controller
