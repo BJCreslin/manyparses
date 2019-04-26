@@ -10,6 +10,10 @@ import ru.bjcreslin.delete.ItemWatermanService;
 /**
  * показывает таблицу с данными СП
  */
+
+/**
+ * todo: переделать в watermanItem
+ */
 @Controller
 @RequestMapping("/watermanitem")
 public class ShowItemWaterman {

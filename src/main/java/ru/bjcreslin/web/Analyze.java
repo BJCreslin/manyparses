@@ -19,6 +19,10 @@ import java.util.List;
 @Log
 @Controller
 @RequestMapping("/analize")
+/**
+ * todo сделать анализ
+ * 1. по цене
+ */
 public class Analyze {
     @Autowired
     private ItemSPService itemSPService;

@@ -10,6 +10,10 @@ import ru.bjcreslin.delete.ItemWatermanDAO;
 import ru.bjcreslin.delete.ItemWatermanService;
 import ru.bjcreslin.delete.ParsingWaterman;
 
+
+/**
+ * todo: переделать в watermanItem
+ */
 @Log
 @Controller
 @RequestMapping("/itemwaterman")
