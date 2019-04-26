@@ -29,7 +29,7 @@ public class WatermanItemService {
         watermanItemDAO.setGroup(watermanItem.getGroupe());
         watermanItemDAO.setName(watermanItem.getName());
         watermanItemDAO.setPrice(watermanItem.getPrice());
-        watermanItemDAO.setDate(new Date());
+        watermanItemDAO.setDate(new Date().toString());
         watermanItemRepository.save(watermanItemDAO);
 
     }

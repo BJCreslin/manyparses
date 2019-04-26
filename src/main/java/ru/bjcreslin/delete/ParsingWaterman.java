@@ -4,8 +4,6 @@ package ru.bjcreslin.delete;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.delete.ItemWatermanDAO;
-import ru.bjcreslin.model.ItemWaterman;
 
 import java.io.IOException;
 import java.math.BigDecimal;

@@ -27,5 +27,5 @@ public class WatermanItemDAO {
     @Column(name = "currency")
     private String currency; // валюта цены -rub или other
     @Column(name = "date")
-    private Date date;
+    private String date;
 }
