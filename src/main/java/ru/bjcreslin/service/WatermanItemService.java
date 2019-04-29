@@ -1,6 +1,7 @@
 package ru.bjcreslin.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.DAO.WatermanItemDAO;
 import ru.bjcreslin.DAO.WatermanItemRepository;
@@ -11,8 +12,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
+@Log
 public class WatermanItemService {
-    @Autowired
     WatermanItemRepository watermanItemRepository;
 
     public WatermanItemDAO findByCode(Long code) {
@@ -37,8 +39,8 @@ public class WatermanItemService {
     public List<WatermanItem> findAll() {
         List<WatermanItem> watermanItemList;
         List<WatermanItemDAO> watermanItemDAOList = (List<WatermanItemDAO>) watermanItemRepository.findAll();
-
-       watermanItemList= watermanItemDAOList.stream().map(this::DaoToItem).collect(Collectors.toList());
+        log.info("WatermanItem findAll:" + watermanItemDAOList.size());
+        watermanItemList = watermanItemDAOList.stream().map(this::DaoToItem).collect(Collectors.toList());
         return watermanItemList;
     }
 

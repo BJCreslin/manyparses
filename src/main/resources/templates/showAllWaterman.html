@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
-    <title>All ItemSP</title>
+    <title>All Waterman Item</title>
     <link rel="stylesheet" type="text/css"
           href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
 </head>
@@ -19,7 +19,6 @@
         <th>Edit</th>
         <th>Delete</th>
         <th>Reread</th>
-        <th>id</th>
     </tr>
 
     </thead>
@@ -28,11 +27,10 @@
         <td th:text="${item.name}"></td>
         <td th:text="${item.price}"></td>
         <td th:text="${item.address}"></td>
-        <td th:text="${item.group}"></td>
-        <td>><a th:href="@{'/itemwaterman/'+${item.id}}">edit</a></td>
-        <td><a th:href="@{'/itemwaterman/delete/'+${item.id}}">Delete</a></td>
-        <td><a th:href="@{'/itemwaterman/reread/'+${item.id}}">Reread</a></td>
-        <td th:text="${item.id}"></td>
+        <td th:text="${item.groupe}"></td>
+        <td>><a th:href="@{'/itemwaterman/'+${item.code}}">edit</a></td>
+        <td><a th:href="@{'/itemwaterman/delete/'+${item.code}}">Delete</a></td>
+        <td><a th:href="@{'/itemwaterman/reread/'+${item.code}}">Reread</a></td>
     </tr>
 </table>
 </body>

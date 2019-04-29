@@ -1,25 +1,21 @@
 package ru.bjcreslin.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.bjcreslin.delete.ItemWatermanService;
+import ru.bjcreslin.service.WatermanItemService;
 
 /**
  * показывает таблицу с данными СП
  */
 
-/**
- * todo: переделать в watermanItem
- */
 @Controller
 @RequestMapping("/watermanitem")
+@AllArgsConstructor
 public class ShowItemWaterman {
-    @Autowired
-    private ItemWatermanService itemWatermanService;
-
+    private WatermanItemService itemWatermanService;
 
 
     @GetMapping("/showall")

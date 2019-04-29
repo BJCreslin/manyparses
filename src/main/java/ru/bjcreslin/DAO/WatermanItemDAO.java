@@ -3,6 +3,7 @@ package ru.bjcreslin.DAO;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
@@ -18,6 +19,7 @@ public class WatermanItemDAO {
     @Column(name = "address")
     private String address;  //цифровой адресс, который сайт добавляет к http://www.waterman-t.ru/products/, что бы получить старницу продукта
     @Column(name = "code")
+    @NotNull
     private Long code; //код товара
     @Column(name = "price")
     private BigDecimal price; //прайсовая цена
