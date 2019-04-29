@@ -7,7 +7,7 @@
           href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
-<div th:insert="~{footer :: main}"></div>
+<div th:insert="~{header :: main}"></div>
 <div th:object="${edit_sp}">
     <span class="card-header" align="center" th:text="'Edit ItemSP with ID: '+${edit_sp.id}"></span>
     <form action="" th:action="@{edit}" method="post">

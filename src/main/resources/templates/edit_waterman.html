@@ -7,21 +7,26 @@
           href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
-<div th:insert="~{footer :: main}"></div>
+<div th:insert="~{header :: main}"></div>
 <div th:object="${edit_waterman}">
-    <span class="card-header" align="center" th:text="'Edit ItemWaterman with ID: '+${edit_waterman.id}"></span>
+    <span class="card-header" align="center" th:text="'Edit ItemWaterman with SKU: '+${edit_waterman.code}"></span>
     <form action="" th:action="@{edit}" method="post">
         <div class="form-control">
-            <input type="hidden" id="id" class="input-group" th:field="${edit_waterman.id}">
+            <input type="hidden" id="code" class="input-group" th:field="${edit_waterman.code}">
             <div style="margin-left: 30px" class="align-self-stretch">
-                adress :
-                <input type="text" id="adress" class="input-group" th:field="${edit_waterman.address}">
+                Web Adress :
+                <input type="text" id="address" class="input-group" th:field="${edit_waterman.address}">
                 Name :
                 <input type="text" id="name" class="input-group" th:field="${edit_waterman.name}">
-                waterman groupe :
+                Waterman groupe :
                 <input type="text" id="groupe" class="input-group" th:field="${edit_waterman.group}">
-                waterman code :
+                Waterman Code :
                 <input type="number" class="input-group" th:field="${edit_waterman.code}">
+                Waterman Price
+                <input type="number" class="input-group" th:field="${edit_waterman.price}">
+                Currency
+                <input type="text" class="input-group" th:field="${edit_waterman.currency}">
+
                 <input type="submit" value="Submit" class="btn-dark"/> <input type="reset" value="Reset"/>
 
             </div>
