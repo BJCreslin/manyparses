@@ -7,5 +7,5 @@ import java.util.List;
 public interface WatermanItemRepository extends CrudRepository<WatermanItemDAO, Long> {
     WatermanItemDAO findByCode(Long code);
 
-    List<WatermanItemDAO> findAllBy();
+    List<WatermanItemDAO> findAll();
 }
