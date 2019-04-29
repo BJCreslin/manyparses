@@ -22,10 +22,13 @@ public class WatermanItemService {
     }
 
     public void save(WatermanItem watermanItem) {
-        WatermanItemDAO watermanItemDAO = findByCode(watermanItem.getCode());
+        Long code = watermanItem.getCode();
+        WatermanItemDAO watermanItemDAO = findByCode(code);
         if (watermanItemDAO == null) {
             watermanItemDAO = new WatermanItemDAO();
+            watermanItemDAO.setCode(code);
         }
+
         watermanItemDAO.setAddress(watermanItem.getAddress());
         watermanItemDAO.setCurrency(watermanItem.getCurrency());
         watermanItemDAO.setGroup(watermanItem.getGroupe());

@@ -1,5 +1,6 @@
 package ru.bjcreslin.web;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,14 +24,11 @@ import java.io.IOException;
  * если кода нет, то добавяляем в таблицу
  */
 @Controller
+@AllArgsConstructor
 public class AddItemSP {
-    @Autowired
     ItemSPService itemSPService;
-    @Autowired
     SPParsingSP spParsingSP;
-    @Autowired
     WatermanItemService watermanItemService;
-    @Autowired
     WatermanItemParserService watermanItemParserService;
 
     @GetMapping("/additemsp")
@@ -40,7 +38,8 @@ public class AddItemSP {
     }
 
     /**
-     * @param item
+     * Метод добавляет itemSP и соответствующий ему Waterman item в базу
+     * @param item  itemSP
      * @param model
      * @return
      */
