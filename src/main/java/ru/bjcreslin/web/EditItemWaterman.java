@@ -6,10 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.bjcreslin.delete.ItemWatermanDAO;
-import ru.bjcreslin.delete.ItemWatermanService;
-import ru.bjcreslin.delete.ParsingWaterman;
-import ru.bjcreslin.model.WatermanItem;
+import ru.bjcreslin.DAO.WatermanItemDAO;
+import ru.bjcreslin.service.WatermanItemParserService;
+import ru.bjcreslin.service.WatermanItemService;
 
 
 /**
@@ -20,35 +19,42 @@ import ru.bjcreslin.model.WatermanItem;
 @RequestMapping("/itemwaterman")
 @AllArgsConstructor
 public class EditItemWaterman {
-    ItemWatermanService watermanService;
-    private ParsingWaterman parsingWaterman;
+    WatermanItemService watermanService;
+    private WatermanItemParserService parsingWaterman;
 
 
     @GetMapping("/{item}")
-    public String editItemSP(@PathVariable WatermanItem item, Model model) {
+    public String editItemSP(@PathVariable WatermanItemDAO item, Model model) {
         model.addAttribute("edit_waterman", item);
         return "edit_waterman";
     }
 
     @PostMapping("edit")
-    public String saveSP(@ModelAttribute("edit_waterman") ItemWatermanDAO item, BindingResult result) {
+    public String saveSP(@ModelAttribute("edit_waterman") WatermanItemDAO item, BindingResult result) {
         if (result.hasErrors()) {
             return "edit_waterman";
         }
         watermanService.save(item);
-        return "redirect:/showall";
+        return "redirect:/itemwaterman/showall";
     }
 
     @GetMapping("/delete/{item}")
-    public String delete(@PathVariable("item") ItemWatermanDAO item) {
+    public String delete(@PathVariable("item") WatermanItemDAO item) {
         watermanService.delete(item);
-        return "redirect:/showall";
+        return "redirect:/itemwaterman/showall";
     }
 
     @GetMapping("/reread/{item}")
-    public String reread(@PathVariable("item") ItemWatermanDAO item) {
-        item.setPrice(parsingWaterman.getPrice(item.getId()));
-        return "redirect:/watermanitem/showall";
+    public String reread(@PathVariable("item") WatermanItemDAO item) {
+        item.setPrice(parsingWaterman.getWatermanItemByCode(item.getCode()).getPrice());
+        return "redirect:/itemwaterman/showall";
+    }
+
+
+    @GetMapping("/showall")
+    public String action(Model model) {
+        model.addAttribute("item_waterman", watermanService.findAll());
+        return "showAllWaterman";
     }
 
 }

@@ -1,16 +1,16 @@
 package ru.bjcreslin.web;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bjcreslin.DAO.ItemSPDAO;
-import ru.bjcreslin.delete.ItemWatermanDAO;
+import ru.bjcreslin.DAO.WatermanItemDAO;
 import ru.bjcreslin.service.ItemSPService;
-import ru.bjcreslin.delete.ItemWatermanService;
+import ru.bjcreslin.service.WatermanItemService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -23,18 +23,17 @@ import java.util.List;
  * todo сделать анализ
  * 1. по цене
  */
+@AllArgsConstructor
 public class Analyze {
-    @Autowired
     private ItemSPService itemSPService;
-    @Autowired
-    private ItemWatermanService itemWatermanService;
+    private WatermanItemService itemWatermanService;
 
     @GetMapping("/cheap_sp")
     public String cheap(Model model) {
         List<ItemSPDAO> itemSPDAOList = itemSPService.findAll();
         List<doubleClass> doubleClassList = new ArrayList<>();
         for (ItemSPDAO item : itemSPDAOList) {
-            ItemWatermanDAO itemWatermanDAO = itemWatermanService.findByCode(item.getCode());
+            WatermanItemDAO itemWatermanDAO = itemWatermanService.findByCode(item.getCode());
             if (itemWatermanDAO != null) {
                 if (itemWatermanDAO.getPrice().compareTo(item.getPriceDiscountSP()) > 0) {
                     doubleClassList.add(new doubleClass(item.getId(), itemWatermanDAO.getCode(),

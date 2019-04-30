@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.bjcreslin.DAO.ItemSPDAO;
+import ru.bjcreslin.DAO.WatermanItemDAO;
 import ru.bjcreslin.model.ItemSP;
 import ru.bjcreslin.model.WatermanItem;
 import ru.bjcreslin.service.ItemSPService;
@@ -51,7 +52,7 @@ public class AddItemSP {
             ItemSPDAO itemSPDAO = spParsingSP.parsingItempSP(item);
             itemSPService.save(itemSPDAO);
 
-            WatermanItem watermanItem = watermanItemParserService.getWatermanItemByCode(itemSPDAO.getCode());
+            WatermanItemDAO watermanItem = watermanItemParserService.getWatermanItemByCode(itemSPDAO.getCode());
             watermanItemService.save(watermanItem);
         } catch (IOException e) {
             // e.printStackTrace();

@@ -5,9 +5,7 @@ import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.DAO.WatermanItemDAO;
 import ru.bjcreslin.DAO.WatermanItemRepository;
-import ru.bjcreslin.model.WatermanItem;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,7 +18,7 @@ public class WatermanItemService {
         return watermanItemRepository.findByCode(code);
     }
 
-    public void save(WatermanItem watermanItem) {
+    public void save(WatermanItemDAO watermanItem) {
         Long code = watermanItem.getCode();
         WatermanItemDAO watermanItemDAO = findByCode(code);
         if (watermanItemDAO == null) {
@@ -28,22 +26,19 @@ public class WatermanItemService {
             watermanItemDAO.setCode(code);
         }
 
-        watermanItemDAO.setAddress(watermanItem.getAddress());
-        watermanItemDAO.setCurrency(watermanItem.getCurrency());
-        watermanItemDAO.setGroup(watermanItem.getGroupe());
-        watermanItemDAO.setName(watermanItem.getName());
-        watermanItemDAO.setPrice(watermanItem.getPrice());
-        watermanItemDAO.setDate(new Date().toString());
         watermanItemRepository.save(watermanItemDAO);
 
     }
 
     public List<WatermanItemDAO> findAll() {
-        List<WatermanItemDAO> watermanItemDAOList =  watermanItemRepository.findAll();
+        List<WatermanItemDAO> watermanItemDAOList = watermanItemRepository.findAll();
         log.info("WatermanItem findAll:" + watermanItemDAOList.size());
         return watermanItemDAOList;
     }
 
+    public void delete(WatermanItemDAO item) {
+        watermanItemRepository.delete(item);
+    }
 
 
 }
