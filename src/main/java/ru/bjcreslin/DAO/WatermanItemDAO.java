@@ -11,18 +11,14 @@ import java.math.BigDecimal;
 @Table(name = "waterman_item")
 public class WatermanItemDAO {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "code")
+    private Long code; //код товара
     @Column(name = "name")
     private String name; //Наименование
     @Column(name = "address")
     private String address;  //цифровой адресс, который сайт добавляет к http://www.waterman-t.ru/products/, что бы получить старницу продукта
-    @Column(name = "code")
-    @NotNull
-    private Long code; //код товара
     @Column(name = "price")
-    private BigDecimal price; //прайсовая цена
+    private BigDecimal price;
     @Column(name = "groupitem")
     private String group;  // группа товаров
     @Column(name = "currency")

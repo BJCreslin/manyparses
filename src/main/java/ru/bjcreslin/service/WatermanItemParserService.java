@@ -6,7 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.model.WatermanItem;
+import ru.bjcreslin.DAO.WatermanItemDAO;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -24,8 +24,8 @@ public class WatermanItemParserService {
      * @param code -code from Base
      * @return WatermanItem;
      */
-    public WatermanItem getWatermanItemByCode(Long code) {
-        var item = new WatermanItem();
+    public WatermanItemDAO getWatermanItemByCode(Long code) {
+        var item = new WatermanItemDAO();
         item.setCode(code);
         try {
             String addressParsingPage = WATERMAN_FIND_PAGE + code.toString();
@@ -65,7 +65,7 @@ public class WatermanItemParserService {
         return item;
     }
 
-    private void addItemGroupeFromHTMLToItem(WatermanItem item, Document itemDocument) {
+    private void addItemGroupeFromHTMLToItem(WatermanItemDAO item, Document itemDocument) {
         /*
          <div class="breadcrumbs">
         <a href="/" class="breadcrumb--text">
@@ -81,18 +81,18 @@ public class WatermanItemParserService {
         </a>
     </div>
          */
-        String groupe = itemDocument.getElementsByClass("breadcrumb--text").last().html().
+        String group = itemDocument.getElementsByClass("breadcrumb--text").last().html().
                 replace("<span>", "").replace("</span>", "").trim();
-        item.setGroupe(groupe);
+        item.setGroup(group);
     }
 
-    private void addItemPriceFromHTMLToItem(WatermanItem item, Element elementsItem) {
+    private void addItemPriceFromHTMLToItem(WatermanItemDAO item, Element elementsItem) {
         //<span class="js-actualPrice">49</span>
         String price = elementsItem.getElementsByClass("js-actualPrice").html();
         item.setPrice(new BigDecimal(price));
     }
 
-    private void addItemCurrencyFromHTMLToItem(WatermanItem item, Element element1) {
+    private void addItemCurrencyFromHTMLToItem(WatermanItemDAO item, Element element1) {
         // <td data-th="Цена, руб">
         if (element1.attr("data-th").equals("Цена, руб")) {
             item.setCurrency("Rub");
@@ -101,7 +101,7 @@ public class WatermanItemParserService {
         }
     }
 
-    private void addItemNameFromHTMLToItem(WatermanItem item, Element element1) {
+    private void addItemNameFromHTMLToItem(WatermanItemDAO item, Element element1) {
         // <td data-th="Наименование">Лен (Италия)  50гр.</td>
         if (element1.attr("data-th").equals("Наименование")) {
             item.setName(element1.html());

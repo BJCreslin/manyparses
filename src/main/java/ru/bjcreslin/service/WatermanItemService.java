@@ -9,7 +9,6 @@ import ru.bjcreslin.model.WatermanItem;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -39,23 +38,12 @@ public class WatermanItemService {
 
     }
 
-    public List<WatermanItem> findAll() {
-        List<WatermanItem> watermanItemList;
-        List<WatermanItemDAO> watermanItemDAOList = (List<WatermanItemDAO>) watermanItemRepository.findAll();
+    public List<WatermanItemDAO> findAll() {
+        List<WatermanItemDAO> watermanItemDAOList =  watermanItemRepository.findAll();
         log.info("WatermanItem findAll:" + watermanItemDAOList.size());
-        watermanItemList = watermanItemDAOList.stream().map(this::DaoToItem).collect(Collectors.toList());
-        return watermanItemList;
+        return watermanItemDAOList;
     }
 
-    private WatermanItem DaoToItem(WatermanItemDAO watermanItemDAO) {
-        WatermanItem watermanItem = new WatermanItem();
-        watermanItem.setAddress(watermanItemDAO.getAddress());
-        watermanItem.setCode(watermanItemDAO.getCode());
-        watermanItem.setCurrency(watermanItemDAO.getCurrency());
-        watermanItem.setGroupe(watermanItemDAO.getGroup());
-        watermanItem.setName(watermanItemDAO.getName());
-        watermanItem.setPrice(watermanItemDAO.getPrice());
-        return watermanItem;
-    }
+
 
 }
