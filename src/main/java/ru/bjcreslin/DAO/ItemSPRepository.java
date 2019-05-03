@@ -4,10 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface ItemSPRepository extends CrudRepository<ItemSPDAO,Long> {
-    Optional<ItemSPDAO> findById(Long id);
-    ItemSPDAO findByAddressSP(String address);
+public interface ItemSPRepository extends CrudRepository<ItemStroyparkDAO,Long> {
+    Optional<ItemStroyparkDAO> findById(Long id);
+    ItemStroyparkDAO findByAddressSP(String address);
 
     @Override
-    void delete(ItemSPDAO itemSPDAO);
+    void delete(ItemStroyparkDAO itemStroyparkDAO);
 }

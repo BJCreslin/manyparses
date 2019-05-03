@@ -1,16 +1,14 @@
 package ru.bjcreslin.web;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.bjcreslin.DAO.ItemSPDAO;
+import ru.bjcreslin.DAO.ItemStroyparkDAO;
 import ru.bjcreslin.DAO.WatermanItemDAO;
 import ru.bjcreslin.model.ItemSP;
-import ru.bjcreslin.model.WatermanItem;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.SPParsingSP;
 import ru.bjcreslin.service.WatermanItemParserService;
@@ -40,19 +38,20 @@ public class AddItemSP {
 
     /**
      * Метод добавляет itemSP и соответствующий ему Waterman item в базу
+     *
      * @param item  itemSP
      * @param model
      * @return
      */
     @PostMapping("/additemsp")
-    public String pidUserSubmit(@ModelAttribute ItemSP item, Model model) {
+    public String pidUserSubmit(@ModelAttribute ItemStroyparkDAO item, Model model) {
         model.addAttribute("item", item);
 
         try {
-            ItemSPDAO itemSPDAO = spParsingSP.parsingItempSP(item);
-            itemSPService.save(itemSPDAO);
+            ItemStroyparkDAO itemStroyparkDAO = spParsingSP.parsingItempSP(item);
+            itemSPService.save(itemStroyparkDAO);
 
-            WatermanItemDAO watermanItem = watermanItemParserService.getWatermanItemByCode(itemSPDAO.getCode());
+            WatermanItemDAO watermanItem = item.getWatermanItemDAO();
             watermanItemService.save(watermanItem);
         } catch (IOException e) {
             // e.printStackTrace();

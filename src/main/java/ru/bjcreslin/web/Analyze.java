@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.bjcreslin.DAO.ItemSPDAO;
+import ru.bjcreslin.DAO.ItemStroyparkDAO;
 import ru.bjcreslin.DAO.WatermanItemDAO;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.WatermanItemService;
@@ -30,15 +30,15 @@ public class Analyze {
 
     @GetMapping("/cheap_sp")
     public String cheap(Model model) {
-        List<ItemSPDAO> itemSPDAOList = itemSPService.findAll();
+        List<ItemStroyparkDAO> itemStroyparkDAOList = itemSPService.findAll();
         List<doubleClass> doubleClassList = new ArrayList<>();
-        for (ItemSPDAO item : itemSPDAOList) {
-            WatermanItemDAO itemWatermanDAO = itemWatermanService.findByCode(item.getCode());
+        for (ItemStroyparkDAO item : itemStroyparkDAOList) {
+            WatermanItemDAO itemWatermanDAO = item.getWatermanItemDAO();
             if (itemWatermanDAO != null) {
-                if (itemWatermanDAO.getPrice().compareTo(item.getPriceDiscountSP()) > 0) {
+                if (itemWatermanDAO.getPrice().compareTo(item.getPriceDiscount()) > 0) {
                     doubleClassList.add(new doubleClass(item.getId(), itemWatermanDAO.getCode(),
-                            item.getNameSP(), itemWatermanDAO.getName(),
-                            item.getAddressSP(), item.getPriceDiscountSP(), itemWatermanDAO.getPrice()));
+                            item.getName(), itemWatermanDAO.getName(),
+                            item.getAddress(), item.getPriceDiscount(), itemWatermanDAO.getPrice()));
                 }
             }
         }
