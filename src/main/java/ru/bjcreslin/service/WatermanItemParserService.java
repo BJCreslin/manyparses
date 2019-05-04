@@ -6,17 +6,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.DAO.WatermanItemDAO;
+import ru.bjcreslin.model.WatermanItemDTO;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
 @Service
 @Log
-public class WatermanItemParserService {
+public class WatermanItemParserService implements ItemParser{
     //private final static String WATERMAN_ADDRESS = "http://www.waterman-t.ru/";
     private final static String WATERMAN_FIND_PAGE = "http://www.waterman-t.ru/search/result?q=";
-    private final static String WATERMAN_ITEM_PAGE = "http://www.waterman-t.ru/products/";
+    private final static String ITEM_PAGE = "http://www.waterman-t.ru/products/";
 
     /**
      * Возвращает товар по заданному коду
@@ -24,8 +24,8 @@ public class WatermanItemParserService {
      * @param code -code from Base
      * @return WatermanItem;
      */
-    public WatermanItemDAO getWatermanItemByCode(Long code) {
-        var item = new WatermanItemDAO();
+    public WatermanItemDTO getItemByCode(Long code) {
+        var item = new WatermanItemDTO();
         item.setCode(code);
         try {
             String addressParsingPage = WATERMAN_FIND_PAGE + code.toString();
@@ -40,7 +40,7 @@ public class WatermanItemParserService {
             item.setAddress(itemAdress);
 
 
-            String AddressItemPage = WATERMAN_ITEM_PAGE + itemAdress;
+            String AddressItemPage = ITEM_PAGE + itemAdress;
             Document itemDocument = Jsoup.connect(AddressItemPage).
                     userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36").
                     get();
@@ -65,7 +65,7 @@ public class WatermanItemParserService {
         return item;
     }
 
-    private void addItemGroupeFromHTMLToItem(WatermanItemDAO item, Document itemDocument) {
+    private void addItemGroupeFromHTMLToItem(WatermanItemDTO item, Document itemDocument) {
         /*
          <div class="breadcrumbs">
         <a href="/" class="breadcrumb--text">
@@ -86,13 +86,13 @@ public class WatermanItemParserService {
         item.setGroup(group);
     }
 
-    private void addItemPriceFromHTMLToItem(WatermanItemDAO item, Element elementsItem) {
+    private void addItemPriceFromHTMLToItem(WatermanItemDTO item, Element elementsItem) {
         //<span class="js-actualPrice">49</span>
         String price = elementsItem.getElementsByClass("js-actualPrice").html();
         item.setPrice(new BigDecimal(price));
     }
 
-    private void addItemCurrencyFromHTMLToItem(WatermanItemDAO item, Element element1) {
+    private void addItemCurrencyFromHTMLToItem(WatermanItemDTO item, Element element1) {
         // <td data-th="Цена, руб">
         if (element1.attr("data-th").equals("Цена, руб")) {
             item.setCurrency("Rub");
@@ -101,7 +101,7 @@ public class WatermanItemParserService {
         }
     }
 
-    private void addItemNameFromHTMLToItem(WatermanItemDAO item, Element element1) {
+    private void addItemNameFromHTMLToItem(WatermanItemDTO item, Element element1) {
         // <td data-th="Наименование">Лен (Италия)  50гр.</td>
         if (element1.attr("data-th").equals("Наименование")) {
             item.setName(element1.html());

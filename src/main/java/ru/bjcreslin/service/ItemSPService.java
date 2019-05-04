@@ -2,7 +2,7 @@ package ru.bjcreslin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.DAO.ItemStroyparkDAO;
+import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.DAO.ItemSPRepository;
 
 import java.util.List;
@@ -12,25 +12,25 @@ public class ItemSPService {
     @Autowired
     ItemSPRepository itemSPRepository;
 
-    public void save(ItemStroyparkDAO itemStroyparkDAO) {
-        this.itemSPRepository.save(itemStroyparkDAO);
+    public void save(StroyparkItemDTO stroyparkItemDTO) {
+        this.itemSPRepository.save(stroyparkItemDTO);
     }
 
-    public List<ItemStroyparkDAO> findAll() {
-        return (List<ItemStroyparkDAO>) itemSPRepository.findAll();
+    public List<StroyparkItemDTO> findAll() {
+        return (List<StroyparkItemDTO>) itemSPRepository.findAll();
     }
 
-    public ItemStroyparkDAO findById(Long id) {
+    public StroyparkItemDTO findByCode(Long id) {
         //  itemSPRepository.findById(id).
-        return itemSPRepository.findById(id).get();
+        return itemSPRepository.findByCode(id).get();
     }
 
-    public ItemStroyparkDAO findByAddressSP(String address) {
-        return itemSPRepository.findByAddressSP(address);
+    public StroyparkItemDTO findByAddress(String address) {
+        return itemSPRepository.findByAddress(address);
     }
 
-    public void delete(ItemStroyparkDAO itemStroyparkDAO) {
-        itemSPRepository.delete(itemStroyparkDAO);
+    public void delete(StroyparkItemDTO stroyparkItemDTO) {
+        itemSPRepository.delete(stroyparkItemDTO);
     }
 
 

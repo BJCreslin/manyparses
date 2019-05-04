@@ -1,13 +1,14 @@
 package ru.bjcreslin.DAO;
 
 import org.springframework.data.repository.CrudRepository;
+import ru.bjcreslin.model.StroyparkItemDTO;
 
 import java.util.Optional;
 
-public interface ItemSPRepository extends CrudRepository<ItemStroyparkDAO,Long> {
-    Optional<ItemStroyparkDAO> findById(Long id);
-    ItemStroyparkDAO findByAddressSP(String address);
+public interface ItemSPRepository extends CrudRepository<StroyparkItemDTO,Long> {
+    Optional<StroyparkItemDTO> findByCode(Long id);
+    StroyparkItemDTO findByAddress(String address);
 
     @Override
-    void delete(ItemStroyparkDAO itemStroyparkDAO);
+    void delete(StroyparkItemDTO stroyparkItemDTO);
 }

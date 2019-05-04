@@ -3,7 +3,7 @@ package ru.bjcreslin.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.DAO.WatermanItemDAO;
+import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.DAO.WatermanItemRepository;
 
 import java.util.List;
@@ -14,29 +14,29 @@ import java.util.List;
 public class WatermanItemService {
     WatermanItemRepository watermanItemRepository;
 
-    public WatermanItemDAO findByCode(Long code) {
+    public WatermanItemDTO findByCode(Long code) {
         return watermanItemRepository.findByCode(code);
     }
 
-    public void save(WatermanItemDAO watermanItem) {
+    public void save(WatermanItemDTO watermanItem) {
         Long code = watermanItem.getCode();
-        WatermanItemDAO watermanItemDAO = findByCode(code);
-        if (watermanItemDAO == null) {
-            watermanItemDAO = new WatermanItemDAO();
-            watermanItemDAO.setCode(code);
+        WatermanItemDTO watermanItemDTO = findByCode(code);
+        if (watermanItemDTO == null) {
+            watermanItemDTO = new WatermanItemDTO();
+            watermanItemDTO.setCode(code);
         }
 
-        watermanItemRepository.save(watermanItemDAO);
+        watermanItemRepository.save(watermanItemDTO);
 
     }
 
-    public List<WatermanItemDAO> findAll() {
-        List<WatermanItemDAO> watermanItemDAOList = watermanItemRepository.findAll();
-        log.info("WatermanItem findAll:" + watermanItemDAOList.size());
-        return watermanItemDAOList;
+    public List<WatermanItemDTO> findAll() {
+        List<WatermanItemDTO> watermanItemDTOList = watermanItemRepository.findAll();
+        log.info("WatermanItem findAll:" + watermanItemDTOList.size());
+        return watermanItemDTOList;
     }
 
-    public void delete(WatermanItemDAO item) {
+    public void delete(WatermanItemDTO item) {
         watermanItemRepository.delete(item);
     }
 

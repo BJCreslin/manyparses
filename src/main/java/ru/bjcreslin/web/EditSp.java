@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.bjcreslin.DAO.ItemStroyparkDAO;
+import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.service.ItemSPService;
 
 @Log
@@ -19,23 +19,23 @@ public class EditSp {
 
 
     @GetMapping("{item}")
-    public String editItemSP(@PathVariable ItemStroyparkDAO item, Model model) {
+    public String editItemSP(@PathVariable StroyparkItemDTO item, Model model) {
         model.addAttribute("edit_sp", item);
         return "edit_sp";
     }
 
     @PostMapping("edit")
-    public String saveSP(@ModelAttribute("edit_sp") ItemStroyparkDAO editItemStroyparkDAO, BindingResult result, Model model) {
+    public String saveSP(@ModelAttribute("edit_sp") StroyparkItemDTO editStroyparkItemDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "edit_sp";
         }
-        itemSPService.save(editItemStroyparkDAO);
+        itemSPService.save(editStroyparkItemDTO);
         return "redirect:/index";
     }
 
     @GetMapping("/delete/{item}")
-    public String delete(@PathVariable ("item") ItemStroyparkDAO itemStroyparkDAO) {
-        itemSPService.delete(itemStroyparkDAO);
+    public String delete(@PathVariable ("item") StroyparkItemDTO stroyparkItemDTO) {
+        itemSPService.delete(stroyparkItemDTO);
         return "redirect:/showallsp";
     }
 

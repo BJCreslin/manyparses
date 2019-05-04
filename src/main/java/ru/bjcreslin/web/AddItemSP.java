@@ -6,9 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.bjcreslin.DAO.ItemStroyparkDAO;
-import ru.bjcreslin.DAO.WatermanItemDAO;
-import ru.bjcreslin.model.ItemSP;
+import ru.bjcreslin.model.StroyparkItemDTO;
+import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.SPParsingSP;
 import ru.bjcreslin.service.WatermanItemParserService;
@@ -32,7 +31,7 @@ public class AddItemSP {
 
     @GetMapping("/additemsp")
     public String action(Model model) {
-        model.addAttribute("item", new ItemSP());
+        model.addAttribute("item", new StroyparkItemDTO());
         return "additemsp";
     }
 
@@ -44,14 +43,14 @@ public class AddItemSP {
      * @return
      */
     @PostMapping("/additemsp")
-    public String pidUserSubmit(@ModelAttribute ItemStroyparkDAO item, Model model) {
+    public String pidUserSubmit(@ModelAttribute StroyparkItemDTO item, Model model) {
         model.addAttribute("item", item);
 
         try {
-            ItemStroyparkDAO itemStroyparkDAO = spParsingSP.parsingItempSP(item);
-            itemSPService.save(itemStroyparkDAO);
+            StroyparkItemDTO stroyparkItemDTO = spParsingSP.parsingItempSP(item);
+            itemSPService.save(stroyparkItemDTO);
 
-            WatermanItemDAO watermanItem = item.getWatermanItemDAO();
+            WatermanItemDTO watermanItem = item.getWatermanItemDTO();
             watermanItemService.save(watermanItem);
         } catch (IOException e) {
             // e.printStackTrace();

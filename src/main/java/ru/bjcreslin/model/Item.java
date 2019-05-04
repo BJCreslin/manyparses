@@ -2,19 +2,36 @@ package ru.bjcreslin.model;
 
 import lombok.Data;
 
-import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+@MappedSuperclass
 @Data
-public abstract class Item implements Serializable {
+public abstract class Item  {
+    @NotNull
+    @Id
+    @Column(name = "code") //код товара
+    private Long code;
 
-
+    @Column(name = "name") //Наименование
     private String name;
 
+    @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "address")
     private String address;
 
-    private Long code;
+    @Column(name = "date")
+    private String date;
+
+    @Column(name="comment")
+    private String comment;
+
+
+
+    @Column(name = "currency")
+    private String currency; // валюта цены -rub или other
 
 }
