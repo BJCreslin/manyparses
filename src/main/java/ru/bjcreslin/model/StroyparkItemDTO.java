@@ -24,4 +24,13 @@ public class StroyparkItemDTO extends Item {
     @JoinColumn(name = "watermanitem_code")
     private WatermanItemDTO watermanItemDTO;
 
+    @Override
+    public String toString() {
+        return "StroyparkItemDTO{" +
+                "multy=" + multy +
+                ", priceDiscount=" + priceDiscount +
+                ", sale=" + sale +
+                ", watermanItemDTO=" + watermanItemDTO +
+                "} " + super.toString();
+    }
 }

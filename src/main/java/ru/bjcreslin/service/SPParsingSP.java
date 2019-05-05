@@ -15,17 +15,6 @@ import java.math.BigDecimal;
 @Log
 public class SPParsingSP implements ItemParser {
 
-    public StroyparkItemDTO parsingItempSP(StroyparkItemDTO item) throws IOException {
-        Document document;
-
-        document = Jsoup.connect(item.getAddress()).
-                userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36").
-                get();
-
-
-        log.info(item.toString());
-        return item;
-    }
 
     private final static String ITEM_PAGE = "https://stroypark.su/good/";
 
@@ -35,6 +24,10 @@ public class SPParsingSP implements ItemParser {
         item.setCode(code);
         String addressParsingPage = ITEM_PAGE + code.toString();
         Document document;
+
+        item.setCode(code);
+
+        item.setAddress(addressParsingPage);
 
         try {
             document = Jsoup.connect(addressParsingPage).
@@ -51,27 +44,37 @@ public class SPParsingSP implements ItemParser {
 
         item.setPrice(getPriceFromDocument(document));
 
+        item.setDate(DateService.getCurrentDate());
 
-        /*
-                                            <div class="c-product-meta-item">
-                                           ......
-                                        </div>
-                                        <div class="c-product-meta-item"> Код товара:
-                                            <strong> 9000901</strong>
-                                        </div>
-         */
+        item.setSale(isSale(document));
 
-        Element elementItem = document.getElementsByClass("c-content").first();
-        Element elementItemWithoutName = elementItem.getElementsByClass("c-product-meta-item").first();
-        Element elementWithCode = elementItemWithoutName.nextElementSibling();
-        log.severe(elementWithCode.html());
+        item.setCurrency(getCurrencyFromDocument(document));
 
+        item.setMulty(getMultyFromDocument(document));
 
+        log.info("Parsing StroyPArk html: " + item);
         return item;
     }
 
+    private Long getMultyFromDocument(Document document) {
+        return 1L;
+    }
+
+    private String getCurrencyFromDocument(Document document) {
+        return "rub";
+    }
+
+
+    private Boolean isSale(Document document) {
+        Element elementItem = document.getElementsByClass("c-content").first();
+
+        if (elementItem.text().toLowerCase().contains("РАСПРОДАЖА".toLowerCase())) {
+            return true;
+        }
+        return false;
+    }
+
     /**
-     *
      * @param document -html страница
      * @return цена без скидки
      */
@@ -97,7 +100,7 @@ public class SPParsingSP implements ItemParser {
     }
 
     /**
-     * @param document  html страница
+     * @param document html страница
      * @return цена со скидкой
      */
     private BigDecimal getPriceDiscountFromDocument(Document document) {
@@ -125,7 +128,7 @@ public class SPParsingSP implements ItemParser {
 
 
     /**
-     * @param document  html страница
+     * @param document html страница
      * @return имя товара
      */
     private String getNameFromDocument(Document document) {

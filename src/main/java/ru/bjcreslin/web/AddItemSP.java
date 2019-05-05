@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.bjcreslin.Exceptions.WebPerserException;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.service.ItemSPService;
@@ -47,13 +48,13 @@ public class AddItemSP {
         model.addAttribute("item", item);
 
         try {
-            StroyparkItemDTO stroyparkItemDTO = spParsingSP.parsingItempSP(item);
+            StroyparkItemDTO stroyparkItemDTO = spParsingSP.getItemByCode(item.getCode());
             itemSPService.save(stroyparkItemDTO);
 
             WatermanItemDTO watermanItem = item.getWatermanItemDTO();
             watermanItemService.save(watermanItem);
-        } catch (IOException e) {
-            // e.printStackTrace();
+        } catch (WebPerserException e) {
+            e.printStackTrace();
         }
 
         return "redirect:/showallsp";

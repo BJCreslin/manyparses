@@ -24,11 +24,10 @@ public abstract class Item  {
     private String address;
 
     @Column(name = "date")
-    private String date;
+    private Long date;
 
     @Column(name="comment")
     private String comment;
-
 
 
     @Column(name = "currency")
