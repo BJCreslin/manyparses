@@ -21,7 +21,7 @@ public class StroyparkItemDTO extends Item {
     private Boolean sale;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "watermanitem_code")
+    @JoinColumn(name = "waterman_item_code")
     private WatermanItemDTO watermanItemDTO;
 
     @Override

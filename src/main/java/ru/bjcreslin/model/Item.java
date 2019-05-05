@@ -29,7 +29,6 @@ public abstract class Item  {
     @Column(name="comment")
     private String comment;
 
-
     @Column(name = "currency")
     private String currency; // валюта цены -rub или other
 
