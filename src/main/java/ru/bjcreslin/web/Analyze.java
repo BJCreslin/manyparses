@@ -36,7 +36,7 @@ public class Analyze {
             WatermanItemDTO itemWatermanDAO = item.getWatermanItemDTO();
             if (itemWatermanDAO != null) {
                 if (itemWatermanDAO.getPrice().compareTo(item.getPriceDiscount()) > 0) {
-                    doubleClassList.add(new doubleClass(item.getCode(), itemWatermanDAO.getCode(),
+                    doubleClassList.add(new doubleClass(item.getId(), itemWatermanDAO.getId(),
                             item.getName(), itemWatermanDAO.getName(),
                             item.getAddress(), item.getPriceDiscount(), itemWatermanDAO.getPrice()));
                 }
