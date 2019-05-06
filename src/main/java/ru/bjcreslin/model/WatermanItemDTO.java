@@ -41,7 +41,7 @@ public class WatermanItemDTO extends Item {
     private String group;  // группа товаров
 
 
-    @OneToMany(targetEntity = StroyparkItemDTO.class, mappedBy = "waterman",
+    @OneToMany(targetEntity = ru.bjcreslin.model.StroyparkItemDTO.class, mappedBy = "waterman",
             cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             orphanRemoval = true)
     private Set<StroyparkItemDTO> stroyparkItemList = new HashSet<>();
