@@ -21,11 +21,11 @@ public class SPParsingSP implements ItemParser {
     @Override
     public StroyparkItemDTO getItemByCode(Long code) throws WebPerserException {
         StroyparkItemDTO item = new StroyparkItemDTO();
-        item.setCode(code);
+        item.setId(code);
         String addressParsingPage = ITEM_PAGE + code.toString();
         Document document;
 
-        item.setCode(code);
+        item.setId(code);
 
         item.setAddress(addressParsingPage);
 

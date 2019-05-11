@@ -46,7 +46,7 @@ public class EditItemWaterman {
 
     @GetMapping("/reread/{item}")
     public String reread(@PathVariable("item") WatermanItemDTO item) {
-        item.setPrice(parsingWaterman.getItemByCode(item.getCode()).getPrice());
+        item.setPrice(parsingWaterman.getItemByCode(item.getId()).getPrice());
         return "redirect:/itemwaterman/showall";
     }
 

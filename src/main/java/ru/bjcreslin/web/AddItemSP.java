@@ -42,7 +42,7 @@ public class AddItemSP {
     /**
      * Метод добавляет itemSP и соответствующий ему Waterman item в базу
      *
-     * @param DoubleCode doublecode
+     * @param doubleCode doublecode
      * @param model
      * @return
      */
