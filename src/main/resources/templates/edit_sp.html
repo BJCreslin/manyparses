@@ -9,17 +9,30 @@
 <body>
 <div th:insert="~{header :: main}"></div>
 <div th:object="${edit_sp}">
-    <span class="card-header" align="center" th:text="'Edit ItemSP with ID: '+${edit_sp.id}"></span>
+    <span class="card-header" align="center" th:text="'Edit Stroypark Item with SKU: '+${edit_sp.code}"></span>
     <form action="" th:action="@{edit}" method="post">
         <div class="form-control">
-            <input type="hidden" id="id" class="input-group" th:field="${edit_sp.id}">
+            <input type="hidden" id="id" class="input-group" th:field="${edit_sp.code}">
             <div style="margin-left: 30px" class="align-self-stretch">
                 adress :
-                <input type="text" id="adress" class="input-group" th:field="${edit_sp.addressSP}">
+                <input type="text" id="adress" class="input-group" th:field="${edit_sp.address}">
                 Name :
-                <input type="text" id="name" class="input-group" th:field="${edit_sp.nameSP}">
+                <input type="text" id="name" class="input-group" th:field="${edit_sp.name}">
+                Price :
+                <input type="text" id="price" class="input-group" th:field="${edit_sp.price}">
+                Price discount:
+                <input type="text" id="priceDiscount" class="input-group" th:field="${edit_sp.priceDiscount}">
+                Currency :
+                <input type="text" id="currency" class="input-group" th:field="${edit_sp.currency}">
+
+                Comment :
+                <input type="text" id="comment" class="input-group" th:field="${edit_sp.comment}">
+                Multy :
+                <input type="text" id="multy" class="input-group" th:field="${edit_sp.multy}">
+                Sale :
+                <input type="text" id="sale" class="input-group" th:field="${edit_sp.sale}">
                 waterman code :
-                <input type="number" class="input-group" th:field="${edit_sp.code}">
+                <input type="number" class="input-group" th:field="${edit_sp.watermanItemDTO.code}">
                 <input type="submit" value="Submit" class="btn-dark"/> <input type="reset" value="Reset"/>
 
             </div>
