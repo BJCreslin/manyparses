@@ -19,11 +19,11 @@ public class WatermanItemService {
     }
 
     public void save(WatermanItemDTO watermanItem) {
-        Long code = watermanItem.getId();
+        Long code = watermanItem.getCode();
         WatermanItemDTO watermanItemDTO = findByCode(code);
         if (watermanItemDTO == null) {
             watermanItemDTO = new WatermanItemDTO();
-            watermanItemDTO.setId(code);
+            watermanItemDTO.setCode(code);
         }
 
         watermanItemRepository.save(watermanItemDTO);

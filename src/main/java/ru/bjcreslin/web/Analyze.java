@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
+import ru.bjcreslin.service.AnalyzeSP;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.WatermanItemService;
 
@@ -25,24 +26,12 @@ import java.util.List;
  */
 @AllArgsConstructor
 public class Analyze {
-    private ItemSPService itemSPService;
-    private WatermanItemService itemWatermanService;
+    AnalyzeSP analyzeSP;
 
     @GetMapping("/cheap_sp")
     public String cheap(Model model) {
-        List<StroyparkItemDTO> stroyparkItemDTOList = itemSPService.findAll();
-        List<doubleClass> doubleClassList = new ArrayList<>();
-        for (StroyparkItemDTO item : stroyparkItemDTOList) {
-            WatermanItemDTO itemWatermanDAO = item.getWatermanItemDTO();
-            if (itemWatermanDAO != null) {
-                if (itemWatermanDAO.getPrice().compareTo(item.getPriceDiscount()) > 0) {
-                    doubleClassList.add(new doubleClass(item.getId(), itemWatermanDAO.getId(),
-                            item.getName(), itemWatermanDAO.getName(),
-                            item.getAddress(), item.getPriceDiscount(), itemWatermanDAO.getPrice()));
-                }
-            }
-        }
-        model.addAttribute("cheaplist", doubleClassList);
+        List<StroyparkItemDTO> stroyparkItemDTOList = analyzeSP.findAllCheaps();
+        model.addAttribute("cheaplist", stroyparkItemDTOList);
         return "analyze_sp";
     }
 

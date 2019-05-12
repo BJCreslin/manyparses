@@ -26,7 +26,7 @@ public class WatermanItemParserService implements ItemParser{
      */
     public WatermanItemDTO getItemByCode(Long code) {
         var item = new WatermanItemDTO();
-        item.setId(code);
+        item.setCode(code);
         try {
             String addressParsingPage = WATERMAN_FIND_PAGE + code.toString();
             Document document = Jsoup.connect(addressParsingPage).
