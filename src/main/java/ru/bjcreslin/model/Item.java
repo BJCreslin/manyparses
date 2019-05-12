@@ -2,9 +2,7 @@ package ru.bjcreslin.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
+import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @Data

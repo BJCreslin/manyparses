@@ -56,17 +56,6 @@ public class AddItemSP {
             WatermanItemDTO watermanItem = watermanItemService.findByCode(doubleCode.getSecondCode());
             watermanItem = watermanItemParserService.getItemByCode(doubleCode.getSecondCode());
 
-//            if (watermanItem == null) {
-//                watermanItem = watermanItemParserService.getItemByCode(doubleCode.getSecondCode());
-//            } else {
-//                Long time = DateService.getCurrentDate();
-//                if ((time - watermanItem.getDate()) > 1000 * 60 * 60 * 24) {
-//                    watermanItem = watermanItemParserService.getItemByCode(doubleCode.getSecondCode());
-//                }
-//            }
-
-//            watermanItem.getStroyparkItemList().add(stroyparkItemDTO);
-         //   watermanItemService.save(watermanItem);
             watermanItemRepository.saveAndFlush(watermanItem);
             stroyparkItemDTO.setWatermanItemDTO(watermanItem);
 
