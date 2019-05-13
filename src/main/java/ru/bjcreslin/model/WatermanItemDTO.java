@@ -22,4 +22,11 @@ public class WatermanItemDTO extends Item {
             orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<StroyparkItemDTO> stroyparkItemList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
+    private List<KitItemDTO> KitItemList = new ArrayList<>();
+
+
 }
