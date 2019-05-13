@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @Service
 @Log
-public class WatermanItemParserService implements ItemParser{
+public class ParserWaterman implements ParserItem {
     //private final static String WATERMAN_ADDRESS = "http://www.waterman-t.ru/";
     private final static String WATERMAN_FIND_PAGE = "http://www.waterman-t.ru/search/result?q=";
     private final static String ITEM_PAGE = "http://www.waterman-t.ru/products/";

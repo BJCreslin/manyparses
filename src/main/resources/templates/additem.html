@@ -9,13 +9,13 @@
 </head>
 <body class="pa">
 
-<div th:insert="~{header :: main}"> </div>
+<div th:insert="~{header :: main}"></div>
 <div class="container">
     <div class="row flex-items-xs-center d-md-flex">
         <form action="#" th:action="@{/additemsp}" th:object="${item}" method="post">
 
-            <p>Stroypark code :<input type="text" th:field="*{firstCode}"/></p>
-            <p>waterman  code : <input type="text" th:field="*{secondCode}"/></p>
+            <p>${name} code     :<input type="text" th:field="*{firstCode}"/></p>
+            <p>Waterman code    : <input type="text" th:field="*{secondCode}"/></p>
 
             <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 

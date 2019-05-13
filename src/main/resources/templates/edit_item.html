@@ -8,30 +8,30 @@
 </head>
 <body>
 <div th:insert="~{header :: main}"></div>
-<div th:object="${edit_sp}">
-    <span class="card-header" align="center" th:text="'Edit ${item_name} Item with SKU: '+${edit_sp.code}"></span>
+<div th:object="${item}">
+    <span class="card-header" align="center" th:text="'Edit ${item_name} Item with SKU: '+${item.code}"></span>
     <form action="" th:action="@{edit}" method="post">
         <div class="form-control">
-            <input type="hidden" id="id" class="input-group" th:field="${edit_sp.code}">
+            <input type="hidden" id="id" class="input-group" th:field="${item.code}">
             <div style="margin-left: 30px" class="align-self-stretch">
                 adress :
-                <input type="text" id="adress" class="input-group" th:field="${edit_sp.address}">
+                <input type="text" id="adress" class="input-group" th:field="${item.address}">
                 Name :
-                <input type="text" id="name" class="input-group" th:field="${edit_sp.name}">
+                <input type="text" id="name" class="input-group" th:field="${item.name}">
                 Price :
-                <input type="text" id="price" class="input-group" th:field="${edit_sp.price}">
+                <input type="text" id="price" class="input-group" th:field="${item.price}">
                 Price discount:
-                <input type="text" id="priceDiscount" class="input-group" th:field="${edit_sp.priceDiscount}">
+                <input type="text" id="priceDiscount" class="input-group" th:field="${item.priceDiscount}">
                 Currency :
-                <input type="text" id="currency" class="input-group" th:field="${edit_sp.currency}">
+                <input type="text" id="currency" class="input-group" th:field="${item.currency}">
                 Comment :
-                <input type="text" id="comment" class="input-group" th:field="${edit_sp.comment}">
+                <input type="text" id="comment" class="input-group" th:field="${item.comment}">
                 Multy :
-                <input type="text" id="multy" class="input-group" th:field="${edit_sp.multy}">
+                <input type="text" id="multy" class="input-group" th:field="${item.multy}">
                 Sale :
-                <input type="text" id="sale" class="input-group" th:field="${edit_sp.sale}">
+                <input type="text" id="sale" class="input-group" th:field="${item.sale}">
                 waterman code :
-                <input type="number" class="input-group" th:field="${edit_sp.watermanItemDTO.code}">
+                <input type="number" class="input-group" th:field="${item.watermanItemDTO.code}">
                 <input type="submit" value="Submit" class="btn-dark"/> <input type="reset" value="Reset"/>
 
             </div>

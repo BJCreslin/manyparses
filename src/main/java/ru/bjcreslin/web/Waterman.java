@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.bjcreslin.model.WatermanItemDTO;
-import ru.bjcreslin.service.WatermanItemParserService;
+import ru.bjcreslin.service.ParserWaterman;
 import ru.bjcreslin.service.WatermanItemService;
 
 
@@ -16,11 +16,11 @@ import ru.bjcreslin.service.WatermanItemService;
  */
 @Log
 @Controller
-@RequestMapping("/itemwaterman")
+@RequestMapping("/waterman")
 @AllArgsConstructor
-public class EditItemWaterman {
+public class Waterman {
     WatermanItemService watermanService;
-    private WatermanItemParserService parsingWaterman;
+    private ParserWaterman parsingWaterman;
 
 
     @GetMapping("/{item}")
@@ -35,19 +35,19 @@ public class EditItemWaterman {
             return "edit_waterman";
         }
         watermanService.save(item);
-        return "redirect:/itemwaterman/showall";
+        return "redirect:/waterman/showall";
     }
 
     @GetMapping("/delete/{item}")
     public String delete(@PathVariable("item") WatermanItemDTO item) {
         watermanService.delete(item);
-        return "redirect:/itemwaterman/showall";
+        return "redirect:/waterman/showall";
     }
 
     @GetMapping("/reread/{item}")
     public String reread(@PathVariable("item") WatermanItemDTO item) {
         item.setPrice(parsingWaterman.getItemByCode(item.getCode()).getPrice());
-        return "redirect:/itemwaterman/showall";
+        return "redirect:/waterman/showall";
     }
 
 

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @Service
 @Log
-public class SPParsingSP implements ItemParser {
+public class ParserSP implements ParserItem {
 
 
     private final static String ITEM_PAGE = "https://stroypark.su/good/";

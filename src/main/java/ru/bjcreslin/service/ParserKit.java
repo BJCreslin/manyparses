@@ -19,7 +19,7 @@ import java.math.BigDecimal;
  */
 @Service
 @Log
-public class ItemKitParser implements ItemParser {
+public class ParserKit implements ParserItem {
     private final static String KITITEM_FIND_ADDRESS = "https://tomsk.kit-teplo.ru/search/?q=";
     private final static String KIT_ADDRESS = "https://tomsk.kit-teplo.ru";
 
@@ -57,7 +57,7 @@ public class ItemKitParser implements ItemParser {
 
         } catch (IOException e) {
             e.printStackTrace();
-            log.severe("ItemKitParser, didn't parse " + code);
+            log.severe("KitParserItem, didn't parse " + code);
             throw new WebPerserException(addressParsingPage);
         }
 
