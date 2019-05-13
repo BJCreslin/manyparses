@@ -26,11 +26,11 @@
     <td th:text="${cheaplist.code}"></td>
     <td th:text="${cheaplist.name}"></td>
     <td th:text="${cheaplist.WatermanItemDTO.name}"></td>
-    <td class="alert-danger" th:text="${cheaplist.priceDiscount}"></td>
+    <td class="alert-danger" th:text="${cheaplist.priceDiscount/cheaplist.multy}"></td>
     <td th:text="${cheaplist.WatermanItemDTO.price}"></td>
     <td th:text="${cheaplist.address}"></td>
 
-    <!--<td>><a href="edit_sp.html" th:href="@{'/itemsp/'+${itemsSP.id}}">edit</a> </td>
+    <!--<td>><a href="edit_item.html" th:href="@{'/itemsp/'+${itemsSP.id}}">edit</a> </td>
     <td><a th:href="@{'/itemsp/delete/'+${itemsSP.id}}">Delete</a></td>
     <td th:text="${itemsSP.id}"></td> -->
 

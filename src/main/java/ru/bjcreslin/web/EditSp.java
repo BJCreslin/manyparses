@@ -17,24 +17,24 @@ public class EditSp {
     ItemSPService itemSPService;
 
 
-
     @GetMapping("{item}")
     public String editItemSP(@PathVariable StroyparkItemDTO item, Model model) {
         model.addAttribute("edit_sp", item);
-        return "edit_sp";
+        model.addAttribute("item_name", "Stroypark");
+        return "edit_item";
     }
 
     @PostMapping("edit")
     public String saveSP(@ModelAttribute("edit_sp") StroyparkItemDTO editStroyparkItemDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "edit_sp";
+            return "edit_item";
         }
         itemSPService.save(editStroyparkItemDTO);
         return "redirect:/index";
     }
 
     @GetMapping("/delete/{item}")
-    public String delete(@PathVariable ("item") StroyparkItemDTO stroyparkItemDTO) {
+    public String delete(@PathVariable("item") StroyparkItemDTO stroyparkItemDTO) {
         itemSPService.delete(stroyparkItemDTO);
         return "redirect:/showallsp";
     }

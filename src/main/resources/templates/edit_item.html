@@ -9,7 +9,7 @@
 <body>
 <div th:insert="~{header :: main}"></div>
 <div th:object="${edit_sp}">
-    <span class="card-header" align="center" th:text="'Edit Stroypark Item with SKU: '+${edit_sp.code}"></span>
+    <span class="card-header" align="center" th:text="'Edit ${item_name} Item with SKU: '+${edit_sp.code}"></span>
     <form action="" th:action="@{edit}" method="post">
         <div class="form-control">
             <input type="hidden" id="id" class="input-group" th:field="${edit_sp.code}">
@@ -24,7 +24,6 @@
                 <input type="text" id="priceDiscount" class="input-group" th:field="${edit_sp.priceDiscount}">
                 Currency :
                 <input type="text" id="currency" class="input-group" th:field="${edit_sp.currency}">
-
                 Comment :
                 <input type="text" id="comment" class="input-group" th:field="${edit_sp.comment}">
                 Multy :
