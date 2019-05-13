@@ -12,36 +12,11 @@ import java.math.BigDecimal;
 @Data
     public class StroyparkItemDTO extends Item {
 
-    @NotNull
-    @Id
-    @Column(name = "code") //код товара
-    private Long code;
-
-    @Column(name = "name") //Наименование
-    private String name;
-
-    @Column(name = "price")
-    private BigDecimal price;
-
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "date")
-    private Long date;
-
-    @Column(name="comment")
-    private String comment;
-
-    @Column(name = "currency")
-    private String currency; // валюта цены -rub или other
-
-
     @Column(name = "multy")
     private Long multy;
 
     @Column(name = "price_discount")
     private BigDecimal priceDiscount;
-
 
     @Column(name = "sale")
     private Boolean sale;
