@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.Item;
 
-public interface ItemWeb {
+public interface ItemWeb <t extends Item>{
     @GetMapping("/additem")
     String addGet(Model model);
 
@@ -20,12 +20,12 @@ public interface ItemWeb {
     String showAll(Model model);
 
     @GetMapping("{item}")
-    String editGet(@PathVariable Item item, Model model);
+    String editGet(@PathVariable t item, Model model);
 
     @PostMapping("/edit")
-    String editPost(@ModelAttribute("edit_sp") Item item, BindingResult result, Model model);
+    String editPost(@ModelAttribute("edit_sp") t item, BindingResult result, Model model);
 
     @GetMapping("/delete/{item}")
-    String delete(@PathVariable("item") Item item);
+    String delete(@PathVariable("item") t item);
 
 }

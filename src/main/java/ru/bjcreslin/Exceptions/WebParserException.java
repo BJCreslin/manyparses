@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class WebPerserException extends Exception {
+public class WebParserException extends Exception {
     private String address;
 }

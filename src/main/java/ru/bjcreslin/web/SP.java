@@ -7,9 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.bjcreslin.DAO.WatermanItemRepository;
-import ru.bjcreslin.Exceptions.WebPerserException;
+import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.DoubleCode;
-import ru.bjcreslin.model.Item;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.service.ItemSPService;
@@ -24,7 +23,7 @@ import ru.bjcreslin.service.WatermanItemService;
 @RequestMapping("/sp")
 @Controller
 @AllArgsConstructor
-public class SP {
+public class SP implements ItemWeb<StroyparkItemDTO> {
     private ItemSPService itemSPService;
 
     private ParserSP itemSPParser;
@@ -52,7 +51,6 @@ public class SP {
         try {
             log.severe("Date from page" + doubleCode);
             StroyparkItemDTO stroyparkItemDTO = itemSPParser.getItemByCode(doubleCode.getFirstCode());
-
             WatermanItemDTO watermanItem = watermanItemParserService.getItemByCode(doubleCode.getSecondCode());
 
             watermanItemRepository.saveAndFlush(watermanItem);
@@ -61,7 +59,7 @@ public class SP {
             itemSPService.save(stroyparkItemDTO);
 
 
-        } catch (WebPerserException e) {
+        } catch (WebParserException e) {
             e.printStackTrace();
         }
         return "redirect:/sp/showall";
@@ -92,9 +90,10 @@ public class SP {
         return "redirect:/index";
     }
 
+    @Override
     @GetMapping("/delete/{item}")
-    public String delete(@PathVariable("item") Item stroyparkItemDTO) {
-        itemSPService.delete((StroyparkItemDTO) stroyparkItemDTO);
+    public String delete(@PathVariable("item") StroyparkItemDTO stroyparkItemDTO) {
+        itemSPService.delete( stroyparkItemDTO);
         return "redirect:/sp/showall";
     }
 

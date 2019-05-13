@@ -5,7 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.Exceptions.WebPerserException;
+import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.StroyparkItemDTO;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class ParserSP implements ParserItem {
     private final static String ITEM_PAGE = "https://stroypark.su/good/";
 
     @Override
-    public StroyparkItemDTO getItemByCode(Long code) throws WebPerserException {
+    public StroyparkItemDTO getItemByCode(Long code) throws WebParserException {
         StroyparkItemDTO item = new StroyparkItemDTO();
         item.setCode(code);
         String addressParsingPage = ITEM_PAGE + code.toString();
@@ -34,7 +34,7 @@ public class ParserSP implements ParserItem {
                     userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36").
                     get();
         } catch (IOException e) {
-            throw new WebPerserException(addressParsingPage);
+            throw new WebParserException(addressParsingPage);
         }
 
 

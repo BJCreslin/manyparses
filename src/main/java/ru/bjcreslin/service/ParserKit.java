@@ -5,7 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.Exceptions.WebPerserException;
+import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.KitItemDTO;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class ParserKit implements ParserItem {
     private final static String KITITEM_FIND_ADDRESS = "https://tomsk.kit-teplo.ru/search/?q=";
     private final static String KIT_ADDRESS = "https://tomsk.kit-teplo.ru";
 
-    public KitItemDTO getItemByCode(Long code) throws WebPerserException {
+    public KitItemDTO getItemByCode(Long code) throws WebParserException {
         KitItemDTO kitItemDTO = new KitItemDTO();
         kitItemDTO.setCode(code);
         String addressParsingPage = KITITEM_FIND_ADDRESS + code.toString();
@@ -58,7 +58,7 @@ public class ParserKit implements ParserItem {
         } catch (IOException e) {
             e.printStackTrace();
             log.severe("KitParserItem, didn't parse " + code);
-            throw new WebPerserException(addressParsingPage);
+            throw new WebParserException(addressParsingPage);
         }
 
         return kitItemDTO;
