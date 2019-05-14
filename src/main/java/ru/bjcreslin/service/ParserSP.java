@@ -6,7 +6,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.WebParserException;
-import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.repository.ItemSPRepository;
 
@@ -29,15 +28,15 @@ public class ParserSP implements ParserItem {
     @Override
     public StroyparkItemDTO getItemByCode(Long code) throws WebParserException {
 
-        StroyparkItemDTO itemDTO = itemRepository.findByCode(code);
-        if (itemDTO == null) {
-            itemDTO = new StroyparkItemDTO();
-            itemDTO.setCode(code);
-            itemDTO.setDate(LocalDateTime.now());
-        } else if (!ParserItem.isNeedToParse(itemDTO)) {
-            return itemDTO;
+        StroyparkItemDTO item = itemRepository.findByCode(code);
+        if (item == null) {
+            item = new StroyparkItemDTO();
+            item.setCode(code);
+            item.setDate(LocalDateTime.now());
+        } else if (!ParserItem.isNeedToParse(item)) {
+            return item;
         }
-        StroyparkItemDTO item = new StroyparkItemDTO();
+
         item.setCode(code);
         String addressParsingPage = ITEM_PAGE + code.toString();
         Document document;

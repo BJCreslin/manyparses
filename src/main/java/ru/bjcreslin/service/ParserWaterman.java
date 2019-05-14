@@ -1,22 +1,30 @@
 package ru.bjcreslin.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
+import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
+import ru.bjcreslin.repository.WatermanItemRepository;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 @Log
+@AllArgsConstructor
 public class ParserWaterman implements ParserItem {
     //private final static String WATERMAN_ADDRESS = "http://www.waterman-t.ru/";
     private final static String WATERMAN_FIND_PAGE = "http://www.waterman-t.ru/search/result?q=";
     private final static String ITEM_PAGE = "http://www.waterman-t.ru/products/";
+
+
+    WatermanItemRepository itemRepository;
 
     /**
      * Возвращает товар по заданному коду
@@ -25,8 +33,15 @@ public class ParserWaterman implements ParserItem {
      * @return WatermanItem;
      */
     public WatermanItemDTO getItemByCode(Long code) {
-        var item = new WatermanItemDTO();
-        item.setCode(code);
+
+        WatermanItemDTO item = itemRepository.findByCode(code);
+        if (item == null) {
+            item = new WatermanItemDTO();
+            item.setCode(code);
+            item.setDate(LocalDateTime.now());
+        } else if (!ParserItem.isNeedToParse(item)) {
+            return item;
+        }
         try {
             String addressParsingPage = WATERMAN_FIND_PAGE + code.toString();
             Document document = Jsoup.connect(addressParsingPage).
@@ -58,10 +73,12 @@ public class ParserWaterman implements ParserItem {
                     addItemPriceFromHTMLToItem(item, elementsItem);
                 }
             }
+            item.setDate(LocalDateTime.now());
             log.info(item.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return item;
     }
 
