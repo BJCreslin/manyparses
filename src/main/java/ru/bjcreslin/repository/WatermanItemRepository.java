@@ -1,4 +1,4 @@
-package ru.bjcreslin.DAO;
+package ru.bjcreslin.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.bjcreslin.model.WatermanItemDTO;

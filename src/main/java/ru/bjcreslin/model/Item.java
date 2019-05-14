@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Data
@@ -27,7 +28,7 @@ public abstract class Item {
     private String address;
 
     @Column(name = "date")
-    private Long date;
+    private LocalDateTime date;
 
     @Column(name = "comment")
     private String comment;

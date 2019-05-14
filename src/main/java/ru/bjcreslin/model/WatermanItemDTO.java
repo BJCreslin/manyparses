@@ -12,8 +12,7 @@ import java.util.List;
 @Table(name = "waterman")
 public class WatermanItemDTO extends Item {
 
-    @Column(name = "date")
-    private Long date;
+
 
     @Column(name = "product_group")
     private String group;  // группа товаров

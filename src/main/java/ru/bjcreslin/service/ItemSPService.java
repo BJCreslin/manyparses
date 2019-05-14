@@ -3,7 +3,7 @@ package ru.bjcreslin.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.model.StroyparkItemDTO;
-import ru.bjcreslin.DAO.ItemSPRepository;
+import ru.bjcreslin.repository.ItemSPRepository;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class ItemSPService {
 
     public StroyparkItemDTO findByCode(Long id) {
         //  itemSPRepository.findById(id).
-        return itemSPRepository.findByCode(id).get();
+        return itemSPRepository.findByCode(id);
     }
 
     public StroyparkItemDTO findByAddress(String address) {

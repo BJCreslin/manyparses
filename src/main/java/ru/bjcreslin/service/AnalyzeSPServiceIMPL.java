@@ -2,7 +2,7 @@ package ru.bjcreslin.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.DAO.ItemSPRepository;
+import ru.bjcreslin.repository.ItemSPRepository;
 import ru.bjcreslin.model.Item;
 import ru.bjcreslin.model.StroyparkItemDTO;
 

@@ -1,4 +1,4 @@
-package ru.bjcreslin.DAO;
+package ru.bjcreslin.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.bjcreslin.model.StroyparkItemDTO;
@@ -6,7 +6,7 @@ import ru.bjcreslin.model.StroyparkItemDTO;
 import java.util.Optional;
 
 public interface ItemSPRepository extends JpaRepository<StroyparkItemDTO,Long> {
-    Optional<StroyparkItemDTO> findByCode(Long id);
+    StroyparkItemDTO findByCode(Long id);
     StroyparkItemDTO findByAddress(String address);
 
     @Override

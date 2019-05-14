@@ -29,8 +29,8 @@
         <td th:text="${itemsSP.priceDiscount}"></td>
         <td th:text="${itemsSP.address}"></td>
         <td th:text="${itemsSP.comment}"></td>
-        <td>><a href="edit_item.html" th:href="@{'/'+${item_name}+'/edit/'+${itemsSP.code}}">edit</a></td>
-        <td><a th:href="@{'/'+${item_name}+'/'+${itemsSP.code}}">Delete</a></td>
+        <td>><a href="edit_item.html" th:href="@{'/'+${item_name}+'/edit/'+${itemsSP.code}}">Edit</a></td>
+        <td><a th:href="@{'/'+${item_name}+'/delete/'+${itemsSP.code}}">Delete</a></td>
 
     </tr>
 

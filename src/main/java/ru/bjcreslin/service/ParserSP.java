@@ -6,20 +6,37 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.WebParserException;
+import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.StroyparkItemDTO;
+import ru.bjcreslin.repository.ItemSPRepository;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 @Log
 public class ParserSP implements ParserItem {
 
+    ItemSPRepository itemRepository;
+
+    public ParserSP(ItemSPRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
 
     private final static String ITEM_PAGE = "https://stroypark.su/good/";
 
     @Override
     public StroyparkItemDTO getItemByCode(Long code) throws WebParserException {
+
+        StroyparkItemDTO itemDTO = itemRepository.findByCode(code);
+        if (itemDTO == null) {
+            itemDTO = new StroyparkItemDTO();
+            itemDTO.setCode(code);
+            itemDTO.setDate(LocalDateTime.now());
+        } else if (!ParserItem.isNeedToParse(itemDTO)) {
+            return itemDTO;
+        }
         StroyparkItemDTO item = new StroyparkItemDTO();
         item.setCode(code);
         String addressParsingPage = ITEM_PAGE + code.toString();
@@ -44,13 +61,13 @@ public class ParserSP implements ParserItem {
 
         item.setPrice(getPriceFromDocument(document));
 
-        item.setDate(DateService.getCurrentDate());
-
         item.setSale(isSale(document));
 
         item.setCurrency(getCurrencyFromDocument(document));
 
         item.setMulty(getMultyFromDocument(document));
+
+        item.setDate(LocalDateTime.now());
 
         log.info("Parsing StroyPArk html: " + item);
         return item;

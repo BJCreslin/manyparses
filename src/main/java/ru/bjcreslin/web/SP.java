@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.bjcreslin.DAO.WatermanItemRepository;
+import ru.bjcreslin.repository.WatermanItemRepository;
 import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.StroyparkItemDTO;
@@ -14,7 +14,6 @@ import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.ParserSP;
 import ru.bjcreslin.service.ParserWaterman;
-import ru.bjcreslin.service.WatermanItemService;
 
 /**
  * показывает таблицу с данными СП

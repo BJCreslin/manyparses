@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.model.WatermanItemDTO;
-import ru.bjcreslin.DAO.WatermanItemRepository;
+import ru.bjcreslin.repository.WatermanItemRepository;
 
 import java.util.List;
 

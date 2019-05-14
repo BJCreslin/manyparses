@@ -7,9 +7,11 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.KitItemDTO;
+import ru.bjcreslin.repository.ItemKitRepository;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 /**
@@ -23,9 +25,21 @@ public class ParserKit implements ParserItem {
     private final static String KITITEM_FIND_ADDRESS = "https://tomsk.kit-teplo.ru/search/?q=";
     private final static String KIT_ADDRESS = "https://tomsk.kit-teplo.ru";
 
+    public ParserKit(ItemKitRepository kitRepository) {
+        this.kitRepository = kitRepository;
+    }
+
+    ItemKitRepository kitRepository;
+
     public KitItemDTO getItemByCode(Long code) throws WebParserException {
-        KitItemDTO kitItemDTO = new KitItemDTO();
-        kitItemDTO.setCode(code);
+        KitItemDTO kitItemDTO = kitRepository.findByCode(code);
+        if (kitItemDTO == null) {
+            kitItemDTO = new KitItemDTO();
+            kitItemDTO.setCode(code);
+            kitItemDTO.setDate(LocalDateTime.now());
+        } else if (!ParserItem.isNeedToParse(kitItemDTO)) {
+            return kitItemDTO;
+        }
         String addressParsingPage = KITITEM_FIND_ADDRESS + code.toString();
 
         try {
@@ -54,6 +68,8 @@ public class ParserKit implements ParserItem {
             kitItemDTO.setSale(getSale());
 
             log.info(kitItemDTO.toString());
+
+            kitItemDTO.setDate(LocalDateTime.now());
 
         } catch (IOException e) {
             e.printStackTrace();
