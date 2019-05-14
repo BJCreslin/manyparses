@@ -17,11 +17,10 @@ public class ItemSPService {
     }
 
     public List<StroyparkItemDTO> findAll() {
-        return (List<StroyparkItemDTO>) itemSPRepository.findAll();
+        return itemSPRepository.findAll();
     }
 
     public StroyparkItemDTO findByCode(Long id) {
-        //  itemSPRepository.findById(id).
         return itemSPRepository.findByCode(id);
     }
 
