@@ -3,7 +3,7 @@ package ru.bjcreslin.DAO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.bjcreslin.model.KitItemDTO;
 
-interface ItemKitRepository extends JpaRepository<KitItemDTO, Long> {
+public interface ItemKitRepository extends JpaRepository<KitItemDTO, Long> {
     KitItemDTO findByCode(Long code);
 
     @Override

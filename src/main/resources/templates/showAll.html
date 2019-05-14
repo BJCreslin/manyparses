@@ -11,15 +11,14 @@
 <table class="table .table-striped .table-bordered .table-responsive">
     <thead class="thead-dark">
     <tr>
-        <th>code</th>
-        <th>name</th>
-        <th>price</th>
-        <th> price with discount</th>
-        <th>address</th>
-        <th>comment</th>
-        <th>edit</th>
-        <th>delete</th>
-        <th>id</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Discount</th>
+        <th>Address</th>
+        <th>Comment</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
 
     </thead>
@@ -30,13 +29,11 @@
         <td th:text="${itemsSP.priceDiscount}"></td>
         <td th:text="${itemsSP.address}"></td>
         <td th:text="${itemsSP.comment}"></td>
-        <td>><a href="edit_item.html" th:href="@{'/'+${name}+'/edit/'+${itemsSP.code}}">edit</a></td>
-        <td><a th:href="@{'/'+${name}+'/'+${itemsSP.code}}">Delete</a></td>
+        <td>><a href="edit_item.html" th:href="@{'/'+${item_name}+'/edit/'+${itemsSP.code}}">edit</a></td>
+        <td><a th:href="@{'/'+${item_name}+'/'+${itemsSP.code}}">Delete</a></td>
 
     </tr>
 
-
 </table>
-
 </body>
 </html>

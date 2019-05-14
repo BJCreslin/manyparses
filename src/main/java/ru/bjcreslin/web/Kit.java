@@ -6,29 +6,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.bjcreslin.DAO.ItemKitRepository;
 import ru.bjcreslin.DAO.WatermanItemRepository;
 import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.DoubleCode;
+import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
-import ru.bjcreslin.service.ItemSPService;
-import ru.bjcreslin.service.ParserSP;
+import ru.bjcreslin.service.ParserKit;
 import ru.bjcreslin.service.ParserWaterman;
-import ru.bjcreslin.service.WatermanItemService;
 
 /**
  * показывает таблицу с данными СП
  */
 @Log
-@RequestMapping("/StroyPark")
+@RequestMapping("/Kit")
 @Controller
 @AllArgsConstructor
-public class SP implements ItemWeb<StroyparkItemDTO> {
-    static final String ITEM_NAME = "StroyPark";
+public class Kit implements ItemWeb<KitItemDTO> {
+    static final String ITEM_NAME = "Kit";
 
-
-    private ItemSPService itemSPService;
-    private ParserSP itemSPParser;
+    private ItemKitRepository itemRepository;
+    private ParserKit parserItem;
     private ParserWaterman watermanItemParserService;
     private WatermanItemRepository watermanItemRepository;
 
@@ -40,7 +39,7 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
     }
 
     /**
-     * Метод добавляет itemSP и соответствующий ему Waterman item в базу
+     * Метод добавляет Kit и соответствующий ему Waterman item в базу
      *
      * @param doubleCode doublecode
      * @param model
@@ -49,13 +48,13 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
     @PostMapping("/additem")
     public String addPost(@ModelAttribute DoubleCode doubleCode, Model model) {
         try {
-            StroyparkItemDTO stroyparkItemDTO = itemSPParser.getItemByCode(doubleCode.getFirstCode());
+            KitItemDTO itemDTO = parserItem.getItemByCode(doubleCode.getFirstCode());
             WatermanItemDTO watermanItem = watermanItemParserService.getItemByCode(doubleCode.getSecondCode());
 
             watermanItemRepository.saveAndFlush(watermanItem);
-            stroyparkItemDTO.setWatermanItemDTO(watermanItem);
+            itemDTO.setWatermanItemDTO(watermanItem);
 
-            itemSPService.save(stroyparkItemDTO);
+            itemRepository.save(itemDTO);
 
         } catch (WebParserException e) {
             e.printStackTrace();
@@ -67,32 +66,32 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
 
     @GetMapping("/showall")
     public String showAll(Model model) {
-        model.addAttribute("itemsSP", itemSPService.findAll());
+        model.addAttribute("itemsSP", itemRepository.findAll());
         model.addAttribute("item_name", ITEM_NAME);
         return "showAll";
     }
 
 
     @GetMapping("/edit/{item}")
-    public String editGet(@PathVariable StroyparkItemDTO item, Model model) {
+    public String editGet(@PathVariable KitItemDTO item, Model model) {
         model.addAttribute("item", item);
         model.addAttribute("item_name", ITEM_NAME);
         return "edit_item";
     }
 
     @PostMapping("/edit")
-    public String editPost(@ModelAttribute("item") StroyparkItemDTO editStroyparkItemDTO, BindingResult result, Model model) {
+    public String editPost(@ModelAttribute("item") KitItemDTO itemDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "edit_item";
         }
-        itemSPService.save(editStroyparkItemDTO);
+        itemRepository.save(itemDTO);
         return "redirect:/index";
     }
 
     @Override
     @GetMapping("/delete/{item}")
-    public String delete(@PathVariable("item") StroyparkItemDTO stroyparkItemDTO) {
-        itemSPService.delete(stroyparkItemDTO);
+    public String delete(@PathVariable("item") KitItemDTO itemDTO) {
+        itemRepository.delete(itemDTO);
         return "redirect:/" + ITEM_NAME + "/showall";
     }
 
