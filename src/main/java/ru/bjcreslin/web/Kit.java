@@ -12,6 +12,7 @@ import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
+import ru.bjcreslin.service.ItemKitService;
 import ru.bjcreslin.service.ParserKit;
 import ru.bjcreslin.service.ParserWaterman;
 
@@ -29,6 +30,7 @@ public class Kit implements ItemWeb<KitItemDTO> {
     private ParserKit parserItem;
     private ParserWaterman watermanItemParserService;
     private WatermanItemRepository watermanItemRepository;
+    private ItemKitService itemService;
 
     @GetMapping("/additem")
     public String addGet(Model model) {
@@ -53,7 +55,7 @@ public class Kit implements ItemWeb<KitItemDTO> {
             watermanItemRepository.saveAndFlush(watermanItem);
             itemDTO.setWatermanItemDTO(watermanItem);
 
-            itemRepository.save(itemDTO);
+            itemService.save(itemDTO);
 
         } catch (WebParserException e) {
             e.printStackTrace();
@@ -83,7 +85,8 @@ public class Kit implements ItemWeb<KitItemDTO> {
         if (result.hasErrors()) {
             return "edit_item";
         }
-        itemRepository.save(itemDTO);
+
+        itemService.save(itemDTO);
         return "redirect:/index";
     }
 

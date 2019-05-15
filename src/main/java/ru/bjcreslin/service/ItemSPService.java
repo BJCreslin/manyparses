@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.repository.ItemSPRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -13,7 +14,8 @@ public class ItemSPService {
     ItemSPRepository itemSPRepository;
 
     public void save(StroyparkItemDTO stroyparkItemDTO) {
-        this.itemSPRepository.save(stroyparkItemDTO);
+        stroyparkItemDTO.setDate(LocalDateTime.now());
+        itemSPRepository.save(stroyparkItemDTO);
     }
 
     public List<StroyparkItemDTO> findAll() {
