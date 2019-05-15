@@ -21,14 +21,14 @@
     </tr>
 
     </thead>
-    <tr th:each="itemsSP : ${itemsSP}">
-        <td th:text="${itemsSP.code}"></td>
-        <td th:text="${itemsSP.name}"></td>
-        <td th:text="${itemsSP.price}"></td>
-        <td th:text="${itemsSP.priceDiscount}"></td>
-        <td th:text="${itemsSP.comment}"></td>
-        <td>><a href="edit_item.html" th:href="@{'/'+${item_name}+'/edit/'+${itemsSP.code}}">Edit</a></td>
-        <td><a th:href="@{'/'+${item_name}+'/delete/'+${itemsSP.code}}">Delete</a></td>
+    <tr th:each="item : ${itemsSP}">
+        <td><a th:href="@{${item.address}}"> <b th:text="${item.code}"></b> </a></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price}"></td>
+        <td th:text="${item.priceDiscount}"></td>
+        <td th:text="${item.comment}"></td>
+        <td><a href="edit_item.html" th:href="@{'/'+${item_name}+'/edit/'+${item.code}}">Edit</a></td>
+        <td><a th:href="@{'/'+${item_name}+'/delete/'+${item.code}}">Delete</a></td>
 
     </tr>
 

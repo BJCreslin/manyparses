@@ -29,8 +29,13 @@ public class Waterman implements ItemWeb <WatermanItemDTO>{
         model.addAttribute("edit_waterman", item);
         return "edit_waterman";
     }
+//    @GetMapping("/edit/{item}")
+//    public String editGet(@PathVariable("item") WatermanItemDTO item, Model model){
+//        model.addAttribute ("edit_waterman",item);
+//
+//    }
 
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String editPost(@ModelAttribute("edit_waterman") WatermanItemDTO item, BindingResult result,Model model) {
         if (result.hasErrors()) {
             return "edit_waterman";
@@ -38,6 +43,7 @@ public class Waterman implements ItemWeb <WatermanItemDTO>{
         watermanService.save(item);
         return "redirect:/waterman/showall";
     }
+
 
     @GetMapping("/delete/{item}")
     public String delete(@PathVariable("item") WatermanItemDTO item) {

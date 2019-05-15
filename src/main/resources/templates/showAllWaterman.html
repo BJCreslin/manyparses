@@ -26,7 +26,7 @@
         <td th:text="${item.name}"></td>
         <td th:text="${item.price}"></td>
         <td th:text="${item.group}"></td>
-        <td><a th:href="@{'/'+${name}+'/'+${item.code}}">edit</a></td>
+        <td><a th:href="@{'/'+${name}+'/'+${item.code}}">Edit</a></td>
         <td><a th:href="@{'/'+${name}+'/delete/'+${item.code}}">Delete</a></td>
         <td><a th:href="@{'/'+${name}+'/reread/'+${item.code}}">Reread</a></td>
     </tr>

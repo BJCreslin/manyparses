@@ -9,8 +9,8 @@
 <body>
 <div th:insert="~{header :: main}"></div>
 <div th:object="${item}">
-    <span class="card-header" align="center" th:text="'Edit ${item_name} Item with SKU: '+${item.code}"></span>
-    <form action="" th:action="@{edit}" method="post">
+    <span class="card-header" align="center" th:text="'Edit '+${item_name}+' Item with SKU: '+${item.code}"></span>
+    <form action="" th:action="@{'/'+${item_name}+'/edit'}" method="post">
         <div class="form-control">
             <input type="hidden" id="id" class="input-group" th:field="${item.code}">
             <div style="margin-left: 30px" class="align-self-stretch">
