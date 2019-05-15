@@ -1,5 +1,7 @@
 package ru.bjcreslin.service;
 
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.Item;
 
@@ -25,6 +27,17 @@ public interface ParserItem {
         }
         LocalDateTime nowTime = LocalDateTime.now();
         return nowTime.minusHours(12L).isAfter(itemTime);
+
+    }
+
+    static boolean hasClass(Element element, String className) {
+        Elements bodyChildren = new Elements();
+        for (Element e : element.getAllElements()) {
+            for (Element eChild : e.children()) {
+                bodyChildren.add(eChild);
+            }
+        }
+        return bodyChildren.hasClass(className);
 
     }
 

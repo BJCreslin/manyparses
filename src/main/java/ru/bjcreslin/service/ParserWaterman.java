@@ -52,10 +52,10 @@ public class ParserWaterman implements ParserItem {
             //<a class="search--item products--item" data-code="88b44d61-8c05-11e8-a8cc-001e6727034e" href="/products/88b44d61-8c05-11e8-a8cc-001e6727034e">
             var elementForAddress = element.first().getElementsByClass("search--item products--item").first();
             String itemAdress = elementForAddress.attr("data-code");
-            item.setAddress(itemAdress);
-
 
             String AddressItemPage = ITEM_PAGE + itemAdress;
+
+            item.setAddress(AddressItemPage);
             Document itemDocument = Jsoup.connect(AddressItemPage).
                     userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36").
                     get();

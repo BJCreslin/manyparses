@@ -25,20 +25,29 @@ public class ParserKit implements ParserItem {
     private final static String KITITEM_FIND_ADDRESS = "https://tomsk.kit-teplo.ru/search/?q=";
     private final static String KIT_ADDRESS = "https://tomsk.kit-teplo.ru";
 
-    public ParserKit(ItemKitRepository kitRepository) {
-        this.kitRepository = kitRepository;
-    }
+//    public ParserKit(ItemKitRepository itemRepository) {
+//        this.itemRepository = itemRepository;
+//    }
 
-    ItemKitRepository kitRepository;
+    ItemKitRepository itemRepository;
 
     public KitItemDTO getItemByCode(Long code) throws WebParserException {
-        KitItemDTO kitItemDTO = kitRepository.findByCode(code);
-        if (kitItemDTO == null) {
-            kitItemDTO = new KitItemDTO();
-            kitItemDTO.setCode(code);
-            kitItemDTO.setDate(LocalDateTime.now());
-        } else if (!ParserItem.isNeedToParse(kitItemDTO)) {
-            return kitItemDTO;
+        /*
+        Пытаемся найти Item в базе данных
+         */
+
+        KitItemDTO itemDTO = itemRepository.findByCode(code);
+
+        if (itemDTO == null) {
+            itemDTO = new KitItemDTO();
+            itemDTO.setCode(code);
+        }
+
+        /*
+        Проверка на то- пора ли парсить элемент.
+         */
+        if (!DateService.isTimeToParse(itemDTO)) {
+            return itemDTO;
         }
         String addressParsingPage = KITITEM_FIND_ADDRESS + code.toString();
 
@@ -53,23 +62,23 @@ public class ParserKit implements ParserItem {
  */
             Element element = document.getElementsByClass("product newproduct").first();
 
-            kitItemDTO.setName(getProduct__name(element));
+            itemDTO.setName(getProduct__name(element));
 
-            kitItemDTO.setPrice(getPrice(element));
+            itemDTO.setPrice(getPrice(element));
 
-            kitItemDTO.setCurrency(getCurrency(element));
+            itemDTO.setCurrency(getCurrency(element));
 
-            kitItemDTO.setAddress(getAddress(element));
+            itemDTO.setAddress(getAddress(element));
 
-            kitItemDTO.setPriceDiscount(getPriceDiscount(element));
+            itemDTO.setPriceDiscount(getPriceDiscount(element));
 
-            kitItemDTO.setMulty(getMulty());
+            itemDTO.setMulty(getMulty());
 
-            kitItemDTO.setSale(getSale());
+            itemDTO.setSale(getSale());
 
-            log.info(kitItemDTO.toString());
+            itemDTO.setDate(LocalDateTime.now());
 
-            kitItemDTO.setDate(LocalDateTime.now());
+            log.info(itemDTO.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,19 +86,41 @@ public class ParserKit implements ParserItem {
             throw new WebParserException(addressParsingPage);
         }
 
-        return kitItemDTO;
+        return itemDTO;
     }
 
 
     /*
    <a id="" title="Купить" data-toggle="modal" data-target="#cartData" class="product__link btn " href="#" onclick="addtocart('84646','bx_60783_quantity',this);itemAddedModal('Радиатор алюминиевый ROMMER Optima 500/80 1 секция','402');" rel="nofollow">
  */
-    private BigDecimal getPriceDiscount(Element element) {
-        return new BigDecimal(element.getElementsByClass("product__link btn ").attr("onclick").
-                replaceFirst("^a.+itemAddedModal\\('", "").
-                replaceFirst("^.+(',')+", "").
-                replaceFirst("('\\);)+$", ""));
+    private BigDecimal getPriceDiscount(Element element) throws IOException {
+        /*
+        если товар в наличие, то:
+        <span class="product__stock">В наличии</span>
+
+        ЕСли в наличие нет, то
+        <span class="product__stock">
+        <span class="not-avail">Нет в наличии</span> </span>
+         */
+        if (!ParserItem.hasClass(element, "not-avail")) {
+            return new BigDecimal(element.getElementsByClass("product__link btn ").attr("onclick").
+                    replaceFirst("^a.+itemAddedModal\\('", "").
+                    replaceFirst("^.+(',')+", "").
+                    replaceFirst("('\\);)+$", ""));
+        }
+        /*
+        переходим на страничку с товаром и забираем цену из названия.
+         */
+        String getAddress = getAddress(element);
+        Document document = Jsoup.connect(getAddress).
+                userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36").
+                get();
+        String str = document.title().replaceAll("^Купить.+(цене){1}", "").replaceAll("руб.+$", "").trim();
+        System.out.println("str =" + str);
+        return new BigDecimal(str);
+
     }
+
 
     private Boolean getSale() {
         /*
