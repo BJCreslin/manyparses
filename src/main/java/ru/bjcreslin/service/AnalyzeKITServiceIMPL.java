@@ -28,7 +28,6 @@ public class AnalyzeKITServiceIMPL  {
         for (KitItemDTO item : itemDTOS) {
             BigDecimal price = item.getPriceDiscount().divide(BigDecimal.valueOf(item.getMulty()));
             BigDecimal priceWtrmn = item.getWatermanItemDTO().getPrice();
-            System.out.println("price:" + price.toString() + " pricewtrmn:" + priceWtrmn.toString());
             if (price.compareTo(priceWtrmn) < 0) {
                 itemDTOList.add(item);
             }
