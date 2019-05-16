@@ -5,6 +5,9 @@ import ru.bjcreslin.model.Item;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+/**
+ * функциональный класс работы со временем
+ */
 public class DateService {
 
     public static Long getCurrentDate() {

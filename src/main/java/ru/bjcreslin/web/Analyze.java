@@ -7,7 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bjcreslin.model.Item;
-import ru.bjcreslin.model.StroyparkItemDTO;
+import ru.bjcreslin.model.KitItemDTO;
+import ru.bjcreslin.service.AnalyzeKITServiceIMPL;
 import ru.bjcreslin.service.AnalyzeSPServiceIMPL;
 
 import java.util.List;
@@ -22,12 +23,23 @@ import java.util.List;
 @AllArgsConstructor
 public class Analyze {
     AnalyzeSPServiceIMPL analyzeSPServiceIMPL;
+    AnalyzeKITServiceIMPL analyzeKITServiceIMPL;
 
     @GetMapping("/cheap_sp")
-    public String cheap(Model model) {
+    public String cheapSP(Model model) {
         List<Item> stroyparkItemDTOList = analyzeSPServiceIMPL.findAllCheaps();
         model.addAttribute("cheaplist", stroyparkItemDTOList);
-        return "analyze_sp";
+        model.addAttribute("name","SP");
+        return "cheap_analizy";
     }
+
+    @GetMapping("/cheap_kit")
+    public String cheapKIT(Model model) {
+        List<KitItemDTO> itemList  = analyzeKITServiceIMPL.findAllCheaps();
+        model.addAttribute("cheaplist", itemList);
+        model.addAttribute("name","Kit");
+        return "cheap_analizy";
+    }
+
 
 }

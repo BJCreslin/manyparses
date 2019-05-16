@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row flex-items-xs-center d-md-flex">
         <form action="#" th:action="@{'/'+${item_name}+'/additem/'}" th:object="${item}" method="post">
-            <p>${item_name} code :<input type="text" th:field="*{firstCode}"/></p>
+            <p><pph th:text="${item_name}"></pph> code :<input type="text" th:field="*{firstCode}"/></p>
             <p>Waterman code : <input type="text" th:field="*{secondCode}"/></p>
             <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 
