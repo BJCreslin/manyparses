@@ -26,7 +26,6 @@ public class Waterman implements ItemWeb<WatermanItemDTO> {
     public Waterman(ItemWtrmnService watermanService, ParserWaterman parsingWaterman) {
         this.watermanService = watermanService;
         this.parsingWaterman = parsingWaterman;
-        int maxElementsOnScreen = 10;
         this.pageable = PageRequest.of(0, maxElementsOnScreen).first();
     }
 

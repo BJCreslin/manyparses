@@ -1,17 +1,18 @@
 package ru.bjcreslin.web;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.bjcreslin.repository.ItemKitRepository;
-import ru.bjcreslin.repository.WatermanItemRepository;
 import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
+import ru.bjcreslin.repository.ItemKitRepository;
+import ru.bjcreslin.repository.WatermanItemRepository;
 import ru.bjcreslin.service.ItemKitService;
 import ru.bjcreslin.service.parses.ParserKit;
 import ru.bjcreslin.service.parses.ParserWaterman;
@@ -22,15 +23,26 @@ import ru.bjcreslin.service.parses.ParserWaterman;
 @Log
 @RequestMapping("/Kit")
 @Controller
-@AllArgsConstructor
 public class Kit implements ItemWeb<KitItemDTO> {
     static final String ITEM_NAME = "Kit";
+
+    public Kit(ItemKitRepository itemRepository, ParserKit parserItem, ParserWaterman watermanItemParserService,
+               WatermanItemRepository watermanItemRepository, ItemKitService itemService) {
+        this.itemRepository = itemRepository;
+        this.parserItem = parserItem;
+        this.watermanItemParserService = watermanItemParserService;
+        this.watermanItemRepository = watermanItemRepository;
+        this.itemService = itemService;
+        this.pageable = PageRequest.of(0, maxElementsOnScreen);
+    }
 
     private ItemKitRepository itemRepository;
     private ParserKit parserItem;
     private ParserWaterman watermanItemParserService;
     private WatermanItemRepository watermanItemRepository;
     private ItemKitService itemService;
+
+    private Pageable pageable;
 
     @GetMapping("/additem")
     public String addGet(Model model) {
@@ -67,7 +79,31 @@ public class Kit implements ItemWeb<KitItemDTO> {
 
     @GetMapping("/showall")
     public String showAll(Model model) {
-        model.addAttribute("itemsSP", itemRepository.findAll());
+        model.addAttribute("itemsSP", itemRepository.findAll(pageable));
+        model.addAttribute("item_name", ITEM_NAME);
+        return "showAll";
+    }
+
+    @GetMapping("/first")
+    public String showFirst(Model model) {
+        pageable = pageable.first();
+        model.addAttribute("itemsSP", itemRepository.findAll(pageable));
+        model.addAttribute("item_name", ITEM_NAME);
+        return "showAll";
+    }
+
+    @GetMapping("/next")
+    public String showNext(Model model) {
+        pageable = pageable.next();
+        model.addAttribute("itemsSP", itemRepository.findAll(pageable));
+        model.addAttribute("item_name", ITEM_NAME);
+        return "showAll";
+    }
+
+    @GetMapping("/prev")
+    public String showPrev(Model model) {
+        pageable = pageable.previousOrFirst();
+        model.addAttribute("itemsSP", itemRepository.findAll(pageable));
         model.addAttribute("item_name", ITEM_NAME);
         return "showAll";
     }

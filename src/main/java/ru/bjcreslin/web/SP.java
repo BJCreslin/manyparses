@@ -2,6 +2,8 @@ package ru.bjcreslin.web;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,15 +23,24 @@ import ru.bjcreslin.service.parses.ParserWaterman;
 @Log
 @RequestMapping("/StroyPark")
 @Controller
-@AllArgsConstructor
 public class SP implements ItemWeb<StroyparkItemDTO> {
     static final String ITEM_NAME = "StroyPark";
-
 
     private ItemSPService itemSPService;
     private ParserSP itemSPParser;
     private ParserWaterman watermanItemParserService;
     private WatermanItemRepository watermanItemRepository;
+
+    public SP(ItemSPService itemSPService, ParserSP itemSPParser, ParserWaterman watermanItemParserService,
+              WatermanItemRepository watermanItemRepository) {
+        this.itemSPService = itemSPService;
+        this.itemSPParser = itemSPParser;
+        this.watermanItemParserService = watermanItemParserService;
+        this.watermanItemRepository = watermanItemRepository;
+        this.pageable = PageRequest.of(0, maxElementsOnScreen);
+    }
+
+    private Pageable pageable;
 
     @GetMapping("/additem")
     public String addGet(Model model) {
@@ -42,8 +53,6 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
      * Метод добавляет itemSP и соответствующий ему Waterman item в базу
      *
      * @param doubleCode doublecode
-     * @param model
-     * @return
      */
     @PostMapping("/additem")
     public String addPost(@ModelAttribute DoubleCode doubleCode, Model model) {
@@ -66,11 +75,31 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
 
     @GetMapping("/showall")
     public String showAll(Model model) {
-        model.addAttribute("itemsSP", itemSPService.findAll());
+        model.addAttribute("itemsSP", itemSPService.findAll(pageable));
         model.addAttribute("item_name", ITEM_NAME);
         return "showAll";
     }
 
+    @GetMapping("/first")
+    public String showFirst(Model model) {
+        model.addAttribute("itemsSP", itemSPService.findAll(pageable.first()));
+        model.addAttribute("item_name", ITEM_NAME);
+        return "showAll";
+    }
+
+    @GetMapping("/next")
+    public String showNext(Model model) {
+        model.addAttribute("itemsSP", itemSPService.findAll(pageable.next()));
+        model.addAttribute("item_name", ITEM_NAME);
+        return "showAll";
+    }
+
+    @GetMapping("/prev")
+    public String showPrev(Model model) {
+        model.addAttribute("itemsSP", itemSPService.findAll(pageable.previousOrFirst()));
+        model.addAttribute("item_name", ITEM_NAME);
+        return "showAll";
+    }
 
     @GetMapping("/edit/{item}")
     public String editGet(@PathVariable StroyparkItemDTO item, Model model) {

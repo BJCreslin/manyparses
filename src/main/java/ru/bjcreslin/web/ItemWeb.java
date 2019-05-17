@@ -10,6 +10,7 @@ import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.Item;
 
 public interface ItemWeb <t extends Item>{
+    int maxElementsOnScreen = 10;
     @GetMapping("/additem")
     String addGet(Model model);
 
