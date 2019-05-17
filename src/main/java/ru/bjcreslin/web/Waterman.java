@@ -1,15 +1,16 @@
 package ru.bjcreslin.web;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.WatermanItemDTO;
-import ru.bjcreslin.service.ParserWaterman;
-import ru.bjcreslin.service.WatermanItemService;
+import ru.bjcreslin.service.ItemWtrmnService;
+import ru.bjcreslin.service.parses.ParserWaterman;
 
 
 /**
@@ -18,11 +19,18 @@ import ru.bjcreslin.service.WatermanItemService;
 @Log
 @Controller
 @RequestMapping("/waterman")
-@AllArgsConstructor
-public class Waterman implements ItemWeb <WatermanItemDTO>{
-    WatermanItemService watermanService;
+public class Waterman implements ItemWeb<WatermanItemDTO> {
+    private ItemWtrmnService watermanService;
     private ParserWaterman parsingWaterman;
 
+    public Waterman(ItemWtrmnService watermanService, ParserWaterman parsingWaterman) {
+        this.watermanService = watermanService;
+        this.parsingWaterman = parsingWaterman;
+        int maxElementsOnScreen = 10;
+        this.pageable = PageRequest.of(0, maxElementsOnScreen).first();
+    }
+
+    private Pageable pageable;
 
     @GetMapping("/{item}")
     public String editGet(@PathVariable WatermanItemDTO item, Model model) {
@@ -36,7 +44,7 @@ public class Waterman implements ItemWeb <WatermanItemDTO>{
 //    }
 
     @PostMapping("/edit")
-    public String editPost(@ModelAttribute("edit_waterman") WatermanItemDTO item, BindingResult result,Model model) {
+    public String editPost(@ModelAttribute("edit_waterman") WatermanItemDTO item, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "edit_waterman";
         }
@@ -76,8 +84,33 @@ public class Waterman implements ItemWeb <WatermanItemDTO>{
 
     @GetMapping("/showall")
     public String showAll(Model model) {
-        model.addAttribute("item_waterman", watermanService.findAll());
-        model.addAttribute("name","waterman");
+
+        model.addAttribute("item_waterman", watermanService.findAll(pageable));
+        model.addAttribute("name", "waterman");
+        return "showAllWaterman";
+    }
+
+    @GetMapping("/first")
+    public String showFirst(Model model) {
+        pageable = pageable.first();
+        model.addAttribute("item_waterman", watermanService.findAll(pageable));
+        model.addAttribute("name", "waterman");
+        return "showAllWaterman";
+    }
+
+    @GetMapping("/prev")
+    public String showPrev(Model model) {
+        pageable = pageable.previousOrFirst();
+        model.addAttribute("item_waterman", watermanService.findAll(pageable));
+        model.addAttribute("name", "waterman");
+        return "showAllWaterman";
+    }
+
+    @GetMapping("/next")
+    public String showNext(Model model) {
+        pageable = pageable.next();
+        model.addAttribute("item_waterman", watermanService.findAll(pageable));
+        model.addAttribute("name", "waterman");
         return "showAllWaterman";
     }
 

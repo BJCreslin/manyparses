@@ -8,6 +8,10 @@
 </head>
 <body>
 <div th:insert="~{header :: main}"></div>
+<div class="text-right" >
+    <a th:href="@{'/'+${name}+'/first'}">First     </a> <a th:href="@{'/'+${name}+'/prev'}">Previsouly   </a>
+    <a th:href="@{'/'+${name}+'/next'}">    Next </a>
+</div>
 <table class="table .table-striped .table-bordered .table-responsive">
     <thead class="thead-dark">
     <tr>

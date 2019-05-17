@@ -13,8 +13,8 @@ import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.service.ItemKitService;
-import ru.bjcreslin.service.ParserKit;
-import ru.bjcreslin.service.ParserWaterman;
+import ru.bjcreslin.service.parses.ParserKit;
+import ru.bjcreslin.service.parses.ParserWaterman;
 
 /**
  * показывает таблицу с данными СП

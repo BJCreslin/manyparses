@@ -1,4 +1,4 @@
-package ru.bjcreslin.service;
+package ru.bjcreslin.service.analyzes;
 
 import ru.bjcreslin.model.Item;
 

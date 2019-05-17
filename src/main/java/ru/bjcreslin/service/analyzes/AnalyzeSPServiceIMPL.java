@@ -1,10 +1,11 @@
-package ru.bjcreslin.service;
+package ru.bjcreslin.service.analyzes;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.repository.ItemSPRepository;
 import ru.bjcreslin.model.Item;
 import ru.bjcreslin.model.StroyparkItemDTO;
+import ru.bjcreslin.service.analyzes.AnalyzeService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

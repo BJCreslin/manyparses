@@ -1,4 +1,4 @@
-package ru.bjcreslin.service;
+package ru.bjcreslin.service.parses;
 
 import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
@@ -84,10 +84,7 @@ public class ParserSP implements ParserItem {
     private Boolean isSale(Document document) {
         Element elementItem = document.getElementsByClass("c-content").first();
 
-        if (elementItem.text().toLowerCase().contains("РАСПРОДАЖА".toLowerCase())) {
-            return true;
-        }
-        return false;
+        return elementItem.text().toLowerCase().contains("РАСПРОДАЖА".toLowerCase());
     }
 
     /**

@@ -1,4 +1,4 @@
-package ru.bjcreslin.service;
+package ru.bjcreslin.service.parses;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -33,9 +33,7 @@ public interface ParserItem {
     static boolean hasClass(Element element, String className) {
         Elements bodyChildren = new Elements();
         for (Element e : element.getAllElements()) {
-            for (Element eChild : e.children()) {
-                bodyChildren.add(eChild);
-            }
+            bodyChildren.addAll(e.children());
         }
         return bodyChildren.hasClass(className);
 

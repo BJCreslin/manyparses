@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bjcreslin.model.Item;
 import ru.bjcreslin.model.KitItemDTO;
-import ru.bjcreslin.service.AnalyzeKITServiceIMPL;
-import ru.bjcreslin.service.AnalyzeSPServiceIMPL;
+import ru.bjcreslin.service.analyzes.AnalyzeKITServiceIMPL;
+import ru.bjcreslin.service.analyzes.AnalyzeSPServiceIMPL;
 
 import java.util.List;
 

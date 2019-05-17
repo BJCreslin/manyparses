@@ -12,8 +12,8 @@ import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.service.ItemSPService;
-import ru.bjcreslin.service.ParserSP;
-import ru.bjcreslin.service.ParserWaterman;
+import ru.bjcreslin.service.parses.ParserSP;
+import ru.bjcreslin.service.parses.ParserWaterman;
 
 /**
  * показывает таблицу с данными СП

@@ -1,4 +1,4 @@
-package ru.bjcreslin.service;
+package ru.bjcreslin.service.parses;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
@@ -7,7 +7,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.repository.WatermanItemRepository;
 
@@ -50,7 +49,7 @@ public class ParserWaterman implements ParserItem {
             // <div class="search--nav">
             Elements element = document.getElementsByClass("search--nav");
             //<a class="search--item products--item" data-code="88b44d61-8c05-11e8-a8cc-001e6727034e" href="/products/88b44d61-8c05-11e8-a8cc-001e6727034e">
-            var elementForAddress = element.first().getElementsByClass("search--item products--item").first();
+            Element elementForAddress = element.first().getElementsByClass("search--item products--item").first();
             String itemAdress = elementForAddress.attr("data-code");
 
             String AddressItemPage = ITEM_PAGE + itemAdress;

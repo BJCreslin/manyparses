@@ -1,6 +1,6 @@
 package ru.bjcreslin.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.repository.ItemSPRepository;
@@ -10,8 +10,15 @@ import java.util.List;
 
 @Service
 public class ItemSPService {
-    @Autowired
     ItemSPRepository itemSPRepository;
+
+    public ItemSPService(ItemSPRepository itemSPRepository) {
+        this.itemSPRepository = itemSPRepository;
+    }
+
+    public List<StroyparkItemDTO> findAll(Pageable pageable) {
+        return itemSPRepository.findAll(pageable).getContent();
+    }
 
     public void save(StroyparkItemDTO stroyparkItemDTO) {
         stroyparkItemDTO.setDate(LocalDateTime.now());

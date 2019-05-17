@@ -1,4 +1,4 @@
-package ru.bjcreslin.service;
+package ru.bjcreslin.service.parses;
 
 import lombok.extern.java.Log;
 import org.jsoup.Jsoup;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
+import ru.bjcreslin.service.DateService;
 
 import java.io.IOException;
 import java.math.BigDecimal;
