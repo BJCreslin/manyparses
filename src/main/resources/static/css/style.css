@@ -1,0 +1,17 @@
+body {
+    background-color: lightgrey;
+}
+
+.menu1 {
+    background-color: #818182;
+    margin-left: 20px;
+    box-shadow: 3px 3px 12px #818182;
+    border-radius: 20px;
+    width: 17%;
+    align-content: center;
+    color: rgba(255, 255, 255, 255);
+}
+
+.punkt {
+    color: rgba(255, 255, 255, 255);
+}

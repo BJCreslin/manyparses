@@ -5,45 +5,45 @@
     <title>footer</title>
 </head>
 <body>
-<div th:fragment="main" style="padding-left: 20px">
-    <div class="row" style="margin-left: 30px">
-        <div class="col-xs-4">
-            <ol class="border container-fluid">
+<div th:fragment="main">
+    <div class="row" >
+        <div class="col-xs-4 menu1" style="margin-left: 5%">
+            <ol>
                 <p>
                     Select section
                 </p>
-                <li><a href="/index" th:href="@{/index}">Index page</a></li>
+                <li><a class="punkt" href="/index" th:href="@{/index}">Index page</a></li>
             </ol>
         </div>
 
-        <div class="col-xs-4" style="margin-left: 10px">
-            <ol class="border container-fluid">
+        <div class="col-xs-4 menu1">
+            <ol >
                 <p>Waterman section </p>
-                <li><a th:href="@{/waterman/showall}">Show AlL</a></li>
+                <li><a class="punkt" th:href="@{/waterman/showall}">Show AlL</a></li>
             </ol>
         </div>
 
-        <div class="col-xs-4" style="margin-left: 10px">
-            <ol class="border container-fluid">
+        <div class="col-xs-4 menu1">
+            <ol >
                 <p>Stroypark </p>
-                <li><a th:href="@{/StroyPark/showall}">Show AlL</a></li>
-                <li><a th:href="@{/StroyPark/additem}">Add item</a></li>
+                <li><a class="punkt" th:href="@{/StroyPark/showall}">Show AlL</a></li>
+                <li><a class="punkt" th:href="@{/StroyPark/additem}">Add item</a></li>
             </ol>
         </div>
 
-        <div class="col-xs-4" style="margin-left: 10px">
-            <ol class="border container-fluid">
+        <div class="col-xs-4 menu1">
+            <ol>
                 <p> Kit section </p>
-                <li><a th:href="@{/Kit/showall}">Show AlL</a></li>
-                <li><a th:href="@{/Kit/additem}">Add item</a></li>
+                <li><a class="punkt" th:href="@{/Kit/showall}">Show AlL</a></li>
+                <li><a class="punkt" th:href="@{/Kit/additem}">Add item</a></li>
             </ol>
         </div>
 
-        <div class="col-xs-4" style="margin-left: 10px">
-            <ol class="border container-fluid">
+        <div class="col-xs-4 menu1">
+            <ol>
                 <p>Analize </p>
-                <li><a href="/analize/cheap_sp" th:href="@{/analize/cheap_sp}">SP cheap</a></li>
-                <li><a href="/analize/cheap_kit" th:href="@{/analize/cheap_kit}">Kit cheap</a></li>
+                <li><a class="punkt" href="/analize/cheap_sp" th:href="@{/analize/cheap_sp}">SP cheap</a></li>
+                <li><a class="punkt" href="/analize/cheap_kit" th:href="@{/analize/cheap_kit}">Kit cheap</a></li>
             </ol>
         </div>
     </div>
