@@ -2,51 +2,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
-    <title>footer</title>
+    <title>header</title>
 </head>
 <body>
 <div th:fragment="main">
-    <div class="row" >
-        <div class="col-xs-4 menu1" style="margin-left: 5%">
-            <ol>
-                <p>
-                    Select section
-                </p>
-                <li><a class="punkt" href="/index" th:href="@{/index}">Index page</a></li>
-            </ol>
-        </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">LOGerta</a>
 
-        <div class="col-xs-4 menu1">
-            <ol >
-                <p>Waterman section </p>
-                <li><a class="punkt" th:href="@{/waterman/showall}">Show AlL</a></li>
-            </ol>
-        </div>
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/index}">Main</a>
+            </li>
 
-        <div class="col-xs-4 menu1">
-            <ol >
-                <p>Stroypark </p>
-                <li><a class="punkt" th:href="@{/StroyPark/showall}">Show AlL</a></li>
-                <li><a class="punkt" th:href="@{/StroyPark/additem}">Add item</a></li>
-            </ol>
-        </div>
 
-        <div class="col-xs-4 menu1">
-            <ol>
-                <p> Kit section </p>
-                <li><a class="punkt" th:href="@{/Kit/showall}">Show AlL</a></li>
-                <li><a class="punkt" th:href="@{/Kit/additem}">Add item</a></li>
-            </ol>
-        </div>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop1" data-toggle="dropdown">
+                    SNTB section
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{/waterman/showall}">Show All</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop2" data-toggle="dropdown">
+                    Stroypark section
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{/StroyPark/showall}">Show All</a>
+                    <a class="dropdown-item" th:href="@{/StroyPark/additem}">Add item </a>
+                    <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
 
-        <div class="col-xs-4 menu1">
-            <ol>
-                <p>Analize </p>
-                <li><a class="punkt" href="/analize/cheap_sp" th:href="@{/analize/cheap_sp}">SP cheap</a></li>
-                <li><a class="punkt" href="/analize/cheap_kit" th:href="@{/analize/cheap_kit}">Kit cheap</a></li>
-            </ol>
-        </div>
-    </div>
 </div>
 </body>
 </html>

@@ -11,8 +11,9 @@
 <body>
 <div th:insert="~{header :: main}"></div>
 <div class="text-right" >
-    <a th:href="@{'/'+${item_name}+'/first'}">First     </a> <a th:href="@{'/'+${item_name}+'/prev'}">Previsouly   </a>
-    <a th:href="@{'/'+${item_name}+'/next'}">    Next </a>
+    <a class="badge badge-pill badge-dark" th:href="@{'/'+${item_name}+'/first'}">First     </a>
+    <a class="badge badge-pill badge-dark" th:href="@{'/'+${item_name}+'/prev'}">Previsouly   </a>
+    <a class="badge badge-pill badge-dark " th:href="@{'/'+${item_name}+'/next'}">    Next </a>
 </div>
 <table class="table .table-striped .table-bordered .table-responsive">
     <thead class="thead-dark">
@@ -39,5 +40,7 @@
     </tr>
 
 </table>
+
+<div th:insert="~{footer :: main}"> </div>
 </body>
 </html>

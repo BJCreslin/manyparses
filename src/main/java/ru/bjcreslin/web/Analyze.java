@@ -2,6 +2,10 @@ package ru.bjcreslin.web;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +32,9 @@ public class Analyze {
     @GetMapping("/cheap_sp")
     public String cheapSP(Model model) {
         List<Item> stroyparkItemDTOList = analyzeSPServiceIMPL.findAllCheaps();
+//        Page <Item> page=new PageImpl<>(stroyparkItemDTOList);
+//        Pageable pageable= PageRequest()
+
         model.addAttribute("cheaplist", stroyparkItemDTOList);
         model.addAttribute("name","SP");
         return "cheap_analizy";
