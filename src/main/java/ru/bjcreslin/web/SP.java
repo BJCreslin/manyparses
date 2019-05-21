@@ -88,6 +88,9 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
     }
 
     @GetMapping("/next")
+    /***
+     * todo: Почему то не работате кнопка
+     */
     public String showNext(Model model) {
         model.addAttribute("itemsSP", itemSPService.findAll(pageable.next()));
         model.addAttribute("item_name", ITEM_NAME);

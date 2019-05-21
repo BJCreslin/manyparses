@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class Index {
 
-    @GetMapping({"","/index"})
+    @GetMapping({"/logerta/","/logerta/index","/","/index"})
     public String getIndexPage(HttpSession session){
         session.setAttribute("SP_name",SP.ITEM_NAME);
         //model.addAttribute(,SP.ITEM_NAME);

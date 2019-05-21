@@ -26,7 +26,11 @@ public interface ParserItem {
             return true;
         }
         LocalDateTime nowTime = LocalDateTime.now();
-        return nowTime.minusHours(12L).isAfter(itemTime);
+        try {
+            return nowTime.minusHours(12L).isAfter(itemTime);
+        } catch (Exception e) {
+           return true;
+        }
 
     }
 

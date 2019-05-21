@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <title>add Item</title>
+    <link rel="stylesheet" type="text/css"
+          href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css"
+          href="../static/css/style.css" th:href="@{/css/style.css}"/>
+
+</head>
+<body class="pa">
+
+<div th:insert="~{header :: main}"></div>
+<div class="container">
+    <div class="row flex-items-xs-center d-md-flex">
+        <form action="#" th:action="@{'/'+${name}+'/add/'}" th:object="${item}" method="post">
+            <p>Stroypark code :<input type="text" th:field="*{spCode}"/></p>
+            <p>Kit code :<input type="text" th:field="*{kitCode}"/></p>
+            <p>Waterman code : <input type="text" th:field="*{watermanCode}"/></p>
+            <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+
+        </form>
+    </div>
+</div>
+
+<div th:insert="~{footer :: main}"> </div>
+</body>
+</html>
