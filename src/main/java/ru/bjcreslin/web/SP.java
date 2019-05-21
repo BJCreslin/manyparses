@@ -1,6 +1,5 @@
 package ru.bjcreslin.web;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -8,11 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.bjcreslin.repository.WatermanItemRepository;
 import ru.bjcreslin.Exceptions.WebParserException;
 import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.StroyparkItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
+import ru.bjcreslin.repository.WatermanItemRepository;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.parses.ParserSP;
 import ru.bjcreslin.service.parses.ParserWaterman;
@@ -82,24 +81,24 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
 
     @GetMapping("/first")
     public String showFirst(Model model) {
-        model.addAttribute("itemsSP", itemSPService.findAll(pageable.first()));
+        pageable = pageable.first();
+        model.addAttribute("itemsSP", itemSPService.findAll(pageable));
         model.addAttribute("item_name", ITEM_NAME);
         return "showAll";
     }
 
     @GetMapping("/next")
-    /***
-     * todo: Почему то не работате кнопка
-     */
     public String showNext(Model model) {
-        model.addAttribute("itemsSP", itemSPService.findAll(pageable.next()));
+        pageable = pageable.next();
+        model.addAttribute("itemsSP", itemSPService.findAll(pageable));
         model.addAttribute("item_name", ITEM_NAME);
         return "showAll";
     }
 
     @GetMapping("/prev")
     public String showPrev(Model model) {
-        model.addAttribute("itemsSP", itemSPService.findAll(pageable.previousOrFirst()));
+        pageable = pageable.previousOrFirst();
+        model.addAttribute("itemsSP", itemSPService.findAll(pageable));
         model.addAttribute("item_name", ITEM_NAME);
         return "showAll";
     }

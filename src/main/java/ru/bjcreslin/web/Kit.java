@@ -24,7 +24,7 @@ import ru.bjcreslin.service.parses.ParserWaterman;
 @RequestMapping("/Kit")
 @Controller
 public class Kit implements ItemWeb<KitItemDTO> {
-    static final String ITEM_NAME = "Kit";
+    private static final String ITEM_NAME = "Kit";
 
     public Kit(ItemKitRepository itemRepository, ParserKit parserItem, ParserWaterman watermanItemParserService,
                WatermanItemRepository watermanItemRepository, ItemKitService itemService) {
@@ -54,9 +54,7 @@ public class Kit implements ItemWeb<KitItemDTO> {
     /**
      * Метод добавляет Kit и соответствующий ему Waterman item в базу
      *
-     * @param doubleCode doublecode
-     * @param model
-     * @return
+
      */
     @PostMapping("/additem")
     public String addPost(@ModelAttribute DoubleCode doubleCode, Model model) {
