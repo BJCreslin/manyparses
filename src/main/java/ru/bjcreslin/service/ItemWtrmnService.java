@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.repository.WatermanItemRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,14 +22,8 @@ public class ItemWtrmnService {
     }
 
     public void save(WatermanItemDTO watermanItem) {
-        Long code = watermanItem.getCode();
-        WatermanItemDTO watermanItemDTO = findByCode(code);
-        if (watermanItemDTO == null) {
-            watermanItemDTO = new WatermanItemDTO();
-            watermanItemDTO.setCode(code);
-        }
-
-        watermanItemRepository.save(watermanItemDTO);
+        watermanItem.setDate(LocalDateTime.now());
+        watermanItemRepository.saveAndFlush(watermanItem);
 
     }
 

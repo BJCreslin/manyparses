@@ -38,14 +38,14 @@ public class ParserWaterman implements ParserItem {
             if ((item == null) | (item.getAddress().isEmpty()) | (item.getName().isEmpty()) | (item.getPrice() == null)) {
                 item = new WatermanItemDTO();
                 item.setCode(code);
-                item.setDate(LocalDateTime.now());
+
             } else if (!ParserItem.isNeedToParse(item)) {
                 return item;
             }
         } catch (Exception e) {
             item = new WatermanItemDTO();
             item.setCode(code);
-            item.setDate(LocalDateTime.now());
+
         }
         try {
             String addressParsingPage = WATERMAN_FIND_PAGE + code.toString();
@@ -78,7 +78,7 @@ public class ParserWaterman implements ParserItem {
                     addItemPriceFromHTMLToItem(item, elementsItem);
                 }
             }
-            item.setDate(LocalDateTime.now());
+
             log.info(item.toString());
         } catch (IOException e) {
             e.printStackTrace();

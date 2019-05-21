@@ -16,7 +16,7 @@ public class ItemKitService {
 
     public void save(KitItemDTO itemDTO) {
         itemDTO.setDate(LocalDateTime.now());
-        repository.save(itemDTO);
+        repository.saveAndFlush(itemDTO);
     }
 
     public List<KitItemDTO> findAll(Pageable pageable) {

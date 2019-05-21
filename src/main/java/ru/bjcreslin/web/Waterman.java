@@ -59,8 +59,10 @@ public class Waterman implements ItemWeb<WatermanItemDTO> {
     }
 
     @GetMapping("/reread/{item}")
-    public String reread(@PathVariable("item") WatermanItemDTO item) {
-        item.setPrice(parsingWaterman.getItemByCode(item.getCode()).getPrice());
+    public String reread(@PathVariable("item") Long itemcode) {
+        WatermanItemDTO item = parsingWaterman.getItemByCode(itemcode);
+        //item.setPrice(parsingWaterman.getItemByCode(item.getCode()).getPrice());
+        watermanService.save(item);
         return "redirect:/waterman/showall";
     }
 

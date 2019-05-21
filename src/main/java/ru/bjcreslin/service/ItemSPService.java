@@ -22,7 +22,7 @@ public class ItemSPService {
 
     public void save(StroyparkItemDTO stroyparkItemDTO) {
         stroyparkItemDTO.setDate(LocalDateTime.now());
-        itemSPRepository.save(stroyparkItemDTO);
+        itemSPRepository.saveAndFlush(stroyparkItemDTO);
     }
 
     public List<StroyparkItemDTO> findAll() {

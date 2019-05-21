@@ -21,6 +21,7 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
 
     /**
      * Ищет все данные, у которых цена Водяного, выше цены Стройпарка
+     *
      * @return список элементов Стройпарка
      */
     public List<Item> findAllCheaps() {
@@ -29,8 +30,12 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
         for (StroyparkItemDTO stroyparkItemDTO : stroyparkItemDTOListALL) {
             BigDecimal priceSP = stroyparkItemDTO.getPriceDiscount().divide(BigDecimal.valueOf(stroyparkItemDTO.getMulty()));
             BigDecimal priceWtrmn = stroyparkItemDTO.getWatermanItemDTO().getPrice();
-            if (priceSP.compareTo(priceWtrmn) < 0) {
-                stroyparkItemDTOList.add(stroyparkItemDTO);
+            try {
+                if (priceSP.compareTo(priceWtrmn) < 0) {
+                    stroyparkItemDTOList.add(stroyparkItemDTO);
+                }
+            } catch (Exception e) {
+                continue;
             }
         }
 
