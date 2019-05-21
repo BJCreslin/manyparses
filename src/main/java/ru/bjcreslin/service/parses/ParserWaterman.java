@@ -34,12 +34,18 @@ public class ParserWaterman implements ParserItem {
     public WatermanItemDTO getItemByCode(Long code) {
 
         WatermanItemDTO item = itemRepository.findByCode(code);
-        if (item == null) {
+        try {
+            if ((item == null) | (item.getAddress().isEmpty()) | (item.getName().isEmpty()) | (item.getPrice() == null)) {
+                item = new WatermanItemDTO();
+                item.setCode(code);
+                item.setDate(LocalDateTime.now());
+            } else if (!ParserItem.isNeedToParse(item)) {
+                return item;
+            }
+        } catch (Exception e) {
             item = new WatermanItemDTO();
             item.setCode(code);
             item.setDate(LocalDateTime.now());
-        } else if (!ParserItem.isNeedToParse(item)) {
-            return item;
         }
         try {
             String addressParsingPage = WATERMAN_FIND_PAGE + code.toString();
