@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
-    <title>All ItemSP</title>
+    <title>Analyse</title>
     <link rel="stylesheet" type="text/css"
           href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
 
@@ -11,6 +11,11 @@
 </head>
 <body>
 <div th:insert="~{header :: main}"></div>
+<div class="text-right">
+    <a class="badge badge-pill badge-dark" th:href="@{'/'+${item_name}+'/first'}">First </a>
+    <a class="badge badge-pill badge-dark" th:href="@{'/'+${item_name}+'/prev'}">Previsouly </a>
+    <a class="badge badge-pill badge-dark " th:href="@{'/'+${item_name}+'/next'}"> Next </a>
+</div>
 <table class="table .table-striped .table-bordered .table-responsive">
     <thead class="thead-dark">
     <tr>
