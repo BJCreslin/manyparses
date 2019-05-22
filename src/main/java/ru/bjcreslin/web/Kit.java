@@ -17,6 +17,8 @@ import ru.bjcreslin.service.ItemKitService;
 import ru.bjcreslin.service.parses.ParserKit;
 import ru.bjcreslin.service.parses.ParserWaterman;
 
+import java.util.List;
+
 /**
  * показывает таблицу с данными СП
  */
@@ -53,8 +55,6 @@ public class Kit implements ItemWeb<KitItemDTO> {
 
     /**
      * Метод добавляет Kit и соответствующий ему Waterman item в базу
-     *
-
      */
     @PostMapping("/additem")
     public String addPost(@ModelAttribute DoubleCode doubleCode, Model model) {
@@ -132,6 +132,40 @@ public class Kit implements ItemWeb<KitItemDTO> {
     }
 
 
+    @GetMapping("/rereadall")
+    public String rereadall() {
+        reReadAll();
+        return "redirect:/" + ITEM_NAME + "/showall";
+    }
+
+
+    private void reReadAll() {
+        List<KitItemDTO> itemDTOList = itemService.findAll();
+        for (KitItemDTO itemDTO : itemDTOList) {
+            KitItemDTO itemDTOtemp = new KitItemDTO();
+            try {
+                itemDTOtemp = parserItem.getItemByCode(itemDTO.getCode());
+            } catch (WebParserException e) {
+                itemDTO.setPrice(itemDTOtemp.getPrice());
+                itemDTO.setPriceDiscount(itemDTOtemp.getPriceDiscount());
+                itemDTO.setSale(itemDTOtemp.getSale());
+                itemDTO.setMulty(itemDTOtemp.getMulty());
+                itemDTO.setCurrency(itemDTOtemp.getCurrency());
+                itemDTO.setAddress(itemDTOtemp.getAddress());
+                itemDTO.setName(itemDTOtemp.getName());
+
+
+                WatermanItemDTO watermanItemDTO = itemDTO.getWatermanItemDTO();
+                watermanItemDTO.addKitItem(itemDTO);
+                watermanItemRepository.saveAndFlush(watermanItemDTO);
+                itemService.save(itemDTO);
+            }
+        }
+
+
+    }
 }
+
+
 
 

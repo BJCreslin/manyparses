@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
+import ru.bjcreslin.service.parses.ParserKit;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,7 +21,11 @@ public class ItemKitService {
     }
 
     public List<KitItemDTO> findAll(Pageable pageable) {
+
         return repository.findAll(pageable).getContent();
     }
 
+    public List<KitItemDTO> findAll() {
+        return repository.findAll();
+    }
 }
