@@ -61,7 +61,7 @@ public class Kit implements ItemWeb<KitItemDTO> {
         try {
             KitItemDTO itemDTO = parserItem.getItemByCode(doubleCode.getFirstCode());
             WatermanItemDTO watermanItem = watermanItemParserService.getItemByCode(doubleCode.getSecondCode());
-
+            watermanItem.addKitItem(itemDTO);
             watermanItemRepository.saveAndFlush(watermanItem);
             itemDTO.setWatermanItemDTO(watermanItem);
 

@@ -69,6 +69,7 @@ public class AddAll {
         if (kitItemDTO != null) {
             kitItemDTO.setWatermanItemDTO(watermanItemDTO);
             kitService.save(kitItemDTO);
+            watermanItemDTO.getKitItemList().add(kitItemDTO);
         }
 
         if (stroyparkItemDTO != null) {

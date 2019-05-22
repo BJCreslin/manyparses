@@ -34,6 +34,10 @@ public class Waterman implements ItemWeb<WatermanItemDTO> {
     @GetMapping("/{item}")
     public String editGet(@PathVariable WatermanItemDTO item, Model model) {
         model.addAttribute("edit_waterman", item);
+        model.addAttribute("stroyparkItemList", item.getStroyparkItemList());
+        model.addAttribute("kitItemList", item.getKitItemList());
+        log.info("Size spp" + item.getStroyparkItemList().size());
+        log.info("Size kit:" + item.getKitItemList().size());
         return "edit_waterman";
     }
 //    @GetMapping("/edit/{item}")

@@ -33,6 +33,7 @@
         <td th:text="${item.name}"></td>
         <td th:text="${item.price}"></td>
         <td th:text="${item.priceDiscount}"></td>
+
         <td th:text="${item.comment}"></td>
         <td><a href="edit_item.html" th:href="@{'/'+${item_name}+'/edit/'+${item.code}}">Edit</a></td>
         <td><a th:href="@{'/'+${item_name}+'/delete/'+${item.code}}">Delete</a></td>

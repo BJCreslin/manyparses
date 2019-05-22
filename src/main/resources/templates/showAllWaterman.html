@@ -32,6 +32,9 @@
         <td><a th:href="@{${item.address}}"> <b th:text="${item.code}"></b> </a></td>
         <td th:text="${item.name}"></td>
         <td th:text="${item.price}"></td>
+
+        <td th:text="${item.stroyparkItemList}"></td>
+
         <td th:text="${item.group}"></td>
         <td><a th:href="@{'/'+${name}+'/'+${item.code}}">Edit</a></td>
         <td><a th:href="@{'/'+${name}+'/delete/'+${item.code}}">Delete</a></td>

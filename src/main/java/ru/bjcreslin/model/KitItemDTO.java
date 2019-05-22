@@ -20,7 +20,7 @@ public class KitItemDTO extends Item {
 
     @Column(name = "sale")
     private Boolean sale;
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = WatermanItemDTO.class)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "waterman_code")
     @EqualsAndHashCode.Exclude
     private WatermanItemDTO watermanItemDTO;

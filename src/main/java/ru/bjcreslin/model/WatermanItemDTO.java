@@ -13,19 +13,23 @@ import java.util.List;
 public class WatermanItemDTO extends Item {
 
 
-
     @Column(name = "product_group")
     private String group;  // группа товаров
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+    @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<StroyparkItemDTO> stroyparkItemList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+
+
+    @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
     @EqualsAndHashCode.Exclude
-    private List<KitItemDTO> KitItemList = new ArrayList<>();
+    private List<KitItemDTO> kitItemList = new ArrayList<>();
 
+    public void addKitItem(KitItemDTO kitItemDTO) {
+        kitItemList.add(kitItemDTO);
+    }
 
 }
