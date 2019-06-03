@@ -24,7 +24,41 @@ public class WatermanItemDTO extends Item {
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
     @EqualsAndHashCode.Exclude
+    @Transient
     private List<KitItemDTO> kitItemList = new ArrayList<>();
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public List<StroyparkItemDTO> getStroyparkItemList() {
+        return stroyparkItemList;
+    }
+
+    public void setStroyparkItemList(List<StroyparkItemDTO> stroyparkItemList) {
+        this.stroyparkItemList = stroyparkItemList;
+    }
+
+    public List<KitItemDTO> getKitItemList() {
+        return kitItemList;
+    }
+
+    public void setKitItemList(List<KitItemDTO> kitItemList) {
+        this.kitItemList = kitItemList;
+    }
+
+    @Override
+    public String toString() {
+        return "WatermanItemDTO{" +
+                "group='" + group + '\'' +
+                ", stroyparkItemList=" + stroyparkItemList +
+                ", kitItemList=" + kitItemList +
+                "} " + super.toString();
+    }
 
     public void addKitItem(KitItemDTO kitItemDTO) {
         kitItemList.add(kitItemDTO);
