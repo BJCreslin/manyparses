@@ -2,11 +2,13 @@ package ru.bjcreslin.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 
+@Transactional
 @Data
 @Entity
 @Table(name = "kit")
@@ -20,6 +22,7 @@ public class KitItemDTO extends Item {
 
     @Column(name = "sale")
     private Boolean sale;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "waterman_code")
     @EqualsAndHashCode.Exclude

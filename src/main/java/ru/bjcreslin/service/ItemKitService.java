@@ -3,13 +3,14 @@ package ru.bjcreslin.service;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
-import ru.bjcreslin.service.parses.ParserKit;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Transactional
 @Service
 @AllArgsConstructor
 public class ItemKitService {

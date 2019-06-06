@@ -1,7 +1,6 @@
 package ru.bjcreslin.model;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,9 +19,9 @@ import java.math.BigDecimal;
     @Column(name = "sale")
     private Boolean sale;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = WatermanItemDTO.class)
+    @ManyToOne
     @JoinColumn(name = "waterman_code")
-    @EqualsAndHashCode.Exclude
+//    @Access(AccessType.PROPERTY)
     private WatermanItemDTO watermanItemDTO;
 
     @Override

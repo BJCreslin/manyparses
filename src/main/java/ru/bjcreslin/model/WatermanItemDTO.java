@@ -14,18 +14,16 @@ public class WatermanItemDTO extends Item {
     @Column(name = "product_group")
     private String group;  // группа товаров
 
-    @OneToMany(cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @EqualsAndHashCode.Exclude
+
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+//    @EqualsAndHashCode.Exclude
     private List<StroyparkItemDTO> stroyparkItemList = new ArrayList<>();
 
 
-    @OneToMany(cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     @Transient
     private List<KitItemDTO> kitItemList = new ArrayList<>();
-
 
 
     public void addKitItem(KitItemDTO kitItemDTO) {
