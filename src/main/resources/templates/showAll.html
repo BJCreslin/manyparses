@@ -23,8 +23,9 @@
         <th class="priceInTable">Price</th>
         <th class="priceInTable">Discount</th>
         <th class="nameInTable">Comment</th>
+        <th class="nameInTable">Waterman</th>
         <th class="priceInTable">Edit</th>
-        <th class="priceInTable">Delete</th>
+        <th class="">Delete</th>
     </tr>
 
     </thead>
@@ -35,6 +36,7 @@
         <td th:text="${item.priceDiscount}"></td>
 
         <td th:text="${item.comment}"></td>
+        <td th:text="${item.watermanItemDTO.name}"></td>
         <td><a href="edit_item.html" th:href="@{'/'+${item_name}+'/edit/'+${item.code}}">Edit</a></td>
         <td><a th:href="@{'/'+${item_name}+'/delete/'+${item.code}}">Delete</a></td>
 
