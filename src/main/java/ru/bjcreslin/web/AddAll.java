@@ -57,13 +57,11 @@ public class AddAll {
             kitItemDTO = parserKit.getItemByCode(trippleCode.getKitCode());
         } catch (WebParserException |NullPointerException e) {
             e.printStackTrace();
-            kitItemDTO=null;
         }
         try {
             stroyparkItemDTO = parserSP.getItemByCode(trippleCode.getSpCode());
         } catch (WebParserException |NullPointerException e) {
             e.printStackTrace();
-            stroyparkItemDTO=null;
         }
         wtrmnService.save(watermanItemDTO);
         if (kitItemDTO != null) {
