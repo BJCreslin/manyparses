@@ -13,6 +13,7 @@ import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.model.WatermanItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
 import ru.bjcreslin.repository.WatermanItemRepository;
+import ru.bjcreslin.service.DateService;
 import ru.bjcreslin.service.ItemKitService;
 import ru.bjcreslin.service.parses.ParserKit;
 import ru.bjcreslin.service.parses.ParserWaterman;
@@ -153,7 +154,7 @@ public class Kit implements ItemWeb<KitItemDTO> {
                 itemDTO.setCurrency(itemDTOtemp.getCurrency());
                 itemDTO.setAddress(itemDTOtemp.getAddress());
                 itemDTO.setName(itemDTOtemp.getName());
-
+                itemDTO.setDate(DateService.getCurrentDate());
 
                 WatermanItemDTO watermanItemDTO = itemDTO.getWatermanItemDTO();
                 watermanItemDTO.addKitItem(itemDTO);
