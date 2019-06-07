@@ -9,26 +9,36 @@ import java.util.Date;
  * функциональный класс работы со временем
  */
 public class DateService {
+    private static Long minHoursToParse = 12L;
 
-    public static Long getCurrentDate() {
-        Date date = new Date();
-        return date.getTime();
-
+    /**
+     * @return текущая дата
+     */
+    public static LocalDateTime getCurrentDate() {
+        return LocalDateTime.now();
     }
 
-    public static boolean isTimeToParse(Item item){
-        if (item == null) {return true;}
+    /**
+     * Возвращает true, если с даты в item прошло более minHoursToParse часов
+     *
+     * @param item
+     * @return да или нет
+     */
+    public static boolean isTimeToParse(Item item) {
+        if (item == null) {
+            return true;
+        }
 
         LocalDateTime itemTime;
         try {
             itemTime = item.getDate();
             LocalDateTime nowTime = LocalDateTime.now();
-            return nowTime.minusHours(12L).isAfter(itemTime);
+            return nowTime.minusHours(minHoursToParse).isAfter(itemTime);
         } catch (NullPointerException ex) {
             return true;
         }
 
 
-        }
     }
+}
 
