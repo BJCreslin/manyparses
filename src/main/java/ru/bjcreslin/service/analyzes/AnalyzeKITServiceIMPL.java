@@ -1,24 +1,17 @@
 package ru.bjcreslin.service.analyzes;
 
 import lombok.AllArgsConstructor;
-import org.apache.poi.hssf.usermodel.HSSFName;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.FileSystemUtils;
 import ru.bjcreslin.Exceptions.ErrorCreationTempFile;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
 
-import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URI;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +24,11 @@ import static java.nio.file.Files.createTempFile;
 @Service
 @AllArgsConstructor
 public class AnalyzeKITServiceIMPL {
-    private static String excellFileSheetName = "Kit";
-    private static String prefix = "KitWaterman";
-    private static String suffix = "xls";
-    private static String tempPAth = "\\resources\\static\\temp";
+
 
     private ItemKitRepository repository;
 
     /**
-     *
      * Ищет все данные, у которых цена Водяного, выше цены Кит
      *
      * @return список элементов Кит
@@ -59,29 +48,31 @@ public class AnalyzeKITServiceIMPL {
 
     /**
      * TODO: Доделать функцию сохранения excell файла
-     * @param kitItemDTOList
-     * @return
+     *
+     * @param kitItemDTOList список Кит Итемов
+     * @return файл ексель
      * @throws ErrorCreationTempFile
      */
-    public Path saveCheaps(List<KitItemDTO> kitItemDTOList) throws ErrorCreationTempFile {
-        Path excellFile;
-        HSSFWorkbook excellFileWorkbook = null;
-        try {
-            excellFile = createTempFile(prefix, suffix);
+    public HSSFWorkbook saveCheaps(List<KitItemDTO> kitItemDTOList)  {
+        HSSFWorkbook excellFileWorkbook;
 
-            excellFileWorkbook = new HSSFWorkbook(POIFSFileSystem.create(excellFile.toFile()));
-        } catch (IOException e) {
-            throw new ErrorCreationTempFile();
-        }
+            excellFileWorkbook = new HSSFWorkbook();
+        String excellFileSheetName = "Kit";
         HSSFSheet excellFileWorkbookSheet = excellFileWorkbook.createSheet(excellFileSheetName);
         /* Заголовок столбцов*/
         HSSFRow hssfRow = excellFileWorkbookSheet.createRow(0);
-        hssfRow.createCell(0).setCellValue("Wtrmn code");
-        hssfRow.createCell(1).setCellValue("Wtrmn name");
-        hssfRow.createCell(2).setCellValue("Kit name");
-        hssfRow.createCell(3).setCellValue("Wtrmn price");
-        hssfRow.createCell(4).setCellValue("Kit price");
-        hssfRow.createCell(5).setCellValue("Groupe");
+        String watrmnCodeColumnNameXlsFile = "Wtrmn code";
+        hssfRow.createCell(0).setCellValue(watrmnCodeColumnNameXlsFile);
+        String watrmnNameColumnNamelsFile = "Wtrmn name";
+        hssfRow.createCell(1).setCellValue(watrmnNameColumnNamelsFile);
+        String kitNameColumnNamelsFile = "Kit name";
+        hssfRow.createCell(2).setCellValue(kitNameColumnNamelsFile);
+        String wtrmnPriceColumnNamelsFile = "Wtrmn price";
+        hssfRow.createCell(3).setCellValue(wtrmnPriceColumnNamelsFile);
+        String kitPriceColumnNamelsFile = "Kit price";
+        hssfRow.createCell(4).setCellValue(kitPriceColumnNamelsFile);
+        String groupeColumnNamelsFile = "Groupe";
+        hssfRow.createCell(5).setCellValue(groupeColumnNamelsFile);
 
         /*По всему листу данных заполняем таблицу */
         for (int i = 0; i < kitItemDTOList.size(); i++) {
@@ -95,7 +86,7 @@ public class AnalyzeKITServiceIMPL {
             hssfRow.createCell(5).setCellValue(kitItemDTO.getWatermanItemDTO().getGroup());
         }
 
-        return excellFile;
+        return excellFileWorkbook;
     }
 
 
