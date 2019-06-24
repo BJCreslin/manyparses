@@ -3,24 +3,19 @@ package ru.bjcreslin.web;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.bjcreslin.Exceptions.ErrorCreationTempFile;
 import ru.bjcreslin.model.Item;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.service.analyzes.AnalyzeKITServiceIMPL;
 import ru.bjcreslin.service.analyzes.AnalyzeSPServiceIMPL;
 
 import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.FileInputStream;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +36,6 @@ public class Analyze {
 
     @Autowired
     private ServletContext servletContext;
-    private static final String DEFAULT_FILE_NAME = "wtrmn-kit.zip";
 
     private AnalyzeSPServiceIMPL analyzeSPServiceIMPL;
     private AnalyzeKITServiceIMPL analyzeKITServiceIMPL;
@@ -94,44 +88,16 @@ public class Analyze {
     }
 
     @GetMapping("/kitExcell")
-    public ResponseEntity<InputStreamResource> downloadFile1(
-            @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName) throws IOException {
+    public void downloadFile1(HttpServletRequest request,
+                              HttpServletResponse response) throws IOException {
 
-        MediaType mediaType = getMediaTypeForFileName(this.servletContext, fileName);
-        System.out.println("fileName: " + fileName);
-        System.out.println("mediaType: " + mediaType);
-        FileInputStream file;
-        try {
-
-            file = new FileInputStream(analyzeKITServiceIMPL.saveCheaps(kitItemDTOList).getBytes());
-
-            InputStreamResource resource = new InputStreamResource(file);
-
-            return ResponseEntity.ok()
-                    // Content-Disposition
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + DEFAULT_FILE_NAME)
-                    // Content-Type
-                    .contentType(mediaType)
-                    // Contet-Length
-                    .contentLength(file.available()) //
-                    .body(resource);
-        } catch (ErrorCreationTempFile errorCreationTempFile) {
-            errorCreationTempFile.printStackTrace();
-        }
-        return null;
+        response.setContentType("application/xls ; charset=UTF-8");
+        response.setHeader("Content-disposition", "attachment; filename=data.xls");
+        ServletOutputStream outt = response.getOutputStream();
+        outt.write(analyzeKITServiceIMPL.saveCheaps(kitItemDTOList).getBytes());
+        outt.flush();
+        outt.close();
     }
 
-    private MediaType getMediaTypeForFileName(ServletContext servletContext, String fileName) {
-        // application/pdf
-        // application/xml
-        // image/gif, ...
-        String mineType = servletContext.getMimeType(fileName);
-        try {
-            MediaType mediaType = MediaType.parseMediaType(mineType);
-            return mediaType;
-        } catch (Exception e) {
-            return MediaType.APPLICATION_OCTET_STREAM;
-        }
-    }
 
 }
