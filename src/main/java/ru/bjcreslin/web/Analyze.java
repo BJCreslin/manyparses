@@ -91,7 +91,7 @@ public class Analyze {
     public void downloadFile1(HttpServletRequest request,
                               HttpServletResponse response) throws IOException {
 
-        response.setContentType("application/xls ; charset=UTF-8");
+        response.setContentType("application/vnd.ms-excel; charset=UTF-8");
         response.setHeader("Content-disposition", "attachment; filename=data.xls");
         ServletOutputStream outt = response.getOutputStream();
         outt.write(analyzeKITServiceIMPL.saveCheaps(kitItemDTOList).getBytes());
