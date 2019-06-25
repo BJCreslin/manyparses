@@ -19,15 +19,13 @@ import java.util.List;
 @Log
 @Controller
 @RequestMapping("/analize")
-/**
- * В этом классе собраны
- */
+
 public class Analyze {
     public Analyze(AnalyzeSPServiceIMPL analyzeSPServiceIMPL, AnalyzeKITServiceIMPL analyzeKITServiceIMPL) {
         this.analyzeSPServiceIMPL = analyzeSPServiceIMPL;
         this.analyzeKITServiceIMPL = analyzeKITServiceIMPL;
-        kitItemDTOList = new ArrayList<>();
-        stroyparkItemDTOList = new ArrayList<>();
+        this.kitItemDTOList = new ArrayList<>();
+        this.stroyparkItemDTOList = new ArrayList<>();
     }
 
 
@@ -81,7 +79,7 @@ public class Analyze {
         response.setContentType("application/vnd.ms-excel; charset=UTF-8");
         response.setHeader("Content-disposition", "attachment; filename=data.xls");
         try (ServletOutputStream outt = response.getOutputStream()) {
-            outt.write(analyzeKITServiceIMPL.saveCheaps(kitItemDTOList).getBytes());
+            outt.write(analyzeSPServiceIMPL.saveCheaps(stroyparkItemDTOList).getBytes());
             outt.flush();
         } catch (IOException e) {
             log.severe("Failed to save Kit cheap excell file");
@@ -96,7 +94,10 @@ public class Analyze {
     @GetMapping("/cheap_kit")
     public String cheapKIT(Model model) {
         kitItemDTOList = analyzeKITServiceIMPL.findAllCheaps();
-        model.addAttribute("cheaplist", kitItemDTOList);
+        pagedListHolder = new PagedListHolder(kitItemDTOList);
+        pagedListHolder.setPageSize(10);
+        pagedListHolder.setPage(0);
+        model.addAttribute("cheaplist", pagedListHolder.getPageList());
         model.addAttribute("name", "Kit");
         return "cheap_analizy";
     }
@@ -112,6 +113,30 @@ public class Analyze {
         } catch (IOException e) {
             log.severe("Failed to save Kit cheap excell file");
         }
+    }
+
+    @GetMapping("/Kit/next")
+    public String cheapKitNext(Model model) {
+        pagedListHolder.nextPage();
+        model.addAttribute("cheaplist", pagedListHolder.getPageList());
+        model.addAttribute("name", "Kit");
+        return "cheap_analizy";
+    }
+
+    @GetMapping("/Kit/first")
+    public String cheapKitFirst(Model model) {
+        pagedListHolder.setPage(0);
+        model.addAttribute("cheaplist", pagedListHolder.getPageList());
+        model.addAttribute("name", "Kit");
+        return "cheap_analizy";
+    }
+
+    @GetMapping("/Kit/prev")
+    public String cheapKitPrev(Model model) {
+        pagedListHolder.previousPage();
+        model.addAttribute("cheaplist", pagedListHolder.getPageList());
+        model.addAttribute("name", "Kit");
+        return "cheap_analizy";
     }
 
 
