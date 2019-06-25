@@ -15,8 +15,7 @@ public class WatermanItemDTO extends Item {
     private String group;  // группа товаров
 
 
-    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
-//    @EqualsAndHashCode.Exclude
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StroyparkItemDTO> stroyparkItemList = new ArrayList<>();
 
 
