@@ -5,6 +5,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
+import ru.bjcreslin.model.domain.DetailItem;
 import ru.bjcreslin.model.domain.Item;
 import ru.bjcreslin.model.domain.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
@@ -47,7 +48,7 @@ public class AnalyzeKITServiceIMPL implements AnalyzeService {
      * @param kitItemDTOList список Кит Итемов
      * @return файл ексель
      */
-    public HSSFWorkbook saveCheaps(List<Item> kitItemDTOList) {
+    public HSSFWorkbook saveCheaps(List<DetailItem> kitItemDTOList) {
         HSSFWorkbook excellFileWorkbook;
 
         excellFileWorkbook = new HSSFWorkbook();
@@ -59,9 +60,8 @@ public class AnalyzeKITServiceIMPL implements AnalyzeService {
         HSSFRow hssfRow;
         /*По всему листу данных заполняем таблицу */
         for (int i = 0; i < kitItemDTOList.size(); i++) {
-            KitItemDTO kitItemDTO = (KitItemDTO) kitItemDTOList.get(i);
             hssfRow = excellFileWorkbookSheet.createRow(i + 1);
-            fillRowInExcellFile(hssfRow, kitItemDTO);
+            fillRowInExcellFile(hssfRow, kitItemDTOList.get(i));
         }
         excellFileWorkbookSheet.autoSizeColumn(1);
         return excellFileWorkbook;

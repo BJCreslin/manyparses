@@ -25,14 +25,13 @@ public class Analyze {
         this.analyzeSPServiceIMPL = analyzeSPServiceIMPL;
         this.analyzeKITServiceIMPL = analyzeKITServiceIMPL;
         this.kitItemDTOList = new ArrayList<>();
-        this.stroyparkItemDTOList = new ArrayList<>();
     }
 
 
     private AnalyzeSPServiceIMPL analyzeSPServiceIMPL;
     private AnalyzeKITServiceIMPL analyzeKITServiceIMPL;
     private PagedListHolder pagedListHolder;
-    private List<Item> stroyparkItemDTOList;
+    private List<Item> stroyparkItemDTOList = new ArrayList<>();
     private List<Item> kitItemDTOList;
 
     /* *************************************************************************************
