@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Data
+/**
+ * Основной класс. Основа для DTO классов
+ */
 public abstract class Item {
 
     @NotNull

@@ -8,8 +8,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "waterman")
+/**
+ * Класс для товаров Waterman
+ *
+ */
 public class WatermanItemDTO extends Item {
-
 
     @Column(name = "product_group")
     private String group;  // группа товаров
@@ -29,6 +32,10 @@ public class WatermanItemDTO extends Item {
         kitItemList.add(kitItemDTO);
     }
 
+    public void addSPItem(StroyparkItemDTO stroyparkItemDTO) {
+        stroyparkItemList.add(stroyparkItemDTO);
+    }
+
     public String getGroup() {
         return group;
     }
@@ -41,16 +48,8 @@ public class WatermanItemDTO extends Item {
         return stroyparkItemList;
     }
 
-    public void setStroyparkItemList(List<StroyparkItemDTO> stroyparkItemList) {
-        this.stroyparkItemList = stroyparkItemList;
-    }
-
     public List<KitItemDTO> getKitItemList() {
         return kitItemList;
-    }
-
-    public void setKitItemList(List<KitItemDTO> kitItemList) {
-        this.kitItemList = kitItemList;
     }
 
     @Override

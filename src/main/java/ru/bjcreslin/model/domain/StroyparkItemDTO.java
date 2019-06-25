@@ -10,6 +10,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "stroypark")
 @Data
+/**
+ * Класс для товаров стройпарк
+ *
+ */
 public class StroyparkItemDTO extends DetailItem {
 
     @Override

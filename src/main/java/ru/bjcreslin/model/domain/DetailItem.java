@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 
 @Data
 @MappedSuperclass
+/**
+ * Основной класс для сравнения. Основа для DTO классов
+ */
 public abstract class DetailItem extends Item {
     @Column(name = "multy") //кратность товара
     protected Long multy;

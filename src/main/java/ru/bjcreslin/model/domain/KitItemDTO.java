@@ -10,6 +10,10 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "kit")
+/**
+ * Класс для товаров Kit
+ *
+ */
 public class KitItemDTO extends DetailItem {
 
     @Override
