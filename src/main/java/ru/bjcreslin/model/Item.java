@@ -21,16 +21,16 @@ public abstract class Item {
     @Column(name = "name") //Наименование
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "price")  //цена
     private BigDecimal price;
 
-    @Column(name = "address")
+    @Column(name = "address") //Вебадресс
     private String address;
 
-    @Column(name = "date")
+    @Column(name = "date") //дата
     private LocalDateTime date;
 
-    @Column(name = "comment")
+    @Column(name = "comment") //комментарий
     private String comment;
 
     @Column(name = "currency")

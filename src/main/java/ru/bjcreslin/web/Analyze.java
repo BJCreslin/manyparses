@@ -24,24 +24,26 @@ import java.util.List;
 @Controller
 @RequestMapping("/analize")
 /**
- * todo сделать анализ
- * 1. по цене
+ * В этом классе собраны
  */
 public class Analyze {
     public Analyze(AnalyzeSPServiceIMPL analyzeSPServiceIMPL, AnalyzeKITServiceIMPL analyzeKITServiceIMPL) {
         this.analyzeSPServiceIMPL = analyzeSPServiceIMPL;
         this.analyzeKITServiceIMPL = analyzeKITServiceIMPL;
         kitItemDTOList = new ArrayList<>();
+        stroyparkItemDTOList = new ArrayList<>();
     }
 
-    @Autowired
-    private ServletContext servletContext;
 
     private AnalyzeSPServiceIMPL analyzeSPServiceIMPL;
     private AnalyzeKITServiceIMPL analyzeKITServiceIMPL;
     private PagedListHolder pagedListHolder;
     private List<Item> stroyparkItemDTOList;
-    List<KitItemDTO> kitItemDTOList;
+    private List<Item> kitItemDTOList;
+
+    /* *************************************************************************************
+     *                                   SP section                                         *
+     ****************************************************************************************/
 
     @GetMapping("/cheap_sp")
     public String cheapSP(Model model) {
@@ -78,6 +80,22 @@ public class Analyze {
         return "cheap_analizy";
     }
 
+    @GetMapping("/SPExcell")
+    public void downloadFileExcellSP(HttpServletResponse response) {
+        response.setContentType("application/vnd.ms-excel; charset=UTF-8");
+        response.setHeader("Content-disposition", "attachment; filename=data.xls");
+        try (ServletOutputStream outt = response.getOutputStream()) {
+            outt.write(analyzeKITServiceIMPL.saveCheaps(kitItemDTOList).getBytes());
+            outt.flush();
+        } catch (IOException e) {
+            log.severe("Failed to save Kit cheap excell file");
+        }
+    }
+
+    /* *************************************************************************************
+     *                                   Kit section                                         *
+     ****************************************************************************************/
+
 
     @GetMapping("/cheap_kit")
     public String cheapKIT(Model model) {
@@ -87,16 +105,17 @@ public class Analyze {
         return "cheap_analizy";
     }
 
-    @GetMapping("/kitExcell")
-    public void downloadFile1(HttpServletRequest request,
-                              HttpServletResponse response) throws IOException {
 
+    @GetMapping("/kitExcell")
+    public void downloadFileExcellKit(HttpServletResponse response) {
         response.setContentType("application/vnd.ms-excel; charset=UTF-8");
         response.setHeader("Content-disposition", "attachment; filename=data.xls");
-        ServletOutputStream outt = response.getOutputStream();
-        outt.write(analyzeKITServiceIMPL.saveCheaps(kitItemDTOList).getBytes());
-        outt.flush();
-        outt.close();
+        try (ServletOutputStream outt = response.getOutputStream()) {
+            outt.write(analyzeSPServiceIMPL.saveCheaps(stroyparkItemDTOList).getBytes());
+            outt.flush();
+        } catch (IOException e) {
+            log.severe("Failed to save Kit cheap excell file");
+        }
     }
 
 

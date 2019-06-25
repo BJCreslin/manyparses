@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.ErrorCreationTempFile;
+import ru.bjcreslin.model.Item;
 import ru.bjcreslin.model.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
 
@@ -23,7 +24,7 @@ import static java.nio.file.Files.createTempFile;
  */
 @Service
 @AllArgsConstructor
-public class AnalyzeKITServiceIMPL {
+public class AnalyzeKITServiceIMPL implements AnalyzeService {
 
 
     private ItemKitRepository repository;
@@ -33,11 +34,11 @@ public class AnalyzeKITServiceIMPL {
      *
      * @return список элементов Кит
      */
-    public List<KitItemDTO> findAllCheaps() {
-        List<KitItemDTO> itemDTOList = new ArrayList<>();
+    public List<Item> findAllCheaps() {
+        List<Item> itemDTOList = new ArrayList<>();
         List<KitItemDTO> itemDTOS = repository.findAll();
         for (KitItemDTO item : itemDTOS) {
-            BigDecimal price = item.getPriceDiscount().divide(BigDecimal.valueOf(item.getMulty()));
+            BigDecimal price = item.getPriceDiscount().divide(BigDecimal.valueOf(item.getMulty(), 2));
             BigDecimal priceWtrmn = item.getWatermanItemDTO().getPrice();
             if (price.compareTo(priceWtrmn) < 0) {
                 itemDTOList.add(item);
@@ -47,36 +48,25 @@ public class AnalyzeKITServiceIMPL {
     }
 
     /**
-     * TODO: Доделать функцию сохранения excell файла
+     * todo: Сделать автоматическую ширину столбца
      *
      * @param kitItemDTOList список Кит Итемов
      * @return файл ексель
      * @throws ErrorCreationTempFile
      */
-    public HSSFWorkbook saveCheaps(List<KitItemDTO> kitItemDTOList)  {
+    public HSSFWorkbook saveCheaps(List<Item> kitItemDTOList) {
         HSSFWorkbook excellFileWorkbook;
 
-            excellFileWorkbook = new HSSFWorkbook();
+        excellFileWorkbook = new HSSFWorkbook();
         String excellFileSheetName = "Kit";
         HSSFSheet excellFileWorkbookSheet = excellFileWorkbook.createSheet(excellFileSheetName);
-        /* Заголовок столбцов*/
-        HSSFRow hssfRow = excellFileWorkbookSheet.createRow(0);
-        String watrmnCodeColumnNameXlsFile = "Wtrmn code";
-        hssfRow.createCell(0).setCellValue(watrmnCodeColumnNameXlsFile);
-        String watrmnNameColumnNamelsFile = "Wtrmn name";
-        hssfRow.createCell(1).setCellValue(watrmnNameColumnNamelsFile);
-        String kitNameColumnNamelsFile = "Kit name";
-        hssfRow.createCell(2).setCellValue(kitNameColumnNamelsFile);
-        String wtrmnPriceColumnNamelsFile = "Wtrmn price";
-        hssfRow.createCell(3).setCellValue(wtrmnPriceColumnNamelsFile);
-        String kitPriceColumnNamelsFile = "Kit price";
-        hssfRow.createCell(4).setCellValue(kitPriceColumnNamelsFile);
-        String groupeColumnNamelsFile = "Groupe";
-        hssfRow.createCell(5).setCellValue(groupeColumnNamelsFile);
 
+        addColumnNamesToExcellFile(excellFileSheetName, excellFileWorkbookSheet);
+
+        HSSFRow hssfRow;
         /*По всему листу данных заполняем таблицу */
         for (int i = 0; i < kitItemDTOList.size(); i++) {
-            KitItemDTO kitItemDTO = kitItemDTOList.get(i);
+            KitItemDTO kitItemDTO = (KitItemDTO) kitItemDTOList.get(i);
             hssfRow = excellFileWorkbookSheet.createRow(i + 1);
             hssfRow.createCell(0).setCellValue(kitItemDTO.getWatermanItemDTO().getCode());
             hssfRow.createCell(1).setCellValue(kitItemDTO.getWatermanItemDTO().getName());
