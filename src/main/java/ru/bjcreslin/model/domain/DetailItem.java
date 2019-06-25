@@ -26,4 +26,16 @@ public abstract class DetailItem extends Item {
     @EqualsAndHashCode.Exclude
     public WatermanItemDTO watermanItemDTO;  //данные Водяного
 
+    /**
+     * дает данные цены с учетом кратности.
+     * Если кратность не проставлена, то берет ее равной 1
+     */
+    public BigDecimal getDiscountPriceWithoutMulty() {
+        if ((this.multy == null) || (this.multy.equals(0L))) {
+            this.multy = 1L;
+        }
+        return priceDiscount.divide(BigDecimal.valueOf(this.multy), 2);
+
+    }
+
 }

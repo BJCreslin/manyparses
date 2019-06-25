@@ -8,7 +8,6 @@ import ru.bjcreslin.model.domain.StroyparkItemDTO;
 public interface ItemSPRepository extends JpaRepository<StroyparkItemDTO,Long> {
     StroyparkItemDTO findByCode(Long id);
     StroyparkItemDTO findByAddress(String address);
-
     Page<StroyparkItemDTO> findAll(Pageable pageable);
 
     @Override

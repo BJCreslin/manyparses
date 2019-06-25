@@ -2,7 +2,9 @@ package ru.bjcreslin.service.analyzes;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
+import ru.bjcreslin.model.domain.DetailItem;
 import ru.bjcreslin.model.domain.Item;
+import ru.bjcreslin.model.domain.KitItemDTO;
 
 import java.util.List;
 
@@ -33,5 +35,14 @@ public interface AnalyzeService {
         hssfRow.createCell(4).setCellValue(kitPriceColumnNamelsFile);
         String groupeColumnNamelsFile = "Groupe";
         hssfRow.createCell(5).setCellValue(groupeColumnNamelsFile);
+    }
+
+    default void fillRowInExcellFile(HSSFRow hssfRow, DetailItem detailItem) {
+        hssfRow.createCell(0).setCellValue(detailItem.getWatermanItemDTO().getCode());
+        hssfRow.createCell(1).setCellValue(detailItem.getWatermanItemDTO().getName());
+        hssfRow.createCell(2).setCellValue(detailItem.getName());
+        hssfRow.createCell(3).setCellValue(detailItem.getWatermanItemDTO().getPrice().toString());
+        hssfRow.createCell(4).setCellValue(detailItem.getPriceDiscount().toString());
+        hssfRow.createCell(5).setCellValue(detailItem.getWatermanItemDTO().getGroup());
     }
 }

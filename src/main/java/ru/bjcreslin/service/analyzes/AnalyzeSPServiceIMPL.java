@@ -5,7 +5,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.Exceptions.ErrorCreationTempFile;
 import ru.bjcreslin.model.domain.Item;
 import ru.bjcreslin.model.domain.StroyparkItemDTO;
 import ru.bjcreslin.repository.ItemSPRepository;
@@ -31,14 +30,10 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
         List<Item> stroyparkItemDTOList = new ArrayList<>();
         List<StroyparkItemDTO> stroyparkItemDTOListALL = itemSPRepository.findAll();
         for (StroyparkItemDTO stroyparkItemDTO : stroyparkItemDTOListALL) {
-            BigDecimal priceSP = stroyparkItemDTO.getPriceDiscount().divide(BigDecimal.valueOf(stroyparkItemDTO.getMulty()));
+            BigDecimal priceSP = stroyparkItemDTO.getDiscountPriceWithoutMulty();
             BigDecimal priceWtrmn = stroyparkItemDTO.getWatermanItemDTO().getPrice();
-            try {
-                if (priceSP.compareTo(priceWtrmn) < 0) {
-                    stroyparkItemDTOList.add(stroyparkItemDTO);
-                }
-            } catch (Exception e) {
-                continue;
+            if (priceSP.compareTo(priceWtrmn) < 0) {
+                stroyparkItemDTOList.add(stroyparkItemDTO);
             }
         }
 
@@ -50,7 +45,6 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
      *
      * @param stroyparkItemDTOS список СтройпаркИтемов
      * @return файл ексель
-     * @throws ErrorCreationTempFile
      */
     public HSSFWorkbook saveCheaps(List<Item> stroyparkItemDTOS) {
         HSSFWorkbook excellFileWorkbook;
@@ -66,18 +60,11 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
         for (int i = 0; i < stroyparkItemDTOS.size(); i++) {
             StroyparkItemDTO stroyparkItemDTO = (StroyparkItemDTO) stroyparkItemDTOS.get(i);
             hssfRow = excellFileWorkbookSheet.createRow(i + 1);
-            hssfRow.createCell(0).setCellValue(stroyparkItemDTO.getWatermanItemDTO().getCode());
-            hssfRow.createCell(1).setCellValue(stroyparkItemDTO.getWatermanItemDTO().getName());
-            hssfRow.createCell(2).setCellValue(stroyparkItemDTO.getName());
-            hssfRow.createCell(3).setCellValue(stroyparkItemDTO.getWatermanItemDTO().getPrice().toString());
-            hssfRow.createCell(4).setCellValue(stroyparkItemDTO.getPriceDiscount().toString());
-            hssfRow.createCell(5).setCellValue(stroyparkItemDTO.getWatermanItemDTO().getGroup());
+            fillRowInExcellFile(hssfRow, stroyparkItemDTO);
         }
 
         return excellFileWorkbook;
     }
-
-
 
 
 }

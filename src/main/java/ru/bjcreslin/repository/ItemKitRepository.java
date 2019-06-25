@@ -7,9 +7,7 @@ import ru.bjcreslin.model.domain.KitItemDTO;
 
 public interface ItemKitRepository extends JpaRepository<KitItemDTO, Long> {
     KitItemDTO findByCode(Long code);
-
     @Override
     void delete(KitItemDTO kitItemDTO);
-
     Page <KitItemDTO> findAll(Pageable pageable);
 }

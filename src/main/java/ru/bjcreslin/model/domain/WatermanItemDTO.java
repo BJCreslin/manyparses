@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "waterman")
 /**
  * Класс для товаров Waterman
  *
  */
+@Entity
+@Table(name = "waterman")
 public class WatermanItemDTO extends Item {
 
     @Column(name = "product_group")
