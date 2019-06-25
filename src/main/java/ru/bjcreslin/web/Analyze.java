@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.bjcreslin.model.domain.Item;
+import ru.bjcreslin.model.domain.DetailItem;
 import ru.bjcreslin.service.analyzes.AnalyzeKITServiceIMPL;
 import ru.bjcreslin.service.analyzes.AnalyzeSPServiceIMPL;
 
@@ -31,8 +31,8 @@ public class Analyze {
     private AnalyzeSPServiceIMPL analyzeSPServiceIMPL;
     private AnalyzeKITServiceIMPL analyzeKITServiceIMPL;
     private PagedListHolder pagedListHolder;
-    private List<Item> stroyparkItemDTOList = new ArrayList<>();
-    private List<Item> kitItemDTOList;
+    private List<DetailItem> stroyparkItemDTOList = new ArrayList<>();
+    private List<DetailItem> kitItemDTOList;
 
     /* *************************************************************************************
      *                                   SP section                                         *

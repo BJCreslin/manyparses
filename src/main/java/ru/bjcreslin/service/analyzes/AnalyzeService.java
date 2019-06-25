@@ -5,7 +5,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.CellType;
 import ru.bjcreslin.model.domain.DetailItem;
-import ru.bjcreslin.model.domain.Item;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface AnalyzeService {
      *
      * @return List Элекментов Item
      */
-    List<Item> findAllCheaps();
+    List<DetailItem> findAllCheaps();
 
     /**
      * Добавляет названия столбцов в эксель файл

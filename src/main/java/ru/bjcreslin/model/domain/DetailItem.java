@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 @Data
 @MappedSuperclass
@@ -34,7 +35,7 @@ public abstract class DetailItem extends Item {
         if ((this.multy == null) || (this.multy.equals(0L))) {
             this.multy = 1L;
         }
-        return priceDiscount.divide(BigDecimal.valueOf(this.multy), 2);
+        return priceDiscount.divide(BigDecimal.valueOf(this.multy), MathContext.DECIMAL32);
 
     }
 

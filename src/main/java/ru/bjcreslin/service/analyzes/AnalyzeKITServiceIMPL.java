@@ -6,7 +6,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.model.domain.DetailItem;
-import ru.bjcreslin.model.domain.Item;
 import ru.bjcreslin.model.domain.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
 
@@ -29,8 +28,8 @@ public class AnalyzeKITServiceIMPL implements AnalyzeService {
      *
      * @return список элементов Кит
      */
-    public List<Item> findAllCheaps() {
-        List<Item> itemDTOList = new ArrayList<>();
+    public List<DetailItem> findAllCheaps() {
+        List<DetailItem> itemDTOList = new ArrayList<>();
         List<KitItemDTO> itemDTOS = repository.findAll();
         for (KitItemDTO item : itemDTOS) {
             BigDecimal price = item.getDiscountPriceWithoutMulty();

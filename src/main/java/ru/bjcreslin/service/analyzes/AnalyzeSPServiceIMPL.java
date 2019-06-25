@@ -5,7 +5,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.model.domain.Item;
+import ru.bjcreslin.model.domain.DetailItem;
 import ru.bjcreslin.model.domain.StroyparkItemDTO;
 import ru.bjcreslin.repository.ItemSPRepository;
 
@@ -26,8 +26,8 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
      *
      * @return список элементов Стройпарка
      */
-    public List<Item> findAllCheaps() {
-        List<Item> stroyparkItemDTOList = new ArrayList<>();
+    public List<DetailItem> findAllCheaps() {
+        List<DetailItem> stroyparkItemDTOList = new ArrayList<>();
         List<StroyparkItemDTO> stroyparkItemDTOListALL = itemSPRepository.findAll();
         for (StroyparkItemDTO stroyparkItemDTO : stroyparkItemDTOListALL) {
             BigDecimal priceSP = stroyparkItemDTO.getDiscountPriceWithoutMulty();
@@ -46,7 +46,7 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
      * @param stroyparkItemDTOS список СтройпаркИтемов
      * @return файл ексель
      */
-    public HSSFWorkbook saveCheaps(List<Item> stroyparkItemDTOS) {
+    public HSSFWorkbook saveCheaps(List<DetailItem> stroyparkItemDTOS) {
         HSSFWorkbook excellFileWorkbook;
 
         excellFileWorkbook = new HSSFWorkbook();
