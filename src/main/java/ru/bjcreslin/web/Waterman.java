@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.bjcreslin.model.DoubleCode;
-import ru.bjcreslin.model.WatermanItemDTO;
+import ru.bjcreslin.model.domain.WatermanItemDTO;
 import ru.bjcreslin.service.ItemWtrmnService;
 import ru.bjcreslin.service.parses.ParserWaterman;
 

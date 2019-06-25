@@ -1,4 +1,4 @@
-package ru.bjcreslin.model;
+package ru.bjcreslin.model.domain;
 
 import lombok.Data;
 

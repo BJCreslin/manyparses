@@ -5,7 +5,7 @@ import lombok.extern.java.Log;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.bjcreslin.model.WatermanItemDTO;
+import ru.bjcreslin.model.domain.WatermanItemDTO;
 import ru.bjcreslin.repository.WatermanItemRepository;
 
 import java.time.LocalDateTime;

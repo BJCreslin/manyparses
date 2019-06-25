@@ -1,20 +1,16 @@
 package ru.bjcreslin.web;
 
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.bjcreslin.model.Item;
-import ru.bjcreslin.model.KitItemDTO;
+import ru.bjcreslin.model.domain.Item;
 import ru.bjcreslin.service.analyzes.AnalyzeKITServiceIMPL;
 import ru.bjcreslin.service.analyzes.AnalyzeSPServiceIMPL;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.WebParserException;
-import ru.bjcreslin.model.KitItemDTO;
+import ru.bjcreslin.model.domain.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
 import ru.bjcreslin.service.DateService;
 

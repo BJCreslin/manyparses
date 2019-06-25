@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.bjcreslin.model.DoubleCode;
-import ru.bjcreslin.model.Item;
+import ru.bjcreslin.model.domain.Item;
 
 public interface ItemWeb <t extends Item>{
     int maxElementsOnScreen = 10;

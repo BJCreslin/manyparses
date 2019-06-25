@@ -2,7 +2,7 @@ package ru.bjcreslin.service.analyzes;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
-import ru.bjcreslin.model.Item;
+import ru.bjcreslin.model.domain.Item;
 
 import java.util.List;
 

@@ -6,8 +6,8 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.ErrorCreationTempFile;
-import ru.bjcreslin.model.Item;
-import ru.bjcreslin.model.StroyparkItemDTO;
+import ru.bjcreslin.model.domain.Item;
+import ru.bjcreslin.model.domain.StroyparkItemDTO;
 import ru.bjcreslin.repository.ItemSPRepository;
 
 import java.math.BigDecimal;

@@ -4,16 +4,13 @@ import lombok.AllArgsConstructor;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.ErrorCreationTempFile;
-import ru.bjcreslin.model.Item;
-import ru.bjcreslin.model.KitItemDTO;
+import ru.bjcreslin.model.domain.Item;
+import ru.bjcreslin.model.domain.KitItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 

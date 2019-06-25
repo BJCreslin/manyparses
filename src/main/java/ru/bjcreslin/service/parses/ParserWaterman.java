@@ -7,12 +7,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import ru.bjcreslin.model.WatermanItemDTO;
+import ru.bjcreslin.model.domain.WatermanItemDTO;
 import ru.bjcreslin.repository.WatermanItemRepository;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Service
 @Log

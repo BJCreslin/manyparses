@@ -6,7 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import ru.bjcreslin.Exceptions.WebParserException;
-import ru.bjcreslin.model.StroyparkItemDTO;
+import ru.bjcreslin.model.domain.StroyparkItemDTO;
 import ru.bjcreslin.repository.ItemSPRepository;
 
 import java.io.IOException;

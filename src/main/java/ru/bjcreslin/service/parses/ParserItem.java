@@ -3,7 +3,7 @@ package ru.bjcreslin.service.parses;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import ru.bjcreslin.Exceptions.WebParserException;
-import ru.bjcreslin.model.Item;
+import ru.bjcreslin.model.domain.Item;
 
 import java.time.LocalDateTime;
 

@@ -1,9 +1,8 @@
 package ru.bjcreslin.service;
 
-import ru.bjcreslin.model.Item;
+import ru.bjcreslin.model.domain.Item;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * функциональный класс работы со временем
