@@ -63,7 +63,7 @@ public class AnalyzeKITServiceIMPL implements AnalyzeService {
             hssfRow = excellFileWorkbookSheet.createRow(i + 1);
             fillRowInExcellFile(hssfRow, kitItemDTO);
         }
-
+        excellFileWorkbookSheet.autoSizeColumn(1);
         return excellFileWorkbook;
     }
 

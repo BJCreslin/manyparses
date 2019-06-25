@@ -53,6 +53,7 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
         String excellFileSheetName = "Stroypark";
 
         HSSFSheet excellFileWorkbookSheet = excellFileWorkbook.createSheet(excellFileSheetName);
+
         addColumnNamesToExcellFile(excellFileSheetName, excellFileWorkbookSheet);
         HSSFRow hssfRow;
 
@@ -62,7 +63,7 @@ public class AnalyzeSPServiceIMPL implements AnalyzeService {
             hssfRow = excellFileWorkbookSheet.createRow(i + 1);
             fillRowInExcellFile(hssfRow, stroyparkItemDTO);
         }
-
+        excellFileWorkbookSheet.autoSizeColumn(1);
         return excellFileWorkbook;
     }
 
