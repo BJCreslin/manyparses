@@ -32,6 +32,11 @@ public interface ItemWeb<t extends Item> {
     @GetMapping("/delete/{item}")
     String delete(@PathVariable("item") t item);
 
+    /**
+     * Переопределяет поля между двумя объеками данных
+     * @param temp DetailItem объект донор
+     * @param current DetailItem объект плучатель
+     */
     default void fromDTOTempToDTO(DetailItem temp, DetailItem current) {
         current.setPrice(temp.getPrice());
         current.setPriceDiscount(temp.getPriceDiscount());
