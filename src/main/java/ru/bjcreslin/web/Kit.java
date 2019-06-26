@@ -13,7 +13,6 @@ import ru.bjcreslin.model.domain.KitItemDTO;
 import ru.bjcreslin.model.domain.WatermanItemDTO;
 import ru.bjcreslin.repository.ItemKitRepository;
 import ru.bjcreslin.repository.WatermanItemRepository;
-import ru.bjcreslin.service.DateService;
 import ru.bjcreslin.service.ItemKitService;
 import ru.bjcreslin.service.parses.ParserKit;
 import ru.bjcreslin.service.parses.ParserWaterman;
@@ -143,27 +142,18 @@ public class Kit implements ItemWeb<KitItemDTO> {
     private void reReadAll() {
         List<KitItemDTO> itemDTOList = itemService.findAll();
         for (KitItemDTO itemDTO : itemDTOList) {
-            KitItemDTO itemDTOtemp = new KitItemDTO();
+            KitItemDTO itemDTOtemp;
             try {
                 itemDTOtemp = parserItem.getItemByCode(itemDTO.getCode());
-            } catch (WebParserException e) {
-                itemDTO.setPrice(itemDTOtemp.getPrice());
-                itemDTO.setPriceDiscount(itemDTOtemp.getPriceDiscount());
-                itemDTO.setSale(itemDTOtemp.getSale());
-                itemDTO.setMulty(itemDTOtemp.getMulty());
-                itemDTO.setCurrency(itemDTOtemp.getCurrency());
-                itemDTO.setAddress(itemDTOtemp.getAddress());
-                itemDTO.setName(itemDTOtemp.getName());
-                itemDTO.setDate(DateService.getCurrentDate());
-
+                fromDTOTempToDTO(itemDTOtemp, itemDTO);
                 WatermanItemDTO watermanItemDTO = itemDTO.getWatermanItemDTO();
                 watermanItemDTO.addKitItem(itemDTO);
                 watermanItemRepository.saveAndFlush(watermanItemDTO);
                 itemService.save(itemDTO);
+            } catch (WebParserException e) {
+                log.info("Parsing failed: " + itemDTO);
             }
         }
-
-
     }
 }
 

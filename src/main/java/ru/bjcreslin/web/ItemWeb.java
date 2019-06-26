@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.bjcreslin.model.DoubleCode;
+import ru.bjcreslin.model.domain.DetailItem;
 import ru.bjcreslin.model.domain.Item;
+import ru.bjcreslin.service.DateService;
 
-public interface ItemWeb <t extends Item>{
+public interface ItemWeb<t extends Item> {
     int maxElementsOnScreen = 10;
+
     @GetMapping("/additem")
     String addGet(Model model);
 
@@ -28,5 +31,16 @@ public interface ItemWeb <t extends Item>{
 
     @GetMapping("/delete/{item}")
     String delete(@PathVariable("item") t item);
+
+    default void fromDTOTempToDTO(DetailItem temp, DetailItem current) {
+        current.setPrice(temp.getPrice());
+        current.setPriceDiscount(temp.getPriceDiscount());
+        current.setSale(temp.getSale());
+        current.setMulty(temp.getMulty());
+        current.setCurrency(temp.getCurrency());
+        current.setAddress(temp.getAddress());
+        current.setName(temp.getName());
+        current.setDate(DateService.getCurrentDate());
+    }
 
 }

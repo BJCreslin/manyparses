@@ -12,7 +12,6 @@ import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.domain.StroyparkItemDTO;
 import ru.bjcreslin.model.domain.WatermanItemDTO;
 import ru.bjcreslin.repository.WatermanItemRepository;
-import ru.bjcreslin.service.DateService;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.parses.ParserSP;
 import ru.bjcreslin.service.parses.ParserWaterman;
@@ -139,23 +138,17 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
     private void reReadAll() {
         List<StroyparkItemDTO> itemDTOList = itemSPService.findAll();
         for (StroyparkItemDTO itemDTO : itemDTOList) {
-            StroyparkItemDTO itemDTOtemp = new StroyparkItemDTO();
+            StroyparkItemDTO itemDTOtemp;
             try {
                 itemDTOtemp = itemSPParser.getItemByCode(itemDTO.getCode());
-            } catch (WebParserException e) {
-                itemDTO.setPrice(itemDTOtemp.getPrice());
-                itemDTO.setPriceDiscount(itemDTOtemp.getPriceDiscount());
-                itemDTO.setSale(itemDTOtemp.getSale());
-                itemDTO.setMulty(itemDTOtemp.getMulty());
-                itemDTO.setCurrency(itemDTOtemp.getCurrency());
-                itemDTO.setAddress(itemDTOtemp.getAddress());
-                itemDTO.setName(itemDTOtemp.getName());
-                itemDTO.setDate(DateService.getCurrentDate());
+                fromDTOTempToDTO(itemDTOtemp, itemDTO);
 
                 WatermanItemDTO watermanItemDTO = itemDTO.getWatermanItemDTO();
                 watermanItemDTO.addSPItem(itemDTO);
                 watermanItemRepository.saveAndFlush(watermanItemDTO);
                 itemSPService.save(itemDTO);
+            } catch (WebParserException e) {
+                log.info("Parsing failed: " + itemDTO);
             }
         }
     }
