@@ -12,9 +12,12 @@ import ru.bjcreslin.model.DoubleCode;
 import ru.bjcreslin.model.domain.StroyparkItemDTO;
 import ru.bjcreslin.model.domain.WatermanItemDTO;
 import ru.bjcreslin.repository.WatermanItemRepository;
+import ru.bjcreslin.service.DateService;
 import ru.bjcreslin.service.ItemSPService;
 import ru.bjcreslin.service.parses.ParserSP;
 import ru.bjcreslin.service.parses.ParserWaterman;
+
+import java.util.List;
 
 /**
  * показывает таблицу с данными СП
@@ -126,7 +129,36 @@ public class SP implements ItemWeb<StroyparkItemDTO> {
         return "redirect:/" + ITEM_NAME + "/showall";
     }
 
+    @GetMapping("/rereadall")
+    public String rereadall() {
+        reReadAll();
+        return "redirect:/" + ITEM_NAME + "/showall";
+    }
 
+
+    private void reReadAll() {
+        List<StroyparkItemDTO> itemDTOList = itemSPService.findAll();
+        for (StroyparkItemDTO itemDTO : itemDTOList) {
+            StroyparkItemDTO itemDTOtemp = new StroyparkItemDTO();
+            try {
+                itemDTOtemp = itemSPParser.getItemByCode(itemDTO.getCode());
+            } catch (WebParserException e) {
+                itemDTO.setPrice(itemDTOtemp.getPrice());
+                itemDTO.setPriceDiscount(itemDTOtemp.getPriceDiscount());
+                itemDTO.setSale(itemDTOtemp.getSale());
+                itemDTO.setMulty(itemDTOtemp.getMulty());
+                itemDTO.setCurrency(itemDTOtemp.getCurrency());
+                itemDTO.setAddress(itemDTOtemp.getAddress());
+                itemDTO.setName(itemDTOtemp.getName());
+                itemDTO.setDate(DateService.getCurrentDate());
+
+                WatermanItemDTO watermanItemDTO = itemDTO.getWatermanItemDTO();
+                watermanItemDTO.addSPItem(itemDTO);
+                watermanItemRepository.saveAndFlush(watermanItemDTO);
+                itemSPService.save(itemDTO);
+            }
+        }
+    }
 }
 
 
