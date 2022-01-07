@@ -106,7 +106,7 @@
         <lombok.version>1.18.8</lombok.version>
         <postgresql.version>42.2.5</postgresql.version>
         <jsoup.version>1.12.1</jsoup.version>
-        <h2.version>1.4.199</h2.version>
+        <h2.version>2.0.206</h2.version>
 
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
