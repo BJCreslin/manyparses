@@ -104,7 +104,7 @@
 
         <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
         <lombok.version>1.18.8</lombok.version>
-        <postgresql.version>42.2.5</postgresql.version>
+        <postgresql.version>42.3.3</postgresql.version>
         <jsoup.version>1.12.1</jsoup.version>
         <h2.version>1.4.199</h2.version>
 
